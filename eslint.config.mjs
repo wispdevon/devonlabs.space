@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 
 const eslintConfig = [
   {
-    ignores: ['.next/**', 'node_modules/**', 'out/**']
+    ignores: ['.next/**', '.wrangler/**', 'node_modules/**', 'out/**']
   },
   ...tseslint.configs.recommended,
   {

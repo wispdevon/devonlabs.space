@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowUpRight, Github, Mail } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import ProjectDirectory from './project-directory';
 
 export default function Home() {
@@ -10,11 +10,6 @@ export default function Home() {
         <div>
           <h1 id="site-title">Devon Labs<span className="cursor" aria-hidden="true">_</span></h1>
           <p className="intro-line">Useful software. Built around real life.</p>
-          <p className="intro-detail">I&apos;m Wisp, an independent developer in Thailand.<br />Photography tools, self-hosted workflows, and small things that make work easier.</p>
-          <div className="intro-links">
-            <a href="https://github.com/wispdevon"><Github size={16} /> GitHub <ArrowUpRight size={14} /></a>
-            <a href="mailto:wispdevon@proton.me"><Mail size={16} /> Work together <ArrowUpRight size={14} /></a>
-          </div>
         </div>
         <a className="portrait-link" href="https://github.com/wispdevon" aria-label="Wisp on GitHub"><Image src="/developer/wisp.jpg" alt="Wisp, developer behind Devon Labs" width={112} height={112} priority /><span>@wispdevon</span></a>
       </section>

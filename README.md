@@ -1,6 +1,8 @@
 # Devon Labs
 
-Developer portfolio for Wisp, styled after TooExpensive.dev: Monaspace Neon, a black canvas, subtle borders, and a searchable project directory. Descriptions are based on public project READMEs; Sharply is explicitly credited as a fork.
+Developer portfolio for Wisp, styled after TooExpensive.dev: Monaspace Neon, a black canvas, and an interactive project constellation. Every selected project is a node, with connections based on shared topics and technologies. Descriptions are based on public project READMEs; Sharply is explicitly credited as a fork.
+
+The Three.js scene supports drag rotation, zoom controls, reset, keyboard camera controls, and animated connection signals. Selecting a project opens details, screenshots, GitHub source, and connected projects. Category filters and search highlight matching nodes; the list view remains available. Automatic motion respects reduced-motion settings, rendering pauses offscreen, and semantic project buttons remain usable without WebGL. On touch devices, one-finger vertical scrolling is preserved; project selection and the zoom buttons work by tapping.
 
 ## Development
 
