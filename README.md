@@ -22,7 +22,9 @@ npm run preview
 npm run deploy
 ```
 
-For Pages Git integration, select Next.js static export, use `npm run build`, output directory `out`, and Node 22. The Wrangler project is `devonlabs-space`. Configure `devonlabs.space` as its custom domain. Photography links to `photo.devonlabs.space`.
+The deployed project uses Pages Direct Upload through Wrangler. Run `npm run deploy` to publish updates after committing them. GitHub Actions validates lint, the static export, and browser interactions on every push; it does not automatically publish. For a separate Git-integrated Pages project, select Next.js static export, use `npm run build`, output directory `out`, and Node 22.
+
+The Wrangler project is `devonlabs-space`, with `devonlabs.space` as its custom domain. The apex DNS record is a proxied CNAME to `devonlabs-space.pages.dev` and is excluded from Tensor's dynamic DNS updates. Photography and Ghost remain at `photo.devonlabs.space`.
 
 ## Content
 
