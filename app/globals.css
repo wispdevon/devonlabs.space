@@ -336,3 +336,13 @@ button.text-link { padding: 0; border: 0; background: transparent; font: inherit
 .copy-status { flex-basis: 100%; color: var(--secondary); font-size: .75rem; }
 .copy-status:empty { display: none; }
 @media (max-width: 600px) { .about-connections { grid-template-columns: 1fr; gap: 32px; } }
+
+/* Portrait and compact, single-line contact list, following the About reference. */
+.about-connections { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px !important; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.contact-portrait { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 2px; margin-bottom: 36px; }
+.find-me li { align-items: center; gap: 8px; margin-bottom: 0; min-height: 32px; }
+.find-me a { font-family: var(--font-workshop), sans-serif; font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.45; letter-spacing: -.025em; white-space: nowrap; }
+.find-me .copy-handle { border: 0; padding: 4px; margin-left: 0; color: var(--secondary); }
+.find-me .copy-status { font-size: .6875rem; }
+@media (max-width: 600px) { .about-connections { grid-template-columns: 1fr; } .contact-portrait { margin-bottom: 30px; } .find-me a { font-size: 1.25rem; } }

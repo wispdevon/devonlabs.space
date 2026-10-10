@@ -35,6 +35,8 @@ try {
   assert.equal(await page.locator('main').getByText(/Lorem Ipsum/i).count(), 0);
   assert.equal(await page.locator('.working-with li svg').count(), 6);
   assert.equal(await page.locator('.find-me a').count(), 4);
+  assert.equal(await page.locator('.contact-portrait').getAttribute('src'), '/developer/profile.jpg');
+  await page.locator('.contact-portrait').evaluate(image => { image.loading = 'eager'; return image.decode(); });
   assert.equal(await page.locator('.find-me a[href="https://github.com/wispdevon"]').count(), 1);
   assert.equal(await page.locator('.find-me a[href="https://www.last.fm/user/wisp-"]').count(), 1);
   assert.equal(await page.locator('.find-me a[href="https://discord.com/channels/@me"]').count(), 1);
