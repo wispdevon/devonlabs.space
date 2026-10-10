@@ -51,7 +51,21 @@ try {
   for (const gear of ['Hario V60', 'Flair Neo', 'ROKpresso Classic', 'Mischief M40', 'Hario Switch']) assert.equal(await page.getByRole('heading', { name: gear, exact: true }).count(), 1);
   await page.locator('.origin-map path').filter({ has: page.locator('title', { hasText: /^Ethiopia$/ }) }).click();
   assert.equal(await page.locator('.origin-detail h3').innerText(), 'Ethiopia');
-  assert.equal(await page.locator('.coffee-media-placeholder').count(), 2);
+  assert.equal(await page.locator('.coffee-photos button').count(), 4);
+  await page.locator('.coffee-photos img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
+  await page.getByRole('button', { name: 'Open coffee photograph 1', exact: true }).click();
+  assert.equal(await page.locator('.photo-dialog').evaluate(dialog => dialog.open), true);
+  await page.keyboard.press('ArrowRight');
+  assert.match(await page.locator('#coffee-photo-title').innerText(), /2 \/ 4/);
+  await page.keyboard.press('Escape');
+  assert.equal(await page.getByRole('button', { name: 'Open coffee photograph 1', exact: true }).evaluate(button => button === document.activeElement), true);
+  assert.equal(await page.locator('.coffee-videos video').count(), 2);
+  for (const player of await page.locator('.coffee-videos video').all()) {
+    assert.equal(await player.getAttribute('preload'), 'none');
+    await player.evaluate(async video => { video.muted = true; await video.play(); });
+    await page.waitForFunction(video => video.currentTime > 0, await player.elementHandle());
+    await player.evaluate(video => video.pause());
+  }
   assert.equal(await page.locator('.coffee-conversation a[href^="mailto:wisp@devonlabs.space"]').count(), 1);
   const dose = page.getByLabel('Coffee dose', { exact: false });
   const ratio = page.getByLabel('Ratio', { exact: false });

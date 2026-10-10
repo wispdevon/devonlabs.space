@@ -1,6 +1,7 @@
 import SiteShell, { pageMetadata } from '../portfolio/site-shell';
 import BrewRatio from './brew-ratio';
 import OriginMap from './origin-map';
+import MediaJournal from './media-journal';
 import { coffeeGear, coffeeMethods } from '../../data/coffee';
 
 export const metadata = pageMetadata('coffee', 'Wisp’s coffee notebook: an origin atlas, brewing gear, methodologies, a photo and video journal, and a brew-ratio calculator.');
@@ -13,7 +14,7 @@ export default function CoffeePage() {
     <section className="coffee-section" aria-labelledby="origin-title"><p className="mono coffee-section-number">01 / Origins</p><h2 id="origin-title">Around the world, by the cup.</h2><p>An origin checklist, with room for tasting notes. Select a country on the map or in the list, and check it off when you’ve tried it.</p><OriginMap /></section>
     <section className="coffee-section" aria-labelledby="gear-title"><p className="mono coffee-section-number">02 / Gear</p><h2 id="gear-title">On the counter.</h2><p>My current coffee setup, from hand grinding to filter brews and manual espresso.</p><div className="coffee-detail-list">{coffeeGear.map(item => <article key={item.name}><h3>{item.name}</h3><p>{item.kind}</p></article>)}</div></section>
     <section className="coffee-section" aria-labelledby="method-title"><p className="mono coffee-section-number">03 / Methodologies</p><h2 id="method-title">Making the next cup.</h2><p>A place to document my brewing methods, recipes, and the little changes between cups.</p><div className="coffee-detail-list coffee-method-list">{coffeeMethods.map(item => <article key={item.name}><h3>{item.name}</h3><p>{item.note}</p></article>)}</div><BrewRatio /></section>
-    <section className="coffee-section" aria-labelledby="coffee-journal-title"><p className="mono coffee-section-number">04 / Photo &amp; video</p><h2 id="coffee-journal-title">Coffee, in the making.</h2><p>Photos and films of my brewing process, from the first grind to the finished cup.</p><div className="coffee-media" aria-hidden="true"><div className="coffee-media-placeholder" /><div className="coffee-media-placeholder" /></div></section>
+    <section className="coffee-section" aria-labelledby="coffee-journal-title"><p className="mono coffee-section-number">04 / Photo &amp; video</p><h2 id="coffee-journal-title">Coffee, in the making.</h2><p>Photos and films of my brewing process, from the first grind to the finished cup.</p><MediaJournal /></section>
     <section className="coffee-conversation" aria-labelledby="coffee-chat-title"><h2 id="coffee-chat-title">Let’s talk coffee.</h2><p>Beans you love, a recipe worth trying, or a question about brewing? I’d like to hear it.</p><div><a href="mailto:wisp@devonlabs.space?subject=Let%E2%80%99s%20talk%20coffee">Email me →</a><a href="https://bsky.app/profile/wispdevon.bsky.social">Find me on Bluesky ↗</a></div></section>
   </SiteShell>;
 }

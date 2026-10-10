@@ -1,0 +1,46 @@
+{
+  "source": "https://im.devonlabs.space/s/homecoffee",
+  "album": "Home Coffee",
+  "photos": [
+    {
+      "image": "/coffee/photo-01.webp",
+      "alt": "A coffee bag held in front of a wall of saved coffee packaging and brewing gear",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "image": "/coffee/photo-02.webp",
+      "alt": "Coffee bags and brew notes pinned above the home coffee station",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "image": "/coffee/photo-03.webp",
+      "alt": "Thai coffee beans held beside the collection of coffee bags",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "image": "/coffee/photo-04.webp",
+      "alt": "Close-up of a Thai coffee bag at the home coffee station",
+      "width": 1200,
+      "height": 1600
+    }
+  ],
+  "videos": [
+    {
+      "src": "/coffee/brewing-01.mp4",
+      "poster": "/coffee/poster-01.webp",
+      "title": "Manual espresso / ROKpresso",
+      "width": 720,
+      "height": 960
+    },
+    {
+      "src": "/coffee/brewing-02.mp4",
+      "poster": "/coffee/poster-02.webp",
+      "title": "Pour-over / Hario Switch",
+      "width": 540,
+      "height": 960
+    }
+  ]
+}
