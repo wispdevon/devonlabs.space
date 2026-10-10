@@ -10,13 +10,16 @@
     "preview": "npm run build && wrangler pages dev out",
     "deploy": "npm run build && wrangler pages deploy out --project-name devonlabs-space",
     "refresh:github": "node scripts/refresh-github.mjs",
+    "refresh:media": "node scripts/refresh-workshop.mjs",
     "lint": "eslint",
+    "test": "node tests/workshop.mjs",
     "test:browser": "node tests/browser.mjs"
   },
   "engines": {
     "node": ">=22"
   },
   "dependencies": {
+    "@dimforge/rapier3d-compat": "0.12.0",
     "lucide-react": "^0.468.0",
     "next": "^16.3.2",
     "react": "19.2.4",

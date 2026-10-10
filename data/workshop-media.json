@@ -1,0 +1,91 @@
+{
+  "source": "https://im.devonlabs.space/s/thebest",
+  "album": "The Best",
+  "fetchedAt": "2026-10-10T18:20:00Z",
+  "photos": [
+    {
+      "id": "c28f4203-e0ae-4ef9-814c-f92e07c67d1d",
+      "image": "/workshop/photos/01.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 1 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "aee45831-2149-4535-a7c1-99dd036d5859",
+      "image": "/workshop/photos/02.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 2 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "0e235a10-2ba2-4594-93ee-d7c4c9cd9aa9",
+      "image": "/workshop/photos/03.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 3 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "9fe858b1-e713-43ab-aa21-8d9c5268af8d",
+      "image": "/workshop/photos/04.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 4 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "8b052e37-ec38-4b45-864c-10a20050f510",
+      "image": "/workshop/photos/05.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 5 from Wisp's The Best collection",
+      "ratio": 1.5
+    },
+    {
+      "id": "40b50824-c72d-4fbb-99c1-d1acab6e6837",
+      "image": "/workshop/photos/06.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 6 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "528f5851-210a-4ec8-b5b2-913e5c535ca8",
+      "image": "/workshop/photos/07.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 7 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "8222890b-c7cb-4597-8d30-919e31e43227",
+      "image": "/workshop/photos/08.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 8 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "b3e8420d-6875-43f5-bcb9-b9550f9c2368",
+      "image": "/workshop/photos/09.webp",
+      "date": "2025-10-24",
+      "alt": "Photograph 9 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "17ec5afb-7ced-4287-8ea9-c0be44a17712",
+      "image": "/workshop/photos/10.webp",
+      "date": "2025-10-15",
+      "alt": "Photograph 10 from Wisp's The Best collection",
+      "ratio": 1.5
+    },
+    {
+      "id": "14d13d14-156b-4e6d-9dd7-e1428f0cbe04",
+      "image": "/workshop/photos/11.webp",
+      "date": "2025-10-15",
+      "alt": "Photograph 11 from Wisp's The Best collection",
+      "ratio": 0.667
+    },
+    {
+      "id": "f6c59577-8246-4ca6-8cf7-4d1723719667",
+      "image": "/workshop/photos/12.webp",
+      "date": "2025-10-03",
+      "alt": "Photograph 12 from Wisp's The Best collection",
+      "ratio": 0.667
+    }
+  ]
+}

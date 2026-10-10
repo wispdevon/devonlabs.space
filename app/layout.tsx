@@ -3,11 +3,8 @@ import localFont from 'next/font/local';
 import './globals.css';
 
 const bodyFont = localFont({
-  src: [
-    { path: '../public/fonts/monaspace-neon-400.woff2', weight: '400', style: 'normal' },
-    { path: '../public/fonts/monaspace-neon-800.woff2', weight: '800', style: 'normal' }
-  ],
-  variable: '--font-neon',
+  src: [{ path: '../public/fonts/inter-roman.woff2', weight: '100 900', style: 'normal' }],
+  variable: '--font-workshop',
   display: 'swap'
 });
 
@@ -15,12 +12,12 @@ const siteUrl = process.env.SITE_URL || 'https://devonlabs.space';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Devon Labs - Independent software by Wisp',
-  description: 'Independent software by Wisp in Thailand. Photography tools, self-hosted workflows, desktop utilities, and thoughtful web applications.',
+  title: 'Devon Labs - A workshop of curiosities',
+  description: 'Explore Wisp’s world of software, photography, films, and hardware. An independent creative workshop in Thailand.',
   applicationName: 'Devon Labs',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Devon Labs - Independent software by Wisp',
+    title: 'Devon Labs - A workshop of curiosities',
     description: 'Photography tools, self-hosted workflows, and small things that make work easier.',
     url: siteUrl,
     siteName: 'Devon Labs',
@@ -36,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#050505'
+  themeColor: '#bad5ce'
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
