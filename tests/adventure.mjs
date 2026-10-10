@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 950 } });
-  await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3011');
+  await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3011/workshop/');
   const close = () => page.getByRole('button', { name: 'Close', exact: true }).click();
   for (const name of [
     'A lost negative',

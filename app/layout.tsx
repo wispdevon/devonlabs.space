@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import './adventure.css';
 
 const bodyFont = localFont({
   src: [{ path: '../public/fonts/inter-roman.woff2', weight: '100 900', style: 'normal' }],
@@ -13,12 +12,12 @@ const siteUrl = process.env.SITE_URL || 'https://devonlabs.space';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Devon Labs - A workshop of curiosities',
+  title: 'Devon Labs — Wisp’s software, photography & experiments',
   description: 'Explore Wisp’s world of software, photography, films, and hardware. An independent creative workshop in Thailand.',
   applicationName: 'Devon Labs',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'Devon Labs - A workshop of curiosities',
+    title: 'Devon Labs — Wisp’s software, photography & experiments',
     description: 'Photography tools, self-hosted workflows, and small things that make work easier.',
     url: siteUrl,
     siteName: 'Devon Labs',
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#bad5ce'
+  themeColor: '#ffffff'
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

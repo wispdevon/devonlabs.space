@@ -1,5 +1,9 @@
 # Devon Labs
 
+A typography-led portfolio for Wisp’s software, photography, films, and hardware, inspired by the personal, browsable layouts of https://rsms.me/ and https://aresluna.org/. The homepage uses local Inter, a white background, blue links, and real project and photography assets. Software summaries live in `app/page.tsx`; repository details remain in `data/developer-projects.ts`.
+
+The original illustrated workshop is preserved at `/workshop/` with its own layout and styles.
+
 A still, illustrated 2D point-and-click workshop for Wisp's software, photography, film, and hardware. No 3D renderer, physics, walking, camera dragging, or animation loop. Click objects to explore. Narrow screens expose the same objects as labeled touch targets beneath the illustration.
 
 All twelve destinations are available through room categories, a searchable index, and the window's constellation. Six curiosities can be collected. Use the negative, lens, and transmitter to restore three devices. Puzzles never gate portfolio content. Existing version-one visitor progress is preserved in local storage. Native dialogs support keyboard navigation, Escape, and focus restoration.
@@ -23,7 +27,7 @@ npm run test:browser
 npm run test:adventure
 ```
 
-Tests cover media integrity, progress migration, static room pixels, project viewers, responsive layouts, pickups, item matching, repairs, and focus restoration. Set `TEST_URL` for a different preview/live target and `SCREENSHOT_DIR` for evidence outside the repository.
+Tests cover media integrity, progress migration, static room pixels, project viewers, responsive layouts, pickups, item matching, repairs, and focus restoration. Set `TEST_URL` to the full workshop URL (for example `http://localhost:3012/workshop/`) for a different preview/live target. Browser tests also check the portfolio at that URL’s origin. Set `SCREENSHOT_DIR` for evidence outside the repository.
 
 ## Cloudflare Pages
 
