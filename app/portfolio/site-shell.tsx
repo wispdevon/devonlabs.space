@@ -43,7 +43,7 @@ export default function SiteShell({ page, children }: { page: PortfolioPage; chi
         <Link href="/" className="p-wordmark">Devon Labs</Link>
         <div className="p-navigation"><nav aria-label="Main navigation">{pages.map(item => <Link key={item.id} href={item.href} aria-current={item.id === page ? 'page' : undefined}>{item.label}</Link>)}</nav><ThemeToggle /></div>
       </header>
-      <main id="main">{children}</main>
+      <main id="main" key={page}>{children}</main>
       <footer className="p-footer"><Link href="/">Devon Labs</Link><div><a href="https://github.com/wispdevon">GitHub</a><a href="https://www.last.fm/user/wisp-">Last.fm</a><a href="/workshop/">Workshop</a></div></footer>
     </div>
   </div>;

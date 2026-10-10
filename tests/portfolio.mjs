@@ -32,6 +32,13 @@ try {
   assert.match(await page.locator('main').innerText(), /Independent developer based in Thailand/);
   assert.match(await page.locator('main').innerText(), /infrastructure you can actually own/);
   assert.equal(await page.locator('main').getByText(/Lorem Ipsum/i).count(), 0);
+  assert.equal(await page.locator('nav').evaluate(element => getComputedStyle(element).flexDirection), 'column');
+  const introduction = await page.locator('.about-introduction').boundingBox();
+  const photograph = await page.locator('.about-photo').boundingBox();
+  assert.ok(photograph.y >= introduction.y + introduction.height, 'About photo follows the introduction vertically');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  assert.equal(await page.locator('main').evaluate(element => getComputedStyle(element).animationName), 'none');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.getByRole('button', { name: 'Dark mode', exact: true }).click();
   await page.getByRole('navigation').getByRole('link', { name: 'Software', exact: true }).click();
   await page.waitForURL(`${origin}/software/`);

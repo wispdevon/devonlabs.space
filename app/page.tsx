@@ -9,7 +9,7 @@ export default function AboutPage() {
   return <SiteShell page="about">
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-introduction"><h1 id="about-title">Hello, I’m Wisp.</h1><p className="about-lead">{profile.headline}</p><p className="about-summary">{profile.introduction}</p></div>
-      <figure className="about-photo"><div className="duotone"><Image src="/workshop/photos/01.webp" alt="Architectural columns and geometric details, in violet and lime duotone" width={1066} height={1600} sizes="(max-width: 700px) 90vw, 340px" priority /></div><figcaption>A frame from <Link href="/photography/">The Best.</Link></figcaption></figure>
+      <figure className="about-photo"><div className="duotone"><Image src="/workshop/photos/01.webp" alt="Architectural columns and geometric details, in violet and lime duotone" width={1066} height={1600} sizes="(max-width: 700px) 90vw, 640px" priority /></div><figcaption>A frame from <Link href="/photography/">The Best.</Link></figcaption></figure>
     </section>
     <div className="about-details">
       <section aria-labelledby="making-title"><h2 id="making-title">What I make</h2><p>{profile.whatIMake}</p><ul className="principles">{profile.principles.map(principle => <li key={principle}>{principle}</li>)}</ul></section>
