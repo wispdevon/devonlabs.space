@@ -1,6 +1,6 @@
 # Devon Labs
 
-A typography-led portfolio for Wisp’s software, photography, films, and hardware, inspired by the personal, browsable layouts of https://rsms.me/ and https://aresluna.org/. The homepage uses local Inter, a white background, blue links, and real project and photography assets. Software summaries live in `app/page.tsx`; repository details remain in `data/developer-projects.ts`.
+A typography-led portfolio for Wisp’s software, photography, films, and hardware, inspired by the personal, browsable layouts of https://rsms.me/ and https://aresluna.org/. The homepage combines rsms.me’s parallel editorial columns and vertical navigation with Strider’s warm paper, faint dot grid, titanium accents, and graphite dark mode. Fonts and project and photography assets are local. The theme follows the system and a manual override persists locally. Software summaries live in `app/page.tsx`; repository details remain in `data/developer-projects.ts`.
 
 The original illustrated workshop is preserved at `/workshop/` with its own layout and styles.
 

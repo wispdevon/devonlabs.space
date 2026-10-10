@@ -14,7 +14,7 @@ try {
   const workshopUrl = process.env.TEST_URL || 'http://127.0.0.1:3011/workshop/';
   await page.goto(new URL('/', workshopUrl).href);
   assert.equal(await page.getByRole('heading', { level: 1 }).textContent(), 'Hello, I’m Wisp.');
-  assert.equal(await page.locator('.software-columns li').count(), 9);
+  assert.equal(await page.locator('.software-column li').count(), 9);
   for (const width of [1440, 768, 390, 320]) {
     await page.setViewportSize({ width, height: 950 });
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
@@ -23,6 +23,12 @@ try {
     await page.locator('.photo-strip img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
   }
   await page.setViewportSize({ width: 1440, height: 950 });
+  await page.getByRole('button', { name: 'Dark mode', exact: true }).click();
+  assert.equal(await page.locator('.portfolio').getAttribute('data-theme'), 'dark');
+  await page.reload();
+  await page.waitForFunction(() => document.querySelector('.portfolio')?.dataset.theme === 'dark');
+  await page.getByRole('button', { name: 'Dark mode', exact: true }).click();
+  assert.equal(await page.locator('.portfolio').getAttribute('data-theme'), 'light');
   await page.getByRole('link', { name: /Explore the illustrated workshop/ }).click();
   await page.locator('.room-art').waitFor();
   await page.goto(workshopUrl);

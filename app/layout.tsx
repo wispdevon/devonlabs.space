@@ -8,6 +8,13 @@ const bodyFont = localFont({
   display: 'swap'
 });
 
+const displayFont = localFont({
+  src: '../public/fonts/space-grotesk-latin.woff2',
+  variable: '--font-display',
+  display: 'swap',
+  weight: '300 700',
+});
+
 const siteUrl = process.env.SITE_URL || 'https://devonlabs.space';
 
 export const metadata: Metadata = {
@@ -33,12 +40,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff'
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#efece6' },
+    { media: '(prefers-color-scheme: dark)', color: '#151617' },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={bodyFont.variable}>
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`}>
       <body>{children}</body>
     </html>
   );
