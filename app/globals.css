@@ -285,3 +285,54 @@ button.text-link { padding: 0; border: 0; background: transparent; font: inherit
     .portfolio :is(section, figure, article, .color-band):focus-within { animation: none; }
   }
 }
+
+/* The shop is a preview catalog, with native product mockups. */
+.shop-heading { container-type: inline-size; margin-bottom: 44px; }
+.shop-eyebrow { color: var(--secondary); margin-bottom: 18px !important; }
+.page-shop .shop-heading h1 { font-size: clamp(1rem, 8cqw, 3.25rem); white-space: nowrap; letter-spacing: -.055em; margin-bottom: 20px; }
+.shop-lead { font-size: clamp(1.125rem, 2vw, 1.5rem); max-width: 38ch; }
+.shop-notice { max-width: 62ch; margin-top: 18px !important; font-size: .9375rem; color: var(--secondary); }
+.shop-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 28px; }
+.product-art { display: grid; place-items: center; aspect-ratio: 1; background: #e0e7d6; overflow: hidden; --mug-body: #d8ff4e; --mug-ink: #184d38; color: #184d38; }
+.product-art svg { display: block; width: 100%; height: auto; }
+.product-sun { background: #f0dcd2; --mug-body: #f6bd85; --mug-ink: #671d39; color: #671d39; }
+.product-architecture { background: #e3dce9; }
+.product-flight { background: #dfe6db; }
+.print-frame { width: 64%; padding: 10px; border: 8px solid #34224f; background: #f4f1eb; box-shadow: 9px 14px 18px rgb(30 20 40 / 16%); transform: rotate(-3deg); }
+.print-frame .duotone { border-radius: 0; }
+.print-frame img { aspect-ratio: 3 / 4; object-fit: cover; }
+.product-flight .print-frame { transform: rotate(3deg); border-color: #184d38; }
+.product-caption { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 16px; margin-bottom: 10px; color: var(--secondary); }
+.product-caption .mono { font-size: .6875rem; }
+.product-status { font-size: .6875rem; letter-spacing: .03em; }
+.page-shop .shop-product h2 { font-size: 1.625rem; color: var(--accent); }
+.product-description { font-size: .9375rem; max-width: 35ch; }
+.product-price { margin-top: 12px !important; color: var(--secondary); font-size: .75rem !important; }
+.shop-closing { border-top: 1px solid var(--divider); padding-top: 24px; margin-top: 44px !important; color: var(--secondary); }
+@media (max-width: 600px) { .shop-products { grid-template-columns: 1fr; gap: 36px; } .shop-heading { margin-bottom: 30px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .product-art > :is(svg, .print-frame) { transition: transform 600ms cubic-bezier(.22, 1, .36, 1); }
+  .product-art:hover > svg { transform: translateY(-6px) rotate(-3deg); }
+  .product-art:hover > .print-frame { transform: rotate(0); }
+}
+
+.about-connections { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 36px; }
+.working-with li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.working-with li svg { color: var(--accent); flex-shrink: 0; margin-top: 4px; }
+.working-with li:nth-child(2) svg { color: #637aca; }
+.working-with li:nth-child(3) svg { color: #bf7b54; }
+.working-with li:nth-child(4) svg { color: #599b8a; }
+.working-with li:nth-child(5) svg { color: #9c71b9; }
+.working-with li:nth-child(6) svg { color: #bf647e; }
+.find-me ul { list-style: none; margin: 0; padding: 0; }
+.find-me li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 22px; }
+.find-me li > svg { flex-shrink: 0; margin-top: 3px; color: var(--accent); }
+.find-me a { text-decoration: none; font-size: 1rem; }
+.find-me a:hover { text-decoration: underline; }
+.find-me a span { display: block; font-family: 'Devon Mono', monospace; font-size: .75rem; color: var(--secondary); margin-top: 3px; overflow-wrap: anywhere; }
+.discord-contact { position: relative; flex-wrap: wrap; }
+.copy-handle { display: grid; place-items: center; padding: 6px; background: transparent; border: 1px solid var(--divider); border-radius: 4px; margin-left: auto; }
+.copy-handle:hover { background: var(--surface-hover); }
+.copy-status { flex-basis: 100%; color: var(--secondary); font-size: .75rem; }
+.copy-status:empty { display: none; }
+@media (max-width: 600px) { .about-connections { grid-template-columns: 1fr; gap: 32px; } }

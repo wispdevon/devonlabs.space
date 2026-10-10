@@ -24,6 +24,7 @@ try {
     for (const width of [1440, 768, 390, 320]) {
       await page.setViewportSize({ width, height: 1000 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${label} overflows at ${width}px`);
+      if (label === 'Shop') assert.equal(await page.locator('h1').evaluate(heading => heading.scrollWidth <= heading.clientWidth && getComputedStyle(heading).whiteSpace === 'nowrap'), true, `Shop title fits one line at ${width}px`);
     }
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -32,6 +33,16 @@ try {
   assert.match(await page.locator('main').innerText(), /Independent developer based in Thailand/);
   assert.match(await page.locator('main').innerText(), /infrastructure you can actually own/);
   assert.equal(await page.locator('main').getByText(/Lorem Ipsum/i).count(), 0);
+  assert.equal(await page.locator('.working-with li svg').count(), 6);
+  assert.equal(await page.locator('.find-me a').count(), 4);
+  assert.equal(await page.locator('.find-me a[href="https://github.com/wispdevon"]').count(), 1);
+  assert.equal(await page.locator('.find-me a[href="https://www.last.fm/user/wisp-"]').count(), 1);
+  assert.equal(await page.locator('.find-me a[href="https://discord.com/channels/@me"]').count(), 1);
+  assert.equal(await page.locator('.find-me a[href="mailto:wisp@devonlabs.space"]').count(), 1);
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.getByRole('button', { name: 'Copy Discord username wispcream' }).click();
+  await page.getByRole('status').getByText('Username copied').waitFor();
+  assert.equal(await page.evaluate(() => navigator.clipboard.readText()), 'wispcream');
   assert.equal(await page.locator('nav').evaluate(element => getComputedStyle(element).flexDirection), 'column');
   const introduction = await page.locator('.about-introduction').boundingBox();
   const photograph = await page.locator('.about-photo').boundingBox();
@@ -74,14 +85,15 @@ try {
   assert.equal(await video.evaluate(video => video.paused), true);
   await page.getByRole('navigation').getByRole('link', { name: 'Shop', exact: true }).click();
   await page.waitForURL(`${origin}/shop/`);
-  assert.equal(await page.getByRole('link', { name: 'Visit 1337 Sheets', exact: false }).getAttribute('href'), 'https://shop.1337sheets.com/');
-  await page.getByRole('link', { name: /Explore the workshop/ }).click();
-  await page.locator('.room-art').waitFor();
-  await page.goBack();
-  await page.locator('.portfolio').waitFor();
-  assert.equal(await page.evaluate(() => getComputedStyle(document.body).overflow), 'visible');
+  assert.equal(await page.locator('.shop-product').count(), 4);
+  assert.equal(await page.getByText('Placeholder', { exact: true }).count(), 4);
+  assert.match(await page.locator('.shop-notice').innerText(), /nothing is available to purchase yet/);
+  assert.equal(await page.locator('a[href*="1337sheets"], a[href="/workshop/"]').count(), 0);
+  await page.locator('.shop-products img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
+  await page.goto(`${origin}/workshop/`);
+  assert.equal(new URL(page.url()).pathname, '/shop/');
   assert.deepEqual(errors, []);
-  console.log('Passed: five routes, active navigation, README biography, four widths, theme persistence, original/duotone gallery, modal keyboard/focus, film delivery, and workshop round trip.');
+  console.log('Passed: five routes, active navigation, README biography, four widths, theme persistence, original/duotone gallery, modal keyboard/focus, on-demand film player, and placeholder shop with one-line title.');
 } finally {
   await browser.close();
 }
