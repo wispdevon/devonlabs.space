@@ -34,6 +34,8 @@ try {
   await page.waitForURL(`${origin}/work/`);
   assert.equal(await page.locator('.work-entry').count(), 3);
   assert.equal(await page.locator('.work-entry a[href="/software/"]').count(), 1);
+  assert.equal(await page.locator('.work-contact a').getAttribute('href'), 'mailto:wisp@devonlabs.space');
+  assert.equal(await page.locator('.work-contact .__cf_email__').count(), 0);
   await page.getByRole('navigation').getByRole('link', { name: 'Coffee', exact: true }).click();
   await page.waitForURL(`${origin}/coffee/`);
   await page.getByLabel('Explore an origin').selectOption('076');

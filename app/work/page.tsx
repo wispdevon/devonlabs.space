@@ -14,6 +14,6 @@ export default function WorkPage() {
       <article className="work-entry"><span className="mono work-number">02 / Photography</span><div><h2>People, places, in between.</h2><figure className="work-photo"><Link className="duotone" href="/photography/"><Image src="/workshop/photos/06.webp" alt="Birds in flight above city architecture" width={1066} height={1600} sizes="(max-width: 600px) 90vw, 650px" /></Link><figcaption>A frame from The Best.</figcaption></figure><p>A selection from my public photograph collection.</p><Link className="text-link" href="/photography/">See the photographs <ForwardArrow /></Link></div></article>
       <article className="work-entry"><span className="mono work-number">03 / Film</span><div><h2>Stories made together.</h2><p>The One Camp ’26: a collaborative film made with photographers, videographers, and creatives, ready to screen on the third day.</p><Link className="text-link" href="/film/">Watch the film <ForwardArrow /></Link></div></article>
     </section>
-    <div className="work-contact"><p>Get in touch.</p><a href="mailto:wisp@devonlabs.space">wisp@devonlabs.space <ForwardArrow /></a></div>
+    <div className="work-contact"><p>Get in touch.</p>{/* Cloudflare's email rewriting changes server markup before hydration. This trusted, static HTML opts this public link out. */}<span dangerouslySetInnerHTML={{ __html: '<!--email_off--><a href="mailto:wisp@devonlabs.space">wisp@devonlabs.space <span aria-hidden="true">→</span></a><!--/email_off-->' }} /></div>
   </SiteShell>;
 }
