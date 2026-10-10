@@ -20,7 +20,7 @@ const siteUrl = process.env.SITE_URL || 'https://devonlabs.space';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Devon Labs — Wisp’s software, photography & experiments',
-  description: 'Explore Wisp’s world of software, photography, films, and hardware. An independent creative workshop in Thailand.',
+  description: 'Independent developer based in Thailand. Thoughtful software for photographs, self-hosted workflows, and the web.',
   applicationName: 'Devon Labs',
   alternates: { canonical: '/' },
   openGraph: {
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'light dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#efece6' },
-    { media: '(prefers-color-scheme: dark)', color: '#151617' },
+    { media: '(prefers-color-scheme: light)', color: '#f4f1eb' },
+    { media: '(prefers-color-scheme: dark)', color: '#171421' },
   ],
 };
 

@@ -1,6 +1,8 @@
 # Devon Labs
 
-A typography-led portfolio for Wisp’s software, photography, films, and hardware, inspired by the personal, browsable layouts of https://rsms.me/ and https://aresluna.org/. The homepage combines rsms.me’s parallel editorial columns and vertical navigation with Strider’s warm paper, faint dot grid, titanium accents, and graphite dark mode. Fonts and project and photography assets are local. The theme follows the system and a manual override persists locally. Software summaries live in `app/page.tsx`; repository details remain in `data/developer-projects.ts`.
+A colorful multi-page portfolio for Wisp’s software, photography, films, and hardware, inspired by https://rsms.me/, https://aresluna.org/, and the Strider design system. The homepage is About, with biography sourced from [Wisp’s GitHub profile README](https://github.com/wispdevon/wispdevon); the retrieved snapshot and curated content live in `data/profile-readme.md` and `data/profile.ts`. Software, Film, Photography and Shop each have their own static page.
+
+Warm paper and plum text pair with page-specific violet/lime, cobalt/peach, teal/coral, burgundy/apricot, and forest/lime duotones. SVG filters color the existing assets without altering the originals. Photography offers Original mode and a native large-image dialog; the film plays on demand in original color. Fonts and preview images are local. Theme preference persists and follows the OS before a manual override. Edit software summaries in `data/portfolio-summaries.ts`; repository details remain in `data/developer-projects.ts`.
 
 The original illustrated workshop is preserved at `/workshop/` with its own layout and styles.
 
@@ -27,7 +29,7 @@ npm run test:browser
 npm run test:adventure
 ```
 
-Tests cover media integrity, progress migration, static room pixels, project viewers, responsive layouts, pickups, item matching, repairs, and focus restoration. Set `TEST_URL` to the full workshop URL (for example `http://localhost:3012/workshop/`) for a different preview/live target. Browser tests also check the portfolio at that URL’s origin. Set `SCREENSHOT_DIR` for evidence outside the repository.
+Tests cover all five routes, active navigation, biography, responsive layouts, theme persistence, duotone/original gallery, modal keyboard/focus behavior, and the original workshop/media/puzzle checks. Set `TEST_URL` to the full workshop URL (for example `http://localhost:3012/workshop/`) for a different preview/live target. Browser tests also check the portfolio at that URL’s origin. Set `SCREENSHOT_DIR` for evidence outside the repository.
 
 ## Cloudflare Pages
 

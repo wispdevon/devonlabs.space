@@ -13,7 +13,7 @@
     "refresh:media": "node scripts/refresh-workshop.mjs",
     "lint": "eslint",
     "test": "node tests/workshop.mjs",
-    "test:browser": "node tests/browser.mjs",
+    "test:browser": "node tests/portfolio.mjs && node tests/browser.mjs",
     "test:adventure": "node tests/adventure.mjs"
   },
   "engines": {
