@@ -1,5 +1,17 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+
+// Rings crossing the date line must be split, including their closing edge.
+const mapCountries = JSON.parse(await readFile(new URL('../data/world-countries.json', import.meta.url)));
+for (const country of mapCountries) {
+  for (const ring of country.path.split('Z')) {
+    const points = [...ring.matchAll(/[ML]([\d.-]+),([\d.-]+)/g)].map(match => [Number(match[1]), Number(match[2])]);
+    for (let i = 0; i < points.length; i++) {
+      assert.ok(Math.abs(points[i][0] - points[(i + 1) % points.length][0]) <= 480, `${country.name} crosses the map instead of wrapping at its edge`);
+    }
+  }
+}
 
 const origin = new URL(process.env.TEST_URL || 'http://127.0.0.1:3011/').origin;
 const routes = [
