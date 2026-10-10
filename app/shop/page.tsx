@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import SiteShell, { pageMetadata } from '../portfolio/site-shell';
 
-export const metadata = pageMetadata('shop', 'The Devon Labs shop: mugs, wall art, and future curiosities. A preview collection of placeholder products.');
+export const metadata = pageMetadata('shop', 'The Devon Labs shop: a preview collection of mugs and wall art.');
 
 function Mug({ alternate = false }: { alternate?: boolean }) {
   return <svg viewBox="0 0 600 600" role="img" aria-label={alternate ? 'Apricot sample mug with a burgundy sun design' : 'Lime sample mug with Devon Labs lettering'}>
@@ -24,16 +24,15 @@ const products = [
 
 export default function ShopPage() {
   return <SiteShell page="shop">
-    <section className="shop-heading" aria-labelledby="shop-title"><p className="mono shop-eyebrow">Devon Labs / Shop</p><h1 id="shop-title">Hardware &amp; curiosities</h1><p className="shop-lead">Small objects. A little color. Something for your walls.</p><p className="shop-notice">A preview collection. These are placeholder products; nothing is available to purchase yet.</p></section>
+    <section className="shop-heading" aria-labelledby="shop-title"><p className="mono shop-eyebrow">Devon Labs / Shop</p><h1 id="shop-title">Hardware &amp; curiosities</h1><p className="shop-lead">Small objects. A little color. Something for your walls.</p></section>
     <section aria-label="Preview collection" className="shop-products">
       {products.map(product => <article className="shop-product" key={product.type}>
         <div className={`product-art product-${product.type}`}>
           {product.photo ? <div className="print-frame"><div className="duotone"><Image src={product.photo} alt={product.name === 'Geometric light' ? 'Geometric architectural details shown as a sample framed print' : 'Birds in flight shown as a sample framed print'} width={1066} height={1600} sizes="(max-width: 600px) 75vw, 350px" /></div></div> : <Mug alternate={product.type === 'sun'} />}
         </div>
-        <div className="product-caption"><p className="mono">{product.category}</p><span className="product-status">Placeholder</span></div>
-        <h2>{product.name}</h2><p className="product-description">{product.description}</p><p className="product-price mono">Price to come</p>
+        <div className="product-caption"><p className="mono">{product.category}</p></div>
+        <h2>{product.name}</h2><p className="product-description">{product.description}</p>
       </article>)}
     </section>
-    <p className="shop-closing">More hardware &amp; curiosities, in time.</p>
   </SiteShell>;
 }

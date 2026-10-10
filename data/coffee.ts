@@ -11,9 +11,9 @@ export const coffeeGear = [
   { name: 'Hario Switch', kind: 'Immersion / pour-over brewer' },
 ];
 export const coffeeMethods = [
-  { name: 'Pour-over', note: 'Hario V60. Recipes, pouring patterns, and brew notes to come.' },
-  { name: 'Immersion & hybrid', note: 'Hario Switch. Steep times, drawdown, and experiments to come.' },
-  { name: 'Manual espresso', note: 'Flair Neo and ROKpresso Classic. Dial-in notes to come.' },
+  { name: 'Pour-over', note: 'Hario V60.' },
+  { name: 'Immersion & hybrid', note: 'Hario Switch.' },
+  { name: 'Manual espresso', note: 'Flair Neo and ROKpresso Classic.' },
 ];
 // A starter tasting checklist, not a claim about Wisp's past consumption.
 export const coffeeChecklist = ['076', '170', '218', '604', '068', '320', '340', '188', '591', '484', '222', '558', '231', '404', '646', '108', '800', '834', '887', '356', '360', '704', '764', '156', '598'];

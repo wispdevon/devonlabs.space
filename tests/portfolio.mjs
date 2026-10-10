@@ -124,8 +124,6 @@ try {
   await page.getByRole('navigation').getByRole('link', { name: 'Shop', exact: true }).click();
   await page.waitForURL(`${origin}/shop/`);
   assert.equal(await page.locator('.shop-product').count(), 4);
-  assert.equal(await page.getByText('Placeholder', { exact: true }).count(), 4);
-  assert.match(await page.locator('.shop-notice').innerText(), /nothing is available to purchase yet/);
   assert.equal(await page.locator('a[href*="1337sheets"], a[href="/workshop/"]').count(), 0);
   await page.locator('.shop-products img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
   await page.goto(`${origin}/workshop/`);
