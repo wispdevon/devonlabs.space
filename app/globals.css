@@ -90,7 +90,7 @@ canvas:focus-visible {
   width: 100%;
   height: 100%;
   touch-action: none;
-  cursor: grab;
+  cursor: crosshair;
 }
 .world canvas:active {
   cursor: grabbing;
@@ -154,6 +154,7 @@ canvas:focus-visible {
 }
 .world-tools button,
 .world-actions button {
+  position: relative;
   width: 44px;
   height: 44px;
   display: grid;
@@ -181,6 +182,125 @@ canvas:focus-visible {
 }
 .world-tools button[aria-pressed='true']:hover:not(:disabled) {
   background: #294b48;
+}
+.inventory-count {
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  display: grid;
+  place-items: center;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #345b58;
+  color: #fff;
+  font-size: 10px;
+}
+.held-item {
+  position: absolute;
+  left: 50%;
+  bottom: 112px;
+  transform: translateX(-50%);
+  display: flex;
+  background: #f8faf5ed;
+  border: 1px solid #d7dfd9;
+  border-radius: 6px;
+  max-width: calc(100% - 40px);
+}
+.held-item button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  font-size: 12px;
+}
+.object-emblem {
+  width: 64px;
+  height: 64px;
+  margin: 0 0 25px;
+  display: grid;
+  place-items: center;
+  color: #547b70;
+  background: #e5eee6;
+  border-radius: 50%;
+}
+.object-emblem.discovery {
+  background: #f4e7b9;
+  color: #8a6e30;
+}
+.object-emblem.puzzle {
+  background: #e5def0;
+  color: #7c6598;
+}
+.repair-complete {
+  display: flex;
+  gap: 10px;
+  color: #497b63;
+  font-size: 13px;
+}
+.object-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+.pocket-items {
+  display: flex;
+  flex-direction: column;
+}
+.pocket-items > button {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 20px;
+  gap: 15px;
+  padding: 18px 0;
+  align-items: center;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.pocket-items > button[aria-pressed='true'] {
+  color: #428068;
+}
+.pocket-items > button:disabled {
+  opacity: 0.45;
+}
+.pocket-items strong {
+  font-size: 14px;
+  font-weight: 550;
+  display: block;
+  margin-bottom: 6px;
+}
+.pocket-items small {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  display: block;
+}
+.pocket-symbol {
+  color: #a28b4d;
+}
+.field-notes {
+  margin-top: 28px;
+}
+.field-notes h2 {
+  font-size: 16px;
+  font-weight: 550;
+  margin: 0 0 20px;
+}
+.field-notes > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  margin: 13px 0;
+}
+.note-dot {
+  width: 17px;
+  height: 17px;
+  border: 1px solid #adbbb2;
+  border-radius: 50%;
+}
+@media (pointer: coarse) {
+  .held-item {
+    bottom: 267px;
+  }
 }
 .world-status {
   position: absolute;

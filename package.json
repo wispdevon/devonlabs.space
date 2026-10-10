@@ -13,7 +13,8 @@
     "refresh:media": "node scripts/refresh-workshop.mjs",
     "lint": "eslint",
     "test": "node tests/workshop.mjs",
-    "test:browser": "node tests/browser.mjs"
+    "test:browser": "node tests/browser.mjs",
+    "test:adventure": "node tests/adventure.mjs"
   },
   "engines": {
     "node": ">=22"
@@ -21,13 +22,15 @@
   "dependencies": {
     "@dimforge/rapier3d-compat": "0.12.0",
     "lucide-react": "^0.468.0",
-    "next": "^16.3.2",
+    "next": "16.3.8",
+    "pathfinding": "^0.4.18",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "three": "^0.186.1"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pathfinding": "^0.0.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.186.0",

@@ -1,7 +1,15 @@
 import * as THREE from 'three';
 import RAPIER from '@dimforge/rapier3d-compat';
-import { circuit, discoveries, photographs, works } from '@/data/workshop';
-import { createRoverPhysics, driveRover, roverGrounded, wheelPoints } from './workshop-physics';
+import { canRepair, circuit, discoveries, photographs, puzzles, works } from '@/data/workshop';
+import { createNavigator, createWalkingPhysics, walk, type Obstacle } from './workshop-walking';
+
+export type Hotspot = {
+  kind: 'work' | 'discovery' | 'puzzle' | 'rover';
+  id: string;
+  name: string;
+  x: number;
+  z: number;
+};
 
 export type WorldSettings = {
   night: boolean;
@@ -10,12 +18,18 @@ export type WorldSettings = {
   paused: boolean;
   reduced: boolean;
   discovered?: string[];
+  repaired?: string[];
+  held?: string | null;
 };
 export type WorldEvent =
   | { type: 'nearby'; id: string | null }
   | { type: 'open'; id: string }
   | { type: 'discovery'; id: string }
   | { type: 'jump' }
+  | { type: 'hover'; target: Hotspot | null }
+  | { type: 'inspect'; target: Hotspot }
+  | { type: 'repair'; id: string }
+  | { type: 'message'; text: string }
   | { type: 'race'; elapsed: number; checkpoint: number; finished?: boolean };
 export type WorldHandle = {
   update: (settings: WorldSettings) => void;
@@ -27,6 +41,9 @@ export type WorldHandle = {
   race: () => void;
   cancelRace: () => void;
   reset: () => void;
+  interact: () => void;
+  collect: (id: string) => void;
+  repair: (id: string) => void;
   dispose: () => void;
 };
 
@@ -43,11 +60,15 @@ export async function mountWorkshop(
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.setClearColor('#bad5ce');
   renderer.domElement.tabIndex = 0;
-  renderer.domElement.setAttribute('aria-label', 'Drive around Devon Labs');
+  renderer.domElement.setAttribute('aria-label', 'Explore Devon Labs in first person');
   renderer.domElement.setAttribute('role', 'application');
+  renderer.domElement.setAttribute(
+    'aria-keyshortcuts',
+    'W A S D Q E ArrowUp ArrowDown ArrowLeft ArrowRight Space Shift Enter R'
+  );
   host.append(renderer.domElement);
   const scene = new THREE.Scene();
-  const camera = new THREE.OrthographicCamera(-30, 30, 20, -20, 0.1, 180);
+  const camera = new THREE.PerspectiveCamera(65, 1, 0.08, 150);
   const physics = new RAPIER.World({ x: 0, y: -15, z: 0 });
   physics.timestep = 1 / 60;
   let settings = initial;
@@ -55,14 +76,15 @@ export async function mountWorkshop(
   let unavailable = false;
   let accumulator = 0;
   let last = performance.now();
+  let lastPaint = 0;
   let nearby: string | null = null;
   let elapsed = 0;
   let raceTime = 0;
   let raceCheckpoint = -1;
   let lastReport = 0;
-  let zoom = 1;
-  let azimuth = 0.63;
-  let elevation = 0.78;
+  let azimuth = 0;
+  let elevation = -0.07;
+  let fieldOfView = 65;
   let width = 1;
   let height = 1;
   let touchSteer = { x: 0, y: 0 };
@@ -72,6 +94,14 @@ export async function mountWorkshop(
   const keys = new Set<string>();
   const found = new Set<string>();
   const interactive: THREE.Object3D[] = [];
+  const obstacles: Obstacle[] = [];
+  let route: { x: number; z: number }[] = [];
+  let destination: THREE.Vector3 | null = null;
+  let pending: Hotspot | null = null;
+  let hovered: Hotspot | null = null;
+  let hoverKey = '';
+  let lookAtDestination = false;
+  let blockedTime = 0;
   const movingProps: { body: RAPIER.RigidBody; mesh: THREE.Mesh; initial: THREE.Vector3 }[] = [];
   const resources = new Set<THREE.Texture>();
   const colors = {
@@ -139,6 +169,12 @@ export async function mountWorkshop(
     sz: number,
     rotation = 0
   ) => {
+    obstacles.push({
+      x,
+      z,
+      width: sx,
+      depth: Math.abs(sz * Math.cos(rotation)) + Math.abs(sy * Math.sin(rotation)),
+    });
     physics.createCollider(
       RAPIER.ColliderDesc.cuboid(sx / 2, sy / 2, sz / 2)
         .setTranslation(x, y, z)
@@ -228,6 +264,7 @@ export async function mountWorkshop(
   floor.position.y = -3;
   floor.receiveShadow = true;
   scene.add(floor);
+  scene.fog = new THREE.Fog('#bad5ce', 48, 110);
 
   box(scene, 0, 0.1, 0, 7, 0.06, 65, '#f0f2ed');
   box(scene, 0, 0.105, 5, 62, 0.06, 6, '#f0f2ed');
@@ -259,7 +296,7 @@ export async function mountWorkshop(
     scene.add(rock);
   }
   const brand = new THREE.Group();
-  brand.position.set(-4, 0, 6);
+  brand.position.set(-4, 0, -2);
   scene.add(brand);
   box(brand, 0, 1.9, 0, 0.15, 3.8, 0.15, colors.ink);
   box(brand, 6, 1.9, 0, 0.15, 3.8, 0.15, colors.ink);
@@ -281,6 +318,13 @@ export async function mountWorkshop(
     const group = new THREE.Group();
     group.position.set(work.position[0], 0, work.position[1]);
     group.userData.work = work.id;
+    const hotspot: Hotspot = {
+      kind: 'work',
+      id: work.id,
+      name: work.name,
+      x: work.position[0],
+      z: work.position[1] + (work.kind === 'Video' ? 7 : 4.2),
+    };
     scene.add(group);
     const plinth = cylinder(
       group,
@@ -382,9 +426,10 @@ export async function mountWorkshop(
       box(group, 0, 1.6, 0.5, 1.9, 0.08, 0.65, '#c4cbd0');
     }
     const name = sign(group, work.name, 0, 0.5, 3.4, 5);
-    name.rotation.x = -Math.PI / 2;
+    name.position.y = 0.85;
     group.traverse((object) => {
       object.userData.work = work.id;
+      object.userData.hotspot = hotspot;
     });
     interactive.push(group);
     if (work.kind !== 'Video') fixedBox(work.position[0], 1.1, work.position[1], 3.3, 2.2, 1.8);
@@ -427,20 +472,102 @@ export async function mountWorkshop(
     fixedBox(x, 0.65, z, 3.5, 0.3, 5, 0.24);
   }
   const secretMeshes = discoveries.map((secret, i) => {
-    const mesh = new THREE.Mesh(
-      new THREE.OctahedronGeometry(0.65),
-      new THREE.MeshStandardMaterial({
-        color: colors.yellow,
-        emissive: '#8e7525',
-        emissiveIntensity: 0.2,
-      })
-    );
-    mesh.position.set(secret.position[0], 1.1, secret.position[1]);
-    mesh.rotation.y = i;
-    mesh.castShadow = true;
-    scene.add(mesh);
-    return mesh;
+    const group = new THREE.Group();
+    if (secret.id === 'negative') {
+      box(group, 0, 0, 0, 0.9, 0.65, 0.07, colors.ink);
+      picture(group, photographs[0].image, 0, 0, 0.045, 0.5, 0.48);
+      for (let x = -0.35; x <= 0.35; x += 0.14)
+        for (const y of [-0.28, 0.28]) box(group, x, y, 0.05, 0.06, 0.04, 0.03, colors.yellow);
+    } else if (secret.id === 'lens') {
+      const lens = cylinder(group, 0, 0, 0, 0.4, 0.5, colors.ink);
+      lens.rotation.x = Math.PI / 2;
+      const glass = cylinder(group, 0, 0, 0.26, 0.32, 0.04, colors.lilac);
+      glass.rotation.x = Math.PI / 2;
+    } else if (secret.id === 'signal') {
+      box(group, 0, 0, 0, 0.6, 0.65, 0.3, colors.mint);
+      cylinder(group, 0.18, 0.55, 0, 0.025, 0.55, colors.ink);
+      box(group, 0, 0.07, 0.17, 0.4, 0.2, 0.03, colors.ink);
+      box(group, 0.13, -0.2, 0.17, 0.08, 0.08, 0.04, colors.yellow);
+    } else if (secret.id === 'satellite') {
+      box(group, 0, 0, 0, 0.4, 0.45, 0.45, colors.white);
+      box(group, -0.62, 0, 0, 0.7, 0.035, 0.5, colors.blue);
+      box(group, 0.62, 0, 0, 0.7, 0.035, 0.5, colors.blue);
+    } else if (secret.id === 'archive') {
+      box(group, 0, 0, 0, 0.7, 0.75, 0.15, colors.yellow);
+      box(group, 0, 0.14, 0.09, 0.48, 0.35, 0.03, colors.white);
+      sign(group, 'IDEAS', 0, 0.14, 0.12, 0.4);
+    } else {
+      group.add(new THREE.Mesh(new THREE.OctahedronGeometry(0.45), material(colors.yellow)));
+    }
+    group.position.set(secret.position[0], 1.1, secret.position[1]);
+    group.rotation.y = i * 0.3;
+    const hotspot: Hotspot = {
+      kind: 'discovery',
+      id: secret.id,
+      name: secret.name,
+      x: secret.position[0],
+      z: secret.position[1] + 1.5,
+    };
+    group.traverse((object) => {
+      object.userData.hotspot = hotspot;
+    });
+    scene.add(group);
+    interactive.push(group);
+    return group;
   });
+  const puzzleLamps = puzzles.map((puzzle) => {
+    const group = new THREE.Group();
+    group.position.set(puzzle.position[0], 0, puzzle.position[1]);
+    scene.add(group);
+    box(group, 0, 0.7, 0, 0.14, 1.4, 0.14, colors.ink);
+    box(group, 0, 1.35, 0, 1.4, 0.3, 0.9, puzzle.color);
+    const lamp = box(group, 0, 1.53, 0, 1.05, 0.08, 0.65, colors.ink);
+    if (puzzle.id === 'projector') {
+      const lens = cylinder(group, 0, 1.4, -0.65, 0.28, 0.5, colors.ink);
+      lens.rotation.x = Math.PI / 2;
+    }
+    if (puzzle.id === 'antenna') {
+      cylinder(group, 0, 2.3, 0, 0.04, 1.5, colors.ink);
+      box(group, 0, 2.9, 0, 1, 0.05, 0.05, colors.mint);
+    }
+    sign(group, puzzle.name, 0, 0.8, 0.48, 2.2);
+    const hotspot: Hotspot = {
+      kind: 'puzzle',
+      id: puzzle.id,
+      name: puzzle.name,
+      x: puzzle.position[0],
+      z: puzzle.position[1] + 1.8,
+    };
+    group.traverse((object) => {
+      object.userData.hotspot = hotspot;
+    });
+    interactive.push(group);
+    fixedBox(puzzle.position[0], 0.75, puzzle.position[1], 1.4, 1.5, 0.9);
+    return lamp;
+  });
+  const projectorOrigin = new THREE.Vector3(-12, 1.4, 19);
+  const projectorTarget = new THREE.Vector3(-17, 3, 16.5);
+  const beamDirection = projectorTarget.clone().sub(projectorOrigin);
+  const projectorBeam = new THREE.Mesh(
+    new THREE.CylinderGeometry(2.1, 0.12, beamDirection.length(), 24, 1, true),
+    new THREE.MeshBasicMaterial({
+      color: '#fff0c3',
+      transparent: true,
+      opacity: 0.14,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    })
+  );
+  projectorBeam.position.copy(projectorOrigin).add(projectorTarget).multiplyScalar(0.5);
+  projectorBeam.quaternion.setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0),
+    beamDirection.normalize()
+  );
+  projectorBeam.visible = false;
+  scene.add(projectorBeam);
+  const signalBeacon = new THREE.PointLight('#83ffd1', 0, 9);
+  signalBeacon.position.set(14, 3, 20);
+  scene.add(signalBeacon);
   circuit.slice(0, -1).forEach(([x, z], i) => {
     const group = new THREE.Group();
     group.position.set(x, 0, z);
@@ -493,6 +620,7 @@ export async function mountWorkshop(
 
   const rover = new THREE.Group();
   scene.add(rover);
+  rover.position.set(4, 0.85, 8);
   box(rover, 0, 0.1, 0, 1.65, 0.65, 2.65, colors.yellow);
   box(rover, 0, 0.65, -0.25, 1.35, 0.8, 1.45, colors.white);
   box(rover, 0, 0.74, 0.5, 1.15, 0.5, 0.05, '#294d55');
@@ -503,37 +631,50 @@ export async function mountWorkshop(
     box(rover, x, 0.1, 1.35, 0.35, 0.2, 0.08, colors.white);
     box(rover, x, 0.1, -1.35, 0.25, 0.15, 0.08, colors.pink);
   }
-  const wheels: THREE.Group[] = [];
-  const { body, collider, vehicle } = createRoverPhysics(physics);
-  wheelPoints.forEach(([x]) => {
+  const player = createWalkingPhysics(physics);
+  const { body } = player;
+  [
+    [-0.99, 0.9],
+    [0.99, 0.9],
+    [-0.99, -0.9],
+    [0.99, -0.9],
+  ].forEach(([x, z]) => {
     const group = new THREE.Group();
     rover.add(group);
     const tire = cylinder(group, 0, 0, 0, 0.47, 0.32, colors.ink);
     tire.rotation.z = Math.PI / 2;
     const hub = cylinder(group, x > 0 ? 0.18 : -0.18, 0, 0, 0.24, 0.035, colors.white);
     hub.rotation.z = Math.PI / 2;
-    wheels.push(group);
+    group.position.set(x, -0.42, z);
   });
-  const follow = new THREE.Vector3(0, 0, 6);
-  const target = new THREE.Vector3();
+  rover.traverse((object) => {
+    object.userData.hotspot = {
+      kind: 'rover',
+      id: 'rover',
+      name: 'The little rover',
+      x: 4,
+      z: 11,
+    } satisfies Hotspot;
+  });
+  interactive.push(rover);
+  fixedBox(4, 0.8, 8, 2, 1.6, 2.8);
+  const navigate = createNavigator(obstacles);
+  const destinationMarker = new THREE.Mesh(
+    new THREE.TorusGeometry(0.35, 0.025, 8, 32),
+    new THREE.MeshBasicMaterial({ color: colors.ink, depthTest: false })
+  );
+  destinationMarker.rotation.x = -Math.PI / 2;
+  destinationMarker.visible = false;
+  scene.add(destinationMarker);
   const raycaster = new THREE.Raycaster();
   let dragging: { x: number; y: number; moved: boolean; id: number } | null = null;
   const touches = new Map<number, { x: number; y: number }>();
   let pinchDistance = 0;
   let audio: AudioContext | null = null;
-  let oscillator: OscillatorNode | null = null;
-  let gain: GainNode | null = null;
   function sound() {
     if (!settings.sound || settings.paused) return;
     if (!audio) {
       audio = new AudioContext();
-      oscillator = audio.createOscillator();
-      gain = audio.createGain();
-      oscillator.type = 'triangle';
-      oscillator.connect(gain);
-      gain.connect(audio.destination);
-      gain.gain.value = 0.018;
-      oscillator.start();
     }
     void audio.resume().catch(() => {});
   }
@@ -559,25 +700,91 @@ export async function mountWorkshop(
   function resize() {
     width = host.clientWidth;
     height = host.clientHeight;
-    const h = width < 680 ? 34 : 39;
-    camera.left = (-h * width) / height / 2;
-    camera.right = (h * width) / height / 2;
-    camera.top = h / 2;
-    camera.bottom = -h / 2;
-    camera.zoom = zoom;
+    camera.aspect = width / height;
+    camera.fov = Math.min(105, fieldOfView + (width < height ? 30 : 0));
     camera.updateProjectionMatrix();
     renderer.setPixelRatio(Math.min(devicePixelRatio, settings.quality === 'high' ? 1.7 : 1));
     renderer.setSize(width, height);
   }
-  function resetPosition(x = 0, z = 6) {
-    body.setTranslation({ x, y: 1.3, z }, true);
-    body.setLinvel({ x: 0, y: 0, z: 0 }, true);
-    body.setAngvel({ x: 0, y: 0, z: 0 }, true);
-    body.setRotation({ x: 0, y: 1, z: 0, w: 0 }, true);
+  function stopWalking() {
+    route = [];
+    pending = null;
+    destination = null;
+    destinationMarker.visible = false;
+    lookAtDestination = false;
+    blockedTime = 0;
+  }
+  function resetPosition(x = 0, z = 14) {
+    body.setTranslation({ x, y: 1, z }, true);
+    body.setNextKinematicTranslation({ x, y: 1, z });
+    player.vertical = 0;
+    player.grounded = false;
+    azimuth = 0;
+    elevation = -0.07;
     keys.clear();
     touchSteer = { x: 0, y: 0 };
     jumpQueued = false;
-    follow.set(x, 0, z);
+    stopWalking();
+    setHover(null);
+  }
+  function collect(id: string) {
+    const item = discoveries.find((item) => item.id === id);
+    const p = body.translation();
+    if (!item || found.has(id) || Math.hypot(p.x - item.position[0], p.z - item.position[1]) > 4)
+      return;
+    found.add(id);
+    secretMeshes[discoveries.indexOf(item)].visible = false;
+    chime(760);
+    onEvent({ type: 'discovery', id });
+  }
+  function repair(id: string) {
+    const puzzle = puzzles.find((p) => p.id === id);
+    const p = body.translation();
+    if (!puzzle || Math.hypot(p.x - puzzle.position[0], p.z - puzzle.position[1]) > 4) return;
+    if (canRepair(id, settings.held || '', [...found], settings.repaired || [])) {
+      chime(880);
+      onEvent({ type: 'repair', id });
+    } else
+      onEvent({
+        type: 'message',
+        text: settings.repaired?.includes(id)
+          ? puzzle.solved
+          : settings.held
+            ? 'That does not fit here.'
+            : puzzle.hint,
+      });
+  }
+  function activate(target: Hotspot) {
+    const object = interactive.find((object) => object.userData.hotspot?.id === target.id);
+    if (object) {
+      const focus = object.getWorldPosition(new THREE.Vector3());
+      const position = body.translation();
+      azimuth = Math.atan2(focus.x - position.x, position.z - focus.z);
+      elevation = -0.05;
+    }
+    if (target.kind === 'work') {
+      chime(520);
+      onEvent({ type: 'open', id: target.id });
+    } else if (target.kind === 'puzzle' && settings.held) repair(target.id);
+    else onEvent({ type: 'inspect', target });
+  }
+  function goTo(x: number, z: number, target: Hotspot | null = null) {
+    const p = body.translation();
+    if (target && Math.hypot(p.x - x, p.z - z) < 2) {
+      activate(target);
+      return;
+    }
+    const path = navigate(p, { x, z });
+    if (!path.length) {
+      onEvent({ type: 'message', text: 'No clear path from here.' });
+      return;
+    }
+    route = path;
+    destination = new THREE.Vector3(x, 0.18, z);
+    pending = target;
+    lookAtDestination = true;
+    destinationMarker.position.copy(destination);
+    destinationMarker.visible = true;
   }
   function cancelRace() {
     raceCheckpoint = -1;
@@ -596,20 +803,28 @@ export async function mountWorkshop(
       mesh.visible = !found.has(discoveries[i].id);
     });
     stars.visible = settings.night;
-    ambient.intensity = settings.night ? 0.75 : 2.2;
-    sun.intensity = settings.night ? 0.8 : 3.1;
+    ambient.intensity = settings.night ? 0.75 : 1.4;
+    sun.intensity = settings.night ? 0.8 : 2.1;
     sun.color.set(settings.night ? '#a8c0f0' : '#fff7ec');
     floor.material = material(settings.night ? '#151e35' : '#bad5ce');
     renderer.setClearColor(settings.night ? '#151e35' : '#bad5ce');
+    (scene.fog as THREE.Fog).color.set(settings.night ? '#151e35' : '#bad5ce');
+    puzzleLamps.forEach((lamp, i) => {
+      lamp.material = material(settings.repaired?.includes(puzzles[i].id) ? '#fff5ad' : colors.ink);
+    });
+    projectorBeam.visible = settings.repaired?.includes('projector') || false;
+    signalBeacon.intensity = settings.repaired?.includes('antenna') ? 6 : 0;
     renderer.shadowMap.enabled = settings.quality === 'high';
     resize();
     if (settings.paused) {
       keys.clear();
       touchSteer = { x: 0, y: 0 };
-      body.setLinvel({ x: 0, y: 0, z: 0 }, true);
+      touchBoost = false;
+      cancelPointer();
+      stopWalking();
     }
     if (!settings.sound || settings.paused) {
-      if (gain) gain.gain.value = 0;
+      if (audio) void audio.suspend().catch(() => {});
     } else {
       sound();
     }
@@ -619,21 +834,58 @@ export async function mountWorkshop(
       touchSteer.y ||
       (keys.has('w') || keys.has('arrowup') ? 1 : 0) -
         (keys.has('s') || keys.has('arrowdown') ? 1 : 0);
-    const steering =
-      touchSteer.x ||
-      (keys.has('a') || keys.has('arrowleft') ? 1 : 0) -
-        (keys.has('d') || keys.has('arrowright') ? 1 : 0);
-    if (jumpQueued) {
-      jumpQueued = false;
-      if (elapsed - lastJump > 0.7 && roverGrounded(physics, body, collider)) {
-        body.applyImpulse({ x: 0, y: 34, z: 0 }, true);
-        lastJump = elapsed;
-        chime(390);
-        onEvent({ type: 'jump' });
+    const steering = touchSteer.x || (keys.has('a') ? 1 : 0) - (keys.has('d') ? 1 : 0);
+    if (keys.has('arrowleft') || keys.has('q')) {
+      azimuth -= 1.8 / 60;
+      lookAtDestination = false;
+    }
+    if (keys.has('arrowright') || keys.has('e')) {
+      azimuth += 1.8 / 60;
+      lookAtDestination = false;
+    }
+    let vx = 0,
+      vz = 0;
+    const speed = touchBoost || keys.has('shift') ? 7 : 4;
+    if (throttle || steering) {
+      stopWalking();
+      const scale = speed / Math.max(1, Math.hypot(throttle, steering));
+      vx = (Math.sin(azimuth) * throttle - Math.cos(azimuth) * steering) * scale;
+      vz = (-Math.cos(azimuth) * throttle - Math.sin(azimuth) * steering) * scale;
+    } else if (route.length) {
+      const p = body.translation(),
+        point = route[0];
+      const dx = point.x - p.x,
+        dz = point.z - p.z,
+        distance = Math.hypot(dx, dz);
+      if (distance < 0.13) route.shift();
+      else {
+        const scale = Math.min(speed, distance * 60) / distance;
+        vx = dx * scale;
+        vz = dz * scale;
+      }
+      if (!route.length) {
+        const target = pending;
+        stopWalking();
+        if (target) activate(target);
       }
     }
-    driveRover(vehicle, throttle, steering, touchBoost || keys.has('shift'), 1 / 60, collider);
-    physics.step();
+    const previous = body.translation();
+    const jumped = walk(physics, player, vx, vz, jumpQueued && elapsed - lastJump > 0.7, 1 / 60);
+    jumpQueued = false;
+    if (jumped) {
+      lastJump = elapsed;
+      chime(390);
+      onEvent({ type: 'jump' });
+    }
+    if (route.length && (vx || vz)) {
+      const moved = body.translation();
+      blockedTime =
+        Math.hypot(moved.x - previous.x, moved.z - previous.z) < 0.003 ? blockedTime + 1 / 60 : 0;
+      if (blockedTime > 2) {
+        stopWalking();
+        onEvent({ type: 'message', text: 'Something is in the way.' });
+      }
+    }
     elapsed += 1 / 60;
     const p = body.translation();
     if (Math.hypot(p.x, p.z) > 41 || p.y < -4) {
@@ -653,17 +905,6 @@ export async function mountWorkshop(
       nearby = next;
       onEvent({ type: 'nearby', id: next });
     }
-    discoveries.forEach((secret, i) => {
-      if (
-        !found.has(secret.id) &&
-        Math.hypot(p.x - secret.position[0], p.z - secret.position[1]) < 2
-      ) {
-        found.add(secret.id);
-        secretMeshes[i].visible = false;
-        chime(760);
-        onEvent({ type: 'discovery', id: secret.id });
-      }
-    });
     if (raceCheckpoint >= 0) {
       raceTime += 1 / 60;
       const [x, z] = circuit[raceCheckpoint];
@@ -689,6 +930,8 @@ export async function mountWorkshop(
       accumulator = 0;
       return;
     }
+    if (settings.paused && now - lastPaint < 120) return;
+    lastPaint = now;
     raceMarker.visible = raceCheckpoint >= 0;
     if (raceCheckpoint >= 0)
       raceMarker.position.set(circuit[raceCheckpoint][0], 0.25, circuit[raceCheckpoint][1]);
@@ -699,18 +942,7 @@ export async function mountWorkshop(
         accumulator -= 1 / 60;
       }
     } else accumulator = 0;
-    const p = body.translation(),
-      q = body.rotation();
-    rover.position.set(p.x, p.y, p.z);
-    rover.quaternion.set(q.x, q.y, q.z, q.w);
-    wheels.forEach((wheel, i) => {
-      const [x, , z] = wheelPoints[i];
-      wheel.position.set(x, -(vehicle.wheelSuspensionLength(i) ?? 0.42), z);
-      wheel.rotation.y = vehicle.wheelSteering(i) ?? 0;
-      wheel.children.forEach((child) => {
-        child.rotation.x = vehicle.wheelRotation(i) ?? 0;
-      });
-    });
+    const p = body.translation();
     movingProps.forEach((prop) => {
       const p = prop.body.translation(),
         q = prop.body.rotation();
@@ -722,21 +954,45 @@ export async function mountWorkshop(
         mesh.rotation.y += dt * 0.65;
         mesh.position.y = 1.2 + Math.sin(elapsed * 1.5 + i) * 0.13;
       });
-    target.set(p.x, 0, p.z);
-    follow.lerp(target, settings.reduced ? 1 : 1 - Math.exp(-dt * 4));
-    camera.position.set(
-      follow.x + Math.sin(azimuth) * Math.cos(elevation) * 52,
-      Math.sin(elevation) * 52,
-      follow.z + Math.cos(azimuth) * Math.cos(elevation) * 52
-    );
-    camera.lookAt(follow.x, 0, follow.z);
-    if (gain && oscillator) {
-      const speed = Math.min(Math.abs(vehicle.currentVehicleSpeed()), 20);
-      gain.gain.value = settings.sound && !settings.paused ? 0.007 + speed * 0.001 : 0;
-      oscillator.frequency.value = 65 + speed * 10;
+    if (destination && lookAtDestination && !settings.paused) {
+      const desired = Math.atan2(destination.x - p.x, p.z - destination.z);
+      const delta = Math.atan2(Math.sin(desired - azimuth), Math.cos(desired - azimuth));
+      azimuth += delta * (settings.reduced ? 1 : 1 - Math.exp(-dt * 5));
     }
+    camera.position.set(p.x, p.y + 0.74, p.z);
+    camera.rotation.order = 'YXZ';
+    camera.rotation.set(elevation, -azimuth, 0);
+    camera.updateMatrixWorld();
+    scene.updateMatrixWorld();
     host.dataset.position = `${p.x.toFixed(2)},${p.y.toFixed(2)},${p.z.toFixed(2)}`;
     host.dataset.checkpoint = String(raceCheckpoint);
+    host.dataset.camera = 'first-person';
+    host.dataset.view = `${azimuth.toFixed(3)},${elevation.toFixed(3)}`;
+    host.dataset.walking = route.length ? 'true' : 'false';
+    // Read-only projections let browser tests exercise actual visible 3D hotspots.
+    const projections = interactive
+      .map((object) => {
+        const hotspot = object.userData.hotspot as Hotspot | undefined;
+        if (!hotspot || !object.visible) return null;
+        const point = object.getWorldPosition(new THREE.Vector3());
+        point.y +=
+          hotspot.kind === 'work'
+            ? 2
+            : hotspot.kind === 'rover'
+              ? 0.8
+              : hotspot.kind === 'puzzle'
+                ? 1.4
+                : 0;
+        point.project(camera);
+        return {
+          id: hotspot.id,
+          x: ((point.x + 1) * width) / 2,
+          y: ((1 - point.y) * height) / 2,
+          visible: point.z > -1 && point.z < 1 && Math.abs(point.x) < 1 && Math.abs(point.y) < 1,
+        };
+      })
+      .filter(Boolean);
+    host.dataset.hotspots = JSON.stringify(projections);
     renderer.render(scene, camera);
   }
   const keydown = (event: KeyboardEvent) => {
@@ -756,8 +1012,8 @@ export async function mountWorkshop(
         ' ',
         'r',
         'enter',
-        '+',
-        '-',
+        'q',
+        'e',
       ].includes(key)
     ) {
       event.preventDefault();
@@ -769,13 +1025,9 @@ export async function mountWorkshop(
       resetPosition();
       cancelRace();
     }
-    if (key === 'enter' && nearby) {
-      chime(520);
-      onEvent({ type: 'open', id: nearby });
-    }
-    if (key === '+' || key === '-') {
-      zoom = THREE.MathUtils.clamp(zoom * (key === '+' ? 1.1 : 0.9), 0.7, 1.7);
-      resize();
+    if (key === 'enter') {
+      if (hovered) goTo(hovered.x, hovered.z, hovered);
+      else if (nearby) onEvent({ type: 'open', id: nearby });
     }
   };
   const keyup = (event: KeyboardEvent) => keys.delete(event.key.toLowerCase());
@@ -788,8 +1040,42 @@ export async function mountWorkshop(
     blur();
     last = performance.now();
     accumulator = 0;
-    if (document.hidden && gain) gain.gain.value = 0;
+    if (audio && document.hidden) void audio.suspend().catch(() => {});
+    else if (audio && settings.sound && !settings.paused) void audio.resume().catch(() => {});
   };
+  function pick(clientX: number, clientY: number) {
+    const rect = renderer.domElement.getBoundingClientRect();
+    raycaster.setFromCamera(
+      new THREE.Vector2(
+        ((clientX - rect.left) / width) * 2 - 1,
+        1 - ((clientY - rect.top) / height) * 2
+      ),
+      camera
+    );
+    return raycaster.intersectObjects(scene.children, true).find((hit) => {
+      let object: THREE.Object3D | null = hit.object;
+      while (object) {
+        if (!object.visible) return false;
+        object = object.parent;
+      }
+      return (
+        hit.object !== projectorBeam &&
+        hit.object !== destinationMarker &&
+        hit.object !== raceMarker &&
+        hit.object.type !== 'Line' &&
+        hit.object.type !== 'LineSegments'
+      );
+    });
+  }
+  function setHover(target: Hotspot | null) {
+    const key = target ? `${target.kind}:${target.id}` : '';
+    hovered = target;
+    renderer.domElement.style.cursor = target ? 'pointer' : 'crosshair';
+    if (key !== hoverKey) {
+      hoverKey = key;
+      onEvent({ type: 'hover', target });
+    }
+  }
   const down = (event: PointerEvent) => {
     if (settings.paused) return;
     renderer.domElement.focus({ preventScroll: true });
@@ -800,13 +1086,17 @@ export async function mountWorkshop(
     sound();
   };
   const move = (event: PointerEvent) => {
-    if (!touches.has(event.pointerId) || settings.paused) return;
+    if (settings.paused) return;
+    if (!touches.has(event.pointerId)) {
+      setHover(pick(event.clientX, event.clientY)?.object.userData.hotspot || null);
+      return;
+    }
     touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (touches.size === 2) {
       const [a, b] = [...touches.values()];
       const distance = Math.hypot(a.x - b.x, a.y - b.y);
       if (pinchDistance) {
-        zoom = THREE.MathUtils.clamp((zoom * distance) / pinchDistance, 0.7, 1.7);
+        fieldOfView = THREE.MathUtils.clamp((fieldOfView * pinchDistance) / distance, 45, 85);
         resize();
       }
       pinchDistance = distance;
@@ -815,8 +1105,9 @@ export async function mountWorkshop(
       const dx = event.clientX - dragging.x,
         dy = event.clientY - dragging.y;
       if (Math.abs(dx) + Math.abs(dy) > 3) dragging.moved = true;
-      azimuth -= dx * 0.005;
-      elevation = THREE.MathUtils.clamp(elevation + dy * 0.003, 0.42, 1.15);
+      azimuth += dx * 0.004;
+      elevation = THREE.MathUtils.clamp(elevation - dy * 0.003, -1.05, 1.05);
+      lookAtDestination = false;
       dragging.x = event.clientX;
       dragging.y = event.clientY;
     }
@@ -824,19 +1115,11 @@ export async function mountWorkshop(
   const up = (event: PointerEvent) => {
     touches.delete(event.pointerId);
     if (dragging?.id === event.pointerId && !dragging.moved && !settings.paused) {
-      const rect = renderer.domElement.getBoundingClientRect();
-      raycaster.setFromCamera(
-        new THREE.Vector2(
-          ((event.clientX - rect.left) / width) * 2 - 1,
-          (-(event.clientY - rect.top) / height) * 2 + 1
-        ),
-        camera
-      );
-      const hit = raycaster.intersectObjects(interactive, true)[0];
-      if (hit?.object.userData.work) {
-        chime(520);
-        onEvent({ type: 'open', id: hit.object.userData.work });
-      }
+      const hit = pick(event.clientX, event.clientY);
+      const target = hit?.object.userData.hotspot as Hotspot | undefined;
+      if (target) goTo(target.x, target.z, target);
+      else if (hit && hit.point.y < 0.35 && Math.hypot(hit.point.x, hit.point.z) < 39)
+        goTo(hit.point.x, hit.point.z);
     }
     dragging = null;
   };
@@ -848,7 +1131,7 @@ export async function mountWorkshop(
   const wheel = (event: WheelEvent) => {
     if (settings.paused) return;
     event.preventDefault();
-    zoom = THREE.MathUtils.clamp(zoom * Math.exp(-event.deltaY * 0.001), 0.7, 1.7);
+    fieldOfView = THREE.MathUtils.clamp(fieldOfView + event.deltaY * 0.015, 45, 85);
     resize();
   };
   const contextLost = (event: Event) => {
@@ -857,7 +1140,7 @@ export async function mountWorkshop(
     renderer.setAnimationLoop(null);
     host.dataset.renderer = 'fallback';
     blur();
-    if (gain) gain.gain.value = 0;
+    if (audio) void audio.suspend().catch(() => {});
     onFallback();
   };
   renderer.domElement.addEventListener('keydown', keydown);
@@ -916,6 +1199,11 @@ export async function mountWorkshop(
         prop.body.setRotation({ x: 0, y: 0, z: 0, w: 1 }, true);
       });
     },
+    interact() {
+      if (hovered) goTo(hovered.x, hovered.z, hovered);
+    },
+    collect,
+    repair,
     dispose() {
       disposed = true;
       renderer.setAnimationLoop(null);
@@ -934,6 +1222,7 @@ export async function mountWorkshop(
       physics.free();
       const geometries = new Set<THREE.BufferGeometry>();
       const mats = new Set<THREE.Material>();
+      materials.forEach((material) => mats.add(material));
       scene.traverse((object) => {
         if (object instanceof THREE.Mesh || object instanceof THREE.Line) {
           geometries.add(object.geometry);

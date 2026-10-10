@@ -13,6 +13,16 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
+  Backpack,
+  Hand,
+  Footprints,
+  Film,
+  Camera,
+  Radio,
+  Satellite,
+  Archive,
+  Sparkles,
+  type LucideIcon,
   Check,
   ExternalLink,
   Flag,
@@ -32,20 +42,30 @@ import {
 } from 'lucide-react';
 import {
   circuit,
+  canRepair,
   discoveries,
   emptyProgress,
   photographs,
+  puzzles,
   readProgress,
   works,
   type Progress,
   type WorkKind,
 } from '@/data/workshop';
-import type { WorldEvent, WorldHandle, WorldSettings } from './workshop-scene';
+import type { Hotspot, WorldEvent, WorldHandle, WorldSettings } from './workshop-scene';
 import WorkshopPreview from './workshop-previews';
 
-type Panel = 'map' | 'index' | 'settings' | 'achievements' | 'work' | null;
+type Panel = 'map' | 'index' | 'settings' | 'achievements' | 'work' | 'inventory' | 'object' | null;
 const formatTime = (value: number) =>
   `${Math.floor(value / 60)}:${(value % 60).toFixed(1).padStart(4, '0')}`;
+const itemIcons: Record<string, LucideIcon> = {
+  negative: Film,
+  lens: Camera,
+  signal: Radio,
+  satellite: Satellite,
+  archive: Archive,
+  starlight: Sparkles,
+};
 
 export default function Workshop() {
   const host = useRef<HTMLDivElement>(null);
@@ -59,6 +79,9 @@ export default function Workshop() {
   const [panel, setPanel] = useState<Panel>(null);
   const [selected, setSelected] = useState(works[0].id);
   const [nearby, setNearby] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<Hotspot | null>(null);
+  const [inspection, setInspection] = useState<Hotspot | null>(null);
+  const [held, setHeld] = useState<string | null>(null);
   const [night, setNight] = useState(false);
   const [sound, setSound] = useState(false);
   const [quality, setQuality] = useState<'low' | 'high'>('high');
@@ -88,6 +111,8 @@ export default function Workshop() {
     paused: panel !== null,
     reduced,
     discovered: progress.discoveries,
+    repaired: progress.repaired,
+    held,
   };
   const save = useCallback((next: Progress) => {
     progressRef.current = next;
@@ -126,6 +151,18 @@ export default function Workshop() {
     (event: WorldEvent) => {
       if (event.type === 'nearby') setNearby(event.id);
       if (event.type === 'open') openWork(event.id);
+      if (event.type === 'hover') setHovered(event.target);
+      if (event.type === 'inspect') {
+        setInspection(event.target);
+        show('object');
+      }
+      if (event.type === 'message') setNotice(event.text);
+      if (event.type === 'repair') {
+        const p = progressRef.current;
+        if (!p.repaired.includes(event.id)) save({ ...p, repaired: [...p.repaired, event.id] });
+        setHeld(null);
+        setNotice(puzzles.find((puzzle) => puzzle.id === event.id)?.solved || 'Brought to life');
+      }
       if (event.type === 'jump') {
         const p = progressRef.current;
         if (!p.jumped) save({ ...p, jumped: true });
@@ -146,7 +183,7 @@ export default function Workshop() {
         }
       }
     },
-    [openWork, save]
+    [openWork, save, show]
   );
   useEffect(() => {
     try {
@@ -193,7 +230,7 @@ export default function Workshop() {
   }, [onEvent]);
   useEffect(() => {
     engine.current?.update(state.current);
-  }, [night, sound, quality, panel, reduced, progress.discoveries]);
+  }, [night, sound, quality, panel, reduced, progress.discoveries, progress.repaired, held]);
   useEffect(() => {
     if (!notice) return;
     const timeout = setTimeout(() => setNotice(''), 4200);
@@ -206,7 +243,9 @@ export default function Workshop() {
     else if (!panel && element.open) element.close();
     if (panel) {
       element.scrollTop = 0;
-      element.querySelector<HTMLButtonElement>('.dialog-top button')?.focus({ preventScroll: true });
+      element
+        .querySelector<HTMLButtonElement>('.dialog-top button')
+        ?.focus({ preventScroll: true });
     }
   }, [panel, selected]);
   const selectedWork = works.find((work) => work.id === selected)!;
@@ -231,12 +270,9 @@ export default function Workshop() {
       detail: `${progress.discoveries.length}/${discoveries.length} discoveries`,
     },
     {
-      name: 'One good lap',
-      done: progress.best !== null,
-      detail:
-        progress.best === null
-          ? 'Complete the circuit.'
-          : `Personal best · ${formatTime(progress.best)}`,
+      name: 'Leave it better',
+      done: progress.repaired.length === puzzles.length,
+      detail: `${progress.repaired.length}/${puzzles.length} things brought to life`,
     },
   ];
   const travel = (id: string) => {
@@ -260,11 +296,16 @@ export default function Workshop() {
     engine.current?.reset();
     setRace(null);
     setNotice('A fresh start');
+    setHeld(null);
   };
   const startRace = () => {
     engine.current?.race();
     close();
   };
+  const inspectedItem = discoveries.find((item) => item.id === inspection?.id);
+  const inspectedPuzzle = puzzles.find((puzzle) => puzzle.id === inspection?.id);
+  const heldItem = discoveries.find((item) => item.id === held);
+  const InspectionIcon = inspectedItem ? itemIcons[inspectedItem.id] : Hand;
   return (
     <main className={`workshop ${night ? 'night' : ''}`} aria-label="Devon Labs planetary workshop">
       <a
@@ -348,9 +389,15 @@ export default function Workshop() {
               {progress.visited.length.toString().padStart(2, '0')} / {works.length} explored
             </span>
             <span className="status-divider" />
-            <span>{progress.discoveries.length} / 6 discoveries</span>
+            <span>{progress.repaired.length} / 3 restored</span>
           </div>
           <div className="world-actions">
+            <button title="Pockets" aria-label="Open inventory" onClick={() => show('inventory')}>
+              <Backpack size={21} />
+              {progress.discoveries.length ? (
+                <span className="inventory-count">{progress.discoveries.length}</span>
+              ) : null}
+            </button>
             <button
               title="Start circuit"
               aria-label="Start circuit"
@@ -363,7 +410,7 @@ export default function Workshop() {
             </button>
             <button
               title="Respawn"
-              aria-label="Respawn rover"
+              aria-label="Return to entrance"
               onClick={() => {
                 engine.current?.respawn();
                 host.current?.querySelector('canvas')?.focus();
@@ -372,7 +419,25 @@ export default function Workshop() {
               <RotateCcw size={21} />
             </button>
           </div>
-          {nearest && panel === null ? (
+          {hovered && panel === null ? (
+            <button
+              className="nearby-work adventure-target"
+              onClick={() => engine.current?.interact()}
+            >
+              <Hand size={20} />
+              <span>
+                <small>
+                  {heldItem && hovered.kind === 'puzzle'
+                    ? `Use ${heldItem.name.toLowerCase()}`
+                    : hovered.kind === 'work'
+                      ? 'Visit'
+                      : 'Inspect'}
+                </small>
+                {hovered.name}
+              </span>
+              <ArrowUpRight size={20} />
+            </button>
+          ) : nearest && panel === null ? (
             <button className="nearby-work" onClick={() => openWork(nearest.id)}>
               <span className="nearby-dot" style={{ background: nearest.color }} />
               <span>
@@ -381,6 +446,17 @@ export default function Workshop() {
               </span>
               <ArrowUpRight size={20} />
             </button>
+          ) : null}
+          {heldItem && panel === null ? (
+            <div className="held-item">
+              <button onClick={() => show('inventory')} title="Pockets">
+                <Backpack size={17} />
+                <span>{heldItem.name}</span>
+              </button>
+              <button type="button" aria-label="Put item away" onClick={() => setHeld(null)}>
+                <X size={15} />
+              </button>
+            </div>
           ) : null}
           {race ? (
             <div className="race-status" role="status">
@@ -401,10 +477,10 @@ export default function Workshop() {
               </button>
             </div>
           ) : null}
-          <div className="touch-controls" aria-label="Rover controls">
+          <div className="touch-controls" aria-label="Walking controls">
             <div
               className="joystick"
-              aria-label="Steer rover"
+              aria-label="Walk"
               role="group"
               onPointerDown={(event) => {
                 const rect = event.currentTarget.getBoundingClientRect();
@@ -423,16 +499,16 @@ export default function Workshop() {
                 className="joystick-thumb"
                 style={{ transform: `translate(${joystick.x * 30}px,${joystick.y * 30}px)` }}
               >
-                <Navigation size={19} />
+                <Footprints size={19} />
               </div>
             </div>
             <div className="touch-actions">
-              <button title="Jump" aria-label="Jump rover" onClick={() => engine.current?.jump()}>
+              <button title="Jump" aria-label="Jump" onClick={() => engine.current?.jump()}>
                 <ArrowUpRight size={23} />
               </button>
               <button
-                title="Boost"
-                aria-label="Boost rover"
+                title="Run"
+                aria-label="Run"
                 onPointerDown={(event) => {
                   event.currentTarget.setPointerCapture(event.pointerId);
                   engine.current?.boost(true);
@@ -462,7 +538,11 @@ export default function Workshop() {
                 ? 'Project index'
                 : panel === 'achievements'
                   ? 'Achievements'
-                  : 'Workshop settings'
+                  : panel === 'inventory'
+                    ? 'Pockets'
+                    : panel === 'object'
+                      ? inspection?.name || 'Found object'
+                      : 'Workshop settings'
         }
         className={`world-dialog ${panel === 'map' ? 'map-dialog' : ''}`}
         onCancel={(event) => {
@@ -483,12 +563,138 @@ export default function Workshop() {
                   ? 'Things I make'
                   : panel === 'achievements'
                     ? 'Small victories'
-                    : 'Workshop settings'}
+                    : panel === 'inventory'
+                      ? 'Pockets'
+                      : panel === 'object'
+                        ? 'A closer look'
+                        : 'Workshop settings'}
           </span>
           <button autoFocus aria-label="Close panel" title="Close" onClick={close}>
             <X size={22} />
           </button>
         </div>
+        {panel === 'object' && inspection ? (
+          <section className="object-detail">
+            <div className={`object-emblem ${inspection.kind}`}>
+              <InspectionIcon size={36} />
+            </div>
+            <h1>{inspection.name}</h1>
+            <p>
+              {inspectedItem?.description ||
+                (inspectedPuzzle
+                  ? progress.repaired.includes(inspectedPuzzle.id)
+                    ? inspectedPuzzle.solved
+                    : inspectedPuzzle.hint
+                  : 'A little yellow rover, taking a well-earned break. There are three unfinished things around the workshop: a lightbox, a projector, and an antenna. Perhaps something in your pockets belongs to one of them.')}
+            </p>
+            {inspectedItem ? (
+              <button
+                className="text-action"
+                disabled={progress.discoveries.includes(inspectedItem.id)}
+                onClick={() => {
+                  engine.current?.collect(inspectedItem.id);
+                  close();
+                }}
+              >
+                <Backpack size={18} />
+                {progress.discoveries.includes(inspectedItem.id) ? 'In your pockets' : 'Take it'}
+              </button>
+            ) : inspectedPuzzle ? (
+              <>
+                {progress.repaired.includes(inspectedPuzzle.id) ? (
+                  <div className="repair-complete">
+                    <Check size={18} />
+                    Brought to life
+                  </div>
+                ) : (
+                  <div className="puzzle-items">
+                    {progress.discoveries.length ? (
+                      progress.discoveries.map((id) => {
+                        const item = discoveries.find((item) => item.id === id)!;
+                        return (
+                          <button
+                            key={id}
+                            className="text-action"
+                            onClick={() => {
+                              setHeld(id);
+                              close();
+                            }}
+                          >
+                            <Backpack size={17} />
+                            {item.name}
+                            <ArrowUpRight size={16} />
+                          </button>
+                        );
+                      })
+                    ) : (
+                      <span className="object-note">Your pockets are empty.</span>
+                    )}
+                    {held &&
+                    canRepair(inspectedPuzzle.id, held, progress.discoveries, progress.repaired) ? (
+                      <button
+                        className="text-action"
+                        onClick={() => {
+                          engine.current?.repair(inspectedPuzzle.id);
+                          close();
+                        }}
+                      >
+                        <Hand size={18} />
+                        Fit {heldItem?.name.toLowerCase()}
+                      </button>
+                    ) : null}
+                  </div>
+                )}
+              </>
+            ) : null}
+          </section>
+        ) : null}
+        {panel === 'inventory' ? (
+          <section className="pockets">
+            <h1>Small things, kept.</h1>
+            <p>
+              {progress.discoveries.length} / {discoveries.length} found
+            </p>
+            <div className="pocket-items">
+              {discoveries.map((item) => {
+                const found = progress.discoveries.includes(item.id);
+                const Icon = itemIcons[item.id];
+                return (
+                  <button
+                    key={item.id}
+                    disabled={!found}
+                    aria-pressed={held === item.id}
+                    onClick={() => {
+                      setHeld(item.id);
+                      close();
+                    }}
+                  >
+                    <span className="pocket-symbol">
+                      <Icon size={25} />
+                    </span>
+                    <span>
+                      <strong>{found ? item.name : 'Not yet found'}</strong>
+                      <small>{found ? item.description : 'Somewhere in the workshop.'}</small>
+                    </span>
+                    {held === item.id ? <Check size={19} /> : <Hand size={19} />}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="field-notes">
+              <h2>Three things left unfinished.</h2>
+              {puzzles.map((puzzle) => (
+                <div key={puzzle.id}>
+                  {progress.repaired.includes(puzzle.id) ? (
+                    <Check size={17} />
+                  ) : (
+                    <span className="note-dot" />
+                  )}
+                  <span>{puzzle.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {panel === 'work' ? (
           <article className="work-detail">
             <h1>{selectedWork.name}</h1>
@@ -768,18 +974,6 @@ export default function Workshop() {
                 <option value="low">Low</option>
               </select>
             </label>
-            <div className="controls-legend">
-              <span>Drive</span>
-              <kbd>W A S D / ↑ ↓ ← →</kbd>
-              <span>Jump</span>
-              <kbd>Space</kbd>
-              <span>Boost</span>
-              <kbd>Shift</kbd>
-              <span>Open station</span>
-              <kbd>Enter</kbd>
-              <span>Respawn</span>
-              <kbd>R</kbd>
-            </div>
             <button
               className="text-action"
               onClick={() => {
@@ -789,7 +983,7 @@ export default function Workshop() {
               disabled={!ready}
             >
               <RotateCcw size={16} />
-              Respawn rover
+              Return to entrance
             </button>
             <button
               className="text-action reset-progress"

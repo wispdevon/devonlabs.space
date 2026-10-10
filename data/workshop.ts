@@ -80,13 +80,84 @@ export const works: Work[] = [
 export const photographs = media.photos;
 export { githubSnapshot };
 export const discoveries = [
-  { id: 'negative', name: 'A lost negative', position: [-28, -14] },
-  { id: 'satellite', name: 'A quiet satellite', position: [28, -28] },
-  { id: 'archive', name: 'An old archive', position: [-27, 27] },
-  { id: 'signal', name: 'A good signal', position: [27, 25] },
-  { id: 'lens', name: 'A spare lens', position: [-7, -31] },
-  { id: 'starlight', name: 'A little starlight', position: [5, 29] },
+  {
+    id: 'negative',
+    name: 'A lost negative',
+    position: [-2.2, 8],
+    description:
+      'A tiny frame of a much bigger day. The lightbox in the photo studio is missing its negative.',
+  },
+  {
+    id: 'satellite',
+    name: 'A quiet satellite',
+    position: [24, -28],
+    description:
+      'An explorer with nowhere to phone home. Its journey is written in scratches, not words.',
+  },
+  {
+    id: 'archive',
+    name: 'An old archive',
+    position: [-25, 21],
+    description:
+      'Early ideas, abandoned branches, unfinished things. Not every experiment needs an ending.',
+  },
+  {
+    id: 'signal',
+    name: 'A good signal',
+    position: [6, 3],
+    description:
+      'A little transmitter, still blinking. The antenna on the hardware bench could use this.',
+  },
+  {
+    id: 'lens',
+    name: 'A spare lens',
+    position: [-6, 5],
+    description: 'Round glass, a purple reflection. The cinema projector has an empty lens mount.',
+  },
+  {
+    id: 'starlight',
+    name: 'A little starlight',
+    position: [4, -29],
+    description:
+      'The workshop is small. The sky is not. Some things are worth keeping just because.',
+  },
 ];
+export const puzzles = [
+  {
+    id: 'lightbox',
+    name: 'The lightbox',
+    item: 'negative',
+    position: [-18, 1],
+    hint: 'An empty lightbox. Somewhere in the workshop, a negative is waiting to be found.',
+    solved: 'The negative catches the light. A small moment becomes a photograph.',
+    color: '#e77d9f',
+  },
+  {
+    id: 'projector',
+    name: 'The projector',
+    item: 'lens',
+    position: [-12, 19],
+    hint: 'The projector hums, but its lens mount is empty.',
+    solved: 'The lens clicks into place. The cinema comes alive.',
+    color: '#a79acc',
+  },
+  {
+    id: 'antenna',
+    name: 'The antenna',
+    item: 'signal',
+    position: [14, 20],
+    hint: 'A little antenna listens to silence. It needs a transmitter.',
+    solved: 'A pulse travels up the mast. Someone out there is listening.',
+    color: '#54aa96',
+  },
+];
+export function canRepair(id: string, item: string, collected: string[], repaired: string[]) {
+  return (
+    collected.includes(item) &&
+    !repaired.includes(id) &&
+    puzzles.some((p) => p.id === id && p.item === item)
+  );
+}
 export const circuit: [number, number][] = [
   [-28, 20],
   [-28, -25],
@@ -101,6 +172,7 @@ export type Progress = {
   discoveries: string[];
   jumped: boolean;
   best: number | null;
+  repaired: string[];
 };
 export const emptyProgress = (): Progress => ({
   version: 1,
@@ -108,6 +180,7 @@ export const emptyProgress = (): Progress => ({
   discoveries: [],
   jumped: false,
   best: null,
+  repaired: [],
 });
 export function readProgress(value: string | null): Progress {
   try {
@@ -126,6 +199,20 @@ export function readProgress(value: string | null): Progress {
           ]
         : [],
       jumped: data.jumped === true,
+      repaired: Array.isArray(data.repaired)
+        ? [
+            ...new Set<string>(
+              data.repaired.filter((id: string) =>
+                puzzles.some(
+                  (p) =>
+                    p.id === id &&
+                    Array.isArray(data.discoveries) &&
+                    data.discoveries.includes(p.item)
+                )
+              )
+            ),
+          ]
+        : [],
       best:
         typeof data.best === 'number' &&
         Number.isFinite(data.best) &&

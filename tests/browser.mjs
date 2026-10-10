@@ -8,10 +8,16 @@ const errors = [];
 const position = async (page) =>
   (await page.locator('.world').getAttribute('data-position')).split(',').map(Number);
 const ready = async (page) => {
+  page.setDefaultTimeout(30000);
   await page.goto(url, { waitUntil: 'networkidle' });
   await page.waitForFunction(() => document.querySelector('.world')?.dataset.renderer === 'webgl');
   await page.waitForTimeout(700);
 };
+const loadedImage = (page, selector) =>
+  page.waitForFunction((selector) => {
+    const image = document.querySelector(selector);
+    return image?.complete && image.naturalWidth > 0;
+  }, selector);
 const close = async (page) =>
   page.getByRole('button', { name: 'Close panel', exact: true }).click();
 const index = async (page) => page.getByRole('button', { name: 'Open project index' }).click();
@@ -45,6 +51,7 @@ try {
     'https://devonlabs.space/'
   );
   assert.equal(await page.locator('canvas').count(), 1);
+  assert.equal(await page.locator('.world').getAttribute('data-camera'), 'first-person');
   assert.equal(await page.locator('.world-loading').count(), 0);
   assert.equal(
     await page.locator('canvas').evaluate((canvas) => canvas.width > 100 && canvas.height > 100),
@@ -67,7 +74,7 @@ try {
     `World must contain rendered geometry, not only a background (${colors} colors)`
   );
   await screenshot(page, 'desktop');
-  console.log('Desktop rendered; checking driving and jump.');
+  console.log('First-person world rendered; checking walking and jump.');
   await page.locator('canvas').focus();
   const before = await position(page);
   await page.keyboard.down('w');
@@ -76,14 +83,13 @@ try {
   const after = await position(page);
   assert.ok(
     Math.hypot(after[0] - before[0], after[2] - before[2]) > 1,
-    'Keyboard drives the rover'
+    'Keyboard walks in first person'
   );
-  await page.getByRole('button', { name: 'Respawn rover' }).click();
+  await page.getByRole('button', { name: 'Return to entrance', exact: true }).click();
   await page.waitForTimeout(600);
   assert.ok(Math.abs((await position(page))[0]) < 0.1);
   await page.locator('canvas').focus();
   await page.keyboard.press('Space');
-  console.log('Jump requested at', await position(page));
   await page.waitForFunction(
     () => JSON.parse(localStorage.getItem('devon-workshop-v1') || '{}').jumped === true
   );
@@ -107,6 +113,7 @@ try {
   );
   await close(page);
   await open(page, 'GibbonPfp');
+  await loadedImage(page, '.portrait-preview img');
   assert.equal(
     await page.locator('.portrait-preview img').evaluate((image) => image.naturalWidth > 0),
     true
@@ -146,6 +153,7 @@ try {
   assert.equal(await page.locator('.sheet-preview.film').count(), 0);
   await close(page);
   await open(page, 'the-best');
+  await loadedImage(page, '.gallery-photo img');
   assert.equal(
     await page.locator('.gallery-photo img').evaluate((image) => image.naturalWidth > 0),
     true
@@ -242,6 +250,12 @@ try {
       const bounds = await page.locator(selector).boundingBox();
       assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= width, `${selector} fits at ${width}`);
     }
+    const statusBounds = await page.locator('.world-status').boundingBox();
+    const actionBounds = await page.locator('.world-actions').boundingBox();
+    assert.ok(
+      statusBounds.x + statusBounds.width <= actionBounds.x,
+      `Status and actions do not overlap at ${width}`
+    );
     await index(page);
     assert.equal(await page.locator('.index-rows > button').count(), 12);
     assert.equal(
@@ -282,16 +296,17 @@ try {
   const destination = await position(touch);
   assert.ok(
     Math.hypot(destination[0] - origin[0], destination[2] - origin[2]) > 1,
-    'Touch joystick drives'
+    'Touch joystick walks'
   );
-  await touch.getByRole('button', { name: 'Respawn rover' }).tap();
+  await touch.getByRole('button', { name: 'Return to entrance', exact: true }).tap();
   await touch.waitForTimeout(600);
-  await touch.getByRole('button', { name: 'Jump rover' }).tap();
+  await touch.getByRole('button', { name: 'Jump', exact: true }).tap();
   await touch.waitForFunction(
     () => JSON.parse(localStorage.getItem('devon-workshop-v1') || '{}').jumped === true
   );
   await touch.getByRole('button', { name: 'Open project index' }).tap();
   await touch.locator('[data-project="the-best"]').tap();
+  await loadedImage(touch, '.gallery-photo img');
   const heading = await touch.locator('.work-detail h1').boundingBox();
   const header = await touch.locator('.dialog-top').boundingBox();
   assert.ok(heading.y >= header.y + header.height, 'Project heading is below the sticky header');
@@ -311,6 +326,7 @@ try {
     };
   });
   const basic = await fallback.newPage();
+  basic.setDefaultTimeout(30000);
   await basic.goto(url, { waitUntil: 'networkidle' });
   await basic.waitForSelector('.world-fallback');
   assert.equal(await basic.locator('.fallback-works > button').count(), 12);
@@ -328,7 +344,7 @@ try {
   await page.waitForSelector('.world-fallback');
   assert.equal(await page.locator('.fallback-works > button').count(), 12);
   console.log(
-    'Passed: rendered world pixels, rover driving/jump/respawn, paused overlays, all destinations, source links, three previews, real photo lightbox, video controls, map travel, night/audio/quality, circuit timer, achievements/persistence, four viewport widths, mobile joystick/taps, reduced motion, and WebGL fallback.'
+    'Passed: first-person world pixels, walking/jump/entrance, paused overlays, all destinations, source links, previews, real photos, map travel, settings, circuit timer, persistence, four viewport widths, mobile walking/taps, reduced motion, and WebGL fallback.'
   );
 } finally {
   await browser.close();
