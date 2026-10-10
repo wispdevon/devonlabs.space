@@ -4,9 +4,11 @@ import { chromium } from 'playwright';
 const origin = new URL(process.env.TEST_URL || 'http://127.0.0.1:3011/').origin;
 const routes = [
   ['About', '/', 'Hello, I’m Wisp.'],
+  ['Work', '/work/', 'Work'],
   ['Software', '/software/', 'Software'],
   ['Film', '/film/', 'Film'],
   ['Photography', '/photography/', 'Photography'],
+  ['Coffee', '/coffee/', 'Coffee'],
   ['Shop', '/shop/', 'Hardware & curiosities'],
 ];
 const browser = await chromium.launch({ headless: true });
@@ -28,13 +30,37 @@ try {
     }
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.getByRole('navigation').getByRole('link', { name: 'Work', exact: true }).click();
+  await page.waitForURL(`${origin}/work/`);
+  assert.equal(await page.locator('.work-entry').count(), 3);
+  assert.equal(await page.locator('.work-entry a[href="/software/"]').count(), 1);
+  await page.getByRole('navigation').getByRole('link', { name: 'Coffee', exact: true }).click();
+  await page.waitForURL(`${origin}/coffee/`);
+  await page.getByLabel('Explore an origin').selectOption('076');
+  assert.equal(await page.locator('.origin-detail h3').innerText(), 'Brazil');
+  assert.equal(await page.locator('.origin-status').innerText(), 'Not recorded');
+  await page.locator('.origin-map path').filter({ has: page.locator('title', { hasText: /^Ethiopia$/ }) }).click();
+  assert.equal(await page.locator('.origin-detail h3').innerText(), 'Ethiopia');
+  assert.equal(await page.locator('.coffee-media-placeholder').count(), 2);
+  assert.equal(await page.locator('.coffee-conversation a[href^="mailto:wisp@devonlabs.space"]').count(), 1);
+  const dose = page.getByLabel('Coffee dose', { exact: false });
+  const ratio = page.getByLabel('Ratio', { exact: false });
+  await dose.fill('20');
+  await ratio.fill('17');
+  assert.match(await page.locator('output').innerText(), /340/);
+  await dose.fill('');
+  assert.match(await page.locator('output').innerText(), /Enter a dose/);
+  await dose.fill('18');
+  await ratio.fill('16');
+  assert.match(await page.locator('output').innerText(), /288/);
   await page.getByRole('navigation').getByRole('link', { name: 'About', exact: true }).click();
   await page.waitForURL(`${origin}/`);
   assert.match(await page.locator('main').innerText(), /Independent developer based in Thailand/);
   assert.match(await page.locator('main').innerText(), /infrastructure you can actually own/);
   assert.equal(await page.locator('main').getByText(/Lorem Ipsum/i).count(), 0);
   assert.equal(await page.locator('.working-with li svg').count(), 6);
-  assert.equal(await page.locator('.find-me a').count(), 4);
+  assert.equal(await page.locator('.find-me a').count(), 5);
+  assert.equal(await page.locator('.find-me a[href="https://bsky.app/profile/wispdevon.bsky.social"]').count(), 1);
   assert.equal(await page.locator('.contact-portrait').getAttribute('src'), '/developer/profile.jpg');
   await page.locator('.contact-portrait').evaluate(image => { image.loading = 'eager'; return image.decode(); });
   assert.equal(await page.locator('.find-me a[href="https://github.com/wispdevon"]').count(), 1);
@@ -95,7 +121,7 @@ try {
   await page.goto(`${origin}/workshop/`);
   assert.equal(new URL(page.url()).pathname, '/shop/');
   assert.deepEqual(errors, []);
-  console.log('Passed: five routes, active navigation, README biography, four widths, theme persistence, original/duotone gallery, modal keyboard/focus, on-demand film player, and placeholder shop with one-line title.');
+  console.log('Passed: seven routes, active navigation, biography and contact links, four widths, Work links, coffee calculator and empty input, theme persistence, original/duotone gallery, modal keyboard/focus, film player, shop title and workshop redirect.');
 } finally {
   await browser.close();
 }

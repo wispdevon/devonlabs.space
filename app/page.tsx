@@ -20,6 +20,7 @@ export default function AboutPage() {
         <section className="working-with" aria-labelledby="stack-title"><h2 id="stack-title">Working with</h2><ul>{profile.stack.map((item, index) => { const Icon = stackIcons[index]; return <li key={item}><Icon size={20} strokeWidth={1.7} aria-hidden="true" /><span>{item}</span></li>; })}</ul><p>{profile.approach}</p></section>
         <section className="find-me" aria-labelledby="find-title"><h2 id="find-title" className="visually-hidden">Find me</h2><Image className="contact-portrait" src="/developer/profile.jpg" alt="Wisp’s GitHub profile photograph" width={460} height={460} sizes="(max-width: 600px) 90vw, 350px" /><ul>
           <li><a href="https://github.com/wispdevon">GitHub /wispdevon</a></li>
+          <li><a href="https://bsky.app/profile/wispdevon.bsky.social">Bluesky @wispdevon</a></li>
           <li><a href={profile.lastfm}>Last.fm /wisp-</a></li>
           <li className="discord-contact"><a href="https://discord.com/channels/@me">Discord @wispcream</a><DiscordHandle /></li>
           <li><a href="mailto:wisp@devonlabs.space">Email wisp@devonlabs.space</a></li>

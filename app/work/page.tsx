@@ -1,0 +1,19 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { profile } from '../../data/profile';
+import SiteShell, { ForwardArrow, pageMetadata } from '../portfolio/site-shell';
+
+export const metadata = pageMetadata('work', 'Product design, software, photography, and collaborative film by Wisp.');
+
+export default function WorkPage() {
+  return <SiteShell page="work">
+    <div className="page-heading"><h1>Work</h1><p>From first idea to final detail.</p></div>
+    <p className="editorial-intro">{profile.whatIMake}</p>
+    <section className="work-index" aria-label="Areas of work">
+      <article className="work-entry"><span className="mono work-number">01 / Software</span><div><h2>Tools with a clear job.</h2><p>Photography workflows, self-hosted services, and focused browser interfaces. From Immich Contact Sheet to Strider, small tools built around real tasks.</p><p className="work-disciplines mono">Product design · Interfaces · Backend · Deployment</p><Link className="text-link" href="/software/">Explore the software <ForwardArrow /></Link></div></article>
+      <article className="work-entry"><span className="mono work-number">02 / Photography</span><div><h2>People, places, in between.</h2><figure className="work-photo"><Link className="duotone" href="/photography/"><Image src="/workshop/photos/06.webp" alt="Birds in flight above city architecture" width={1066} height={1600} sizes="(max-width: 600px) 90vw, 650px" /></Link><figcaption>A frame from The Best.</figcaption></figure><p>A selection from my public photograph collection.</p><Link className="text-link" href="/photography/">See the photographs <ForwardArrow /></Link></div></article>
+      <article className="work-entry"><span className="mono work-number">03 / Film</span><div><h2>Stories made together.</h2><p>The One Camp ’26: a collaborative film made with photographers, videographers, and creatives, ready to screen on the third day.</p><Link className="text-link" href="/film/">Watch the film <ForwardArrow /></Link></div></article>
+    </section>
+    <div className="work-contact"><p>Get in touch.</p><a href="mailto:wisp@devonlabs.space">wisp@devonlabs.space <ForwardArrow /></a></div>
+  </SiteShell>;
+}
