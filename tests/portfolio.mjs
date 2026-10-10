@@ -32,7 +32,7 @@ try {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.getByRole('navigation').getByRole('link', { name: 'Work', exact: true }).click();
   await page.waitForURL(`${origin}/work/`);
-  assert.equal(await page.locator('.work-entry').count(), 3);
+  assert.equal(await page.locator('.work-entry').count(), 5);
   assert.equal(await page.locator('.work-entry a[href="/software/"]').count(), 1);
   assert.equal(await page.locator('.work-contact a').getAttribute('href'), 'mailto:wisp@devonlabs.space');
   assert.equal(await page.locator('.work-contact .__cf_email__').count(), 0);
