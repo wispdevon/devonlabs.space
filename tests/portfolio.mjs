@@ -40,7 +40,15 @@ try {
   await page.waitForURL(`${origin}/coffee/`);
   await page.getByLabel('Explore an origin').selectOption('076');
   assert.equal(await page.locator('.origin-detail h3').innerText(), 'Brazil');
-  assert.equal(await page.locator('.origin-status').innerText(), 'Not recorded');
+  assert.equal(await page.locator('.origin-status').innerText(), 'To try');
+  await page.getByRole('checkbox', { name: 'Brazil', exact: true }).check();
+  assert.equal(await page.locator('.origin-status').innerText(), 'Checked off');
+  assert.match(await page.locator('.checklist-count').innerText(), /1 \/ 25/);
+  await page.reload();
+  assert.equal(await page.getByRole('checkbox', { name: 'Brazil', exact: true }).isChecked(), true);
+  await page.getByRole('checkbox', { name: 'Brazil', exact: true }).uncheck();
+  assert.match(await page.locator('.checklist-count').innerText(), /0 \/ 25/);
+  for (const gear of ['Hario V60', 'Flair Neo', 'ROKpresso Classic', 'Mischief M40', 'Hario Switch']) assert.equal(await page.getByRole('heading', { name: gear, exact: true }).count(), 1);
   await page.locator('.origin-map path').filter({ has: page.locator('title', { hasText: /^Ethiopia$/ }) }).click();
   assert.equal(await page.locator('.origin-detail h3').innerText(), 'Ethiopia');
   assert.equal(await page.locator('.coffee-media-placeholder').count(), 2);
@@ -123,7 +131,7 @@ try {
   await page.goto(`${origin}/workshop/`);
   assert.equal(new URL(page.url()).pathname, '/shop/');
   assert.deepEqual(errors, []);
-  console.log('Passed: seven routes, active navigation, biography and contact links, four widths, Work links, coffee calculator and empty input, theme persistence, original/duotone gallery, modal keyboard/focus, film player, shop title and workshop redirect.');
+  console.log('Passed: seven routes, contact links, four widths, Work links, coffee map/checklist persistence, confirmed gear, brew calculator, theme persistence, gallery controls, film player, shop title and workshop redirect.');
 } finally {
   await browser.close();
 }
