@@ -1,4 +1,4 @@
-import Workshop from './workshop';
+import Workshop from './adventure';
 
 export default function Home() {
   return <Workshop />;

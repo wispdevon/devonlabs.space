@@ -158,14 +158,6 @@ export function canRepair(id: string, item: string, collected: string[], repaire
     puzzles.some((p) => p.id === id && p.item === item)
   );
 }
-export const circuit: [number, number][] = [
-  [-28, 20],
-  [-28, -25],
-  [28, -25],
-  [28, 20],
-  [-28, 20],
-];
-
 export type Progress = {
   version: 1;
   visited: string[];

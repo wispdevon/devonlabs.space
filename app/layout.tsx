@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import './adventure.css';
 
 const bodyFont = localFont({
   src: [{ path: '../public/fonts/inter-roman.woff2', weight: '100 900', style: 'normal' }],

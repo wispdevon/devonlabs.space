@@ -3,7 +3,6 @@ import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import ts from 'typescript';
-import RAPIER from '@dimforge/rapier3d-compat';
 
 const require = createRequire(import.meta.url);
 const modules = new Map();
@@ -27,7 +26,7 @@ function load(path) {
   modules.set(path, module.exports);
   return module.exports;
 }
-const { works, discoveries, puzzles, canRepair, circuit, emptyProgress, readProgress } = load(
+const { works, discoveries, puzzles, canRepair, emptyProgress, readProgress } = load(
   resolve('data/workshop.ts')
 );
 assert.equal(works.length, 12);
@@ -44,7 +43,6 @@ for (const work of works) {
   if (work.image) assert.ok(readFileSync(resolve('public', work.image.slice(1))).length > 0);
 }
 for (const discovery of discoveries) assert.ok(Math.hypot(...discovery.position) < 41);
-assert.deepEqual(circuit[0], circuit.at(-1));
 assert.deepEqual(readProgress(null), emptyProgress());
 assert.deepEqual(readProgress('broken'), emptyProgress());
 assert.deepEqual(readProgress('{"version":2}'), emptyProgress());
@@ -92,36 +90,7 @@ assert.deepEqual(
   ['projector']
 );
 
-await RAPIER.init();
-const { createWalkingPhysics, walk, createNavigator } = load(resolve('app/workshop-walking.ts'));
-const footWorld = new RAPIER.World({ x: 0, y: -15, z: 0 });
-footWorld.createCollider(RAPIER.ColliderDesc.cuboid(50, 0.1, 50));
-const walker = createWalkingPhysics(footWorld);
-for (let i = 0; i < 90; i++) walk(footWorld, walker, 0, 0, false, 1 / 60);
-assert.ok(walker.grounded, 'Walking character settles on ground');
-const start = walker.body.translation();
-for (let i = 0; i < 60; i++) walk(footWorld, walker, 0, -4, false, 1 / 60);
-assert.ok(walker.body.translation().z < start.z - 3.5, 'Character walks forward');
-assert.equal(walk(footWorld, walker, 0, 0, true, 1 / 60), true);
-for (let i = 0; i < 15; i++) walk(footWorld, walker, 0, 0, false, 1 / 60);
-assert.ok(walker.body.translation().y > start.y + 0.5, 'Character jumps');
-assert.equal(walk(footWorld, walker, 0, 0, true, 1 / 60), false, 'No double jump');
-for (let i = 0; i < 90; i++) walk(footWorld, walker, 0, 0, false, 1 / 60);
-assert.ok(walker.grounded, 'Character lands');
-footWorld.createCollider(RAPIER.ColliderDesc.cuboid(4, 2, 0.5).setTranslation(0, 2, 6));
-for (let i = 0; i < 120; i++) walk(footWorld, walker, 0, -4, false, 1 / 60);
-assert.ok(walker.body.translation().z > 6.7, 'Exhibit blocks walking character');
-footWorld.free();
-const obstacle = { x: 0, z: 0, width: 4, depth: 4 };
-const navigation = createNavigator([obstacle]);
-const path = navigation({ x: 0, z: 8 }, { x: 0, z: -8 });
-assert.ok(
-  path.length >= 16 && path.some((point) => Math.abs(point.x) >= 3),
-  'A* routes around the exhibit'
-);
-assert.ok(path.every((point) => Math.abs(point.x) > 2.8 || Math.abs(point.z) > 2.8));
-assert.deepEqual(navigation({ x: 0, z: 8 }, { x: 0, z: 0 }), []);
-assert.deepEqual(navigation({ x: 0, z: 8 }, { x: 42, z: 42 }), []);
+assert.ok(readFileSync('public/workshop/room.webp').length > 10000);
 console.log(
-  'Passed: portfolio/media integrity, progress migration, inventory/puzzle validation, A* obstacle routing, and walking/collisions/jump/landing.'
+  'Passed: portfolio/media integrity, progress migration, inventory/puzzle validation, and room asset.'
 );

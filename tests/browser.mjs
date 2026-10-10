@@ -1,350 +1,86 @@
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright';
-
-const url = process.env.TEST_URL || 'http://127.0.0.1:3011';
-const browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader'] });
-const errors = [];
-const position = async (page) =>
-  (await page.locator('.world').getAttribute('data-position')).split(',').map(Number);
-const ready = async (page) => {
-  page.setDefaultTimeout(30000);
-  await page.goto(url, { waitUntil: 'networkidle' });
-  await page.waitForFunction(() => document.querySelector('.world')?.dataset.renderer === 'webgl');
-  await page.waitForTimeout(700);
-};
-const loadedImage = (page, selector) =>
-  page.waitForFunction((selector) => {
-    const image = document.querySelector(selector);
-    return image?.complete && image.naturalWidth > 0;
-  }, selector);
-const close = async (page) =>
-  page.getByRole('button', { name: 'Close panel', exact: true }).click();
-const index = async (page) => page.getByRole('button', { name: 'Open project index' }).click();
-const open = async (page, id) => {
-  await index(page);
-  await page.getByRole('textbox', { name: 'Search projects' }).fill('');
-  await page.getByRole('radio', { name: 'All', exact: true }).check();
-  await page.locator(`[data-project="${id}"]`).click();
-};
-const travel = async (page, name) => {
-  await page.getByRole('button', { name: 'Open map' }).click();
-  await page.locator('.map-destinations').getByRole('button', { name, exact: true }).click();
-};
-const screenshot = async (page, name) => {
-  if (process.env.SCREENSHOT_DIR) {
-    await mkdir(process.env.SCREENSHOT_DIR, { recursive: true });
-    await page.screenshot({ path: `${process.env.SCREENSHOT_DIR}/${name}.png` });
-  }
-};
+const browser = await chromium.launch({ headless: true });
+const screenshots = process.env.SCREENSHOT_DIR || '/tmp/devon-2d-qa';
+await mkdir(screenshots, { recursive: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 950 } });
-  page.setDefaultTimeout(30000);
-  page.on('pageerror', (error) => errors.push(error.message));
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (message) => {
     if (message.type() === 'error') errors.push(message.text());
   });
-  await ready(page);
+  await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3011');
+  await page.locator('.room-art').evaluate((img) => img.decode());
   assert.match(await page.title(), /Devon Labs/);
-  assert.equal(
-    await page.locator('link[rel="canonical"]').getAttribute('href'),
-    'https://devonlabs.space/'
-  );
-  assert.equal(await page.locator('canvas').count(), 1);
-  assert.equal(await page.locator('.world').getAttribute('data-camera'), 'first-person');
-  assert.equal(await page.locator('.world-loading').count(), 0);
-  assert.equal(
-    await page.locator('canvas').evaluate((canvas) => canvas.width > 100 && canvas.height > 100),
-    true
-  );
-  const colors = await page.locator('canvas').evaluate((canvas) => {
-    const sample = document.createElement('canvas');
-    sample.width = 128;
-    sample.height = 128;
-    const ctx = sample.getContext('2d');
-    ctx.drawImage(canvas, 0, 0, 128, 128);
-    const data = ctx.getImageData(0, 0, 128, 128).data;
-    const colors = new Set();
-    for (let i = 0; i < data.length; i += 4)
-      colors.add(`${data[i] >> 3},${data[i + 1] >> 3},${data[i + 2] >> 3}`);
-    return colors.size;
-  });
-  assert.ok(
-    colors > 30,
-    `World must contain rendered geometry, not only a background (${colors} colors)`
-  );
-  await screenshot(page, 'desktop');
-  console.log('First-person world rendered; checking walking and jump.');
-  await page.locator('canvas').focus();
-  const before = await position(page);
-  await page.keyboard.down('w');
-  await page.waitForTimeout(1000);
-  await page.keyboard.up('w');
-  const after = await position(page);
-  assert.ok(
-    Math.hypot(after[0] - before[0], after[2] - before[2]) > 1,
-    'Keyboard walks in first person'
-  );
-  await page.getByRole('button', { name: 'Return to entrance', exact: true }).click();
-  await page.waitForTimeout(600);
-  assert.ok(Math.abs((await position(page))[0]) < 0.1);
-  await page.locator('canvas').focus();
+  assert.equal(await page.locator('canvas').count(), 0);
+  await page.mouse.move(0, 0);
+  const initial = await page.locator('.painted-room').screenshot();
+  await page.keyboard.press('w');
   await page.keyboard.press('Space');
-  await page.waitForFunction(
-    () => JSON.parse(localStorage.getItem('devon-workshop-v1') || '{}').jumped === true
-  );
-  await page.waitForTimeout(1000);
-  await index(page);
-  assert.equal(await page.locator('.index-rows > button').count(), 12);
-  const pausedBefore = await position(page);
-  await page.waitForTimeout(300);
-  assert.deepEqual(await position(page), pausedBefore, 'Project overlays park the rover');
-  await page.getByRole('radio', { name: 'Software', exact: true }).check();
-  assert.equal(await page.locator('.index-rows > button').count(), 9);
-  await page.getByRole('textbox', { name: 'Search projects' }).fill('does-not-exist');
-  assert.equal(await page.getByText('No matching work.').isVisible(), true);
-  await page.getByRole('textbox', { name: 'Search projects' }).fill('strider');
-  assert.equal(await page.locator('.index-rows > button').count(), 1);
-  await page.locator('[data-project="strider"]').click();
-  assert.equal(await page.locator('.work-detail h1').textContent(), 'Strider');
-  assert.equal(
-    await page.locator('.work-links a').getAttribute('href'),
-    'https://github.com/wispdevon/strider'
-  );
-  await close(page);
-  await open(page, 'GibbonPfp');
-  await loadedImage(page, '.portrait-preview img');
-  assert.equal(
-    await page.locator('.portrait-preview img').evaluate((image) => image.naturalWidth > 0),
-    true
-  );
-  await page.getByRole('radio', { name: '1:1', exact: true }).check();
-  assert.equal(
-    await page
-      .locator('.portrait-preview')
-      .evaluate((element) => getComputedStyle(element).aspectRatio),
-    '1 / 1'
-  );
-  await page.getByRole('slider', { name: 'Portrait crop' }).fill('1.6');
-  assert.notEqual(
-    await page
-      .locator('.portrait-preview img')
-      .evaluate((element) => getComputedStyle(element).transform),
-    'matrix(1, 0, 0, 1, 0, 0)'
-  );
-  await screenshot(page, 'portrait-preview');
-  await close(page);
-  await open(page, 'Immichinko');
-  await page.getByRole('button', { name: 'Favorite photograph', exact: true }).click();
-  assert.equal(
-    await page
-      .getByRole('button', { name: 'Favorite photograph', exact: true })
-      .getAttribute('aria-pressed'),
-    'true'
-  );
-  const first = await page.locator('.review-photo').getAttribute('src');
+  await page.mouse.move(400, 400);
+  await page.mouse.down();
+  await page.mouse.move(600, 450);
+  await page.mouse.up();
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(700);
+  assert.deepEqual(await page.locator('.painted-room').screenshot(), initial, 'Room stays still');
+  await page.screenshot({ path: `${screenshots}/desktop.png` });
+  const close = () => page.getByRole('button', { name: 'Close', exact: true }).click();
+  await page.getByRole('button', { name: 'Photo studio', exact: true }).click();
+  await page.getByRole('button', { name: /The Best/ }).click();
+  await page.locator('.gallery-photo img').evaluate((img) => img.decode());
+  const firstPhoto = await page.locator('.gallery-photo img').getAttribute('src');
   await page.getByRole('button', { name: 'Next photograph', exact: true }).click();
-  assert.notEqual(await page.locator('.review-photo').getAttribute('src'), first);
-  await close(page);
-  await open(page, 'immich-contact');
-  await page.getByRole('slider', { name: 'Contact sheet columns' }).fill('4');
-  assert.equal(await page.locator('.slider-field output').textContent(), '4');
-  await page.getByRole('checkbox', { name: 'Film border' }).uncheck();
-  assert.equal(await page.locator('.sheet-preview.film').count(), 0);
-  await close(page);
-  await open(page, 'the-best');
-  await loadedImage(page, '.gallery-photo img');
-  assert.equal(
-    await page.locator('.gallery-photo img').evaluate((image) => image.naturalWidth > 0),
-    true
-  );
-  assert.equal(await page.locator('.gallery-thumbnails button').count(), 12);
-  const photo = await page.locator('.gallery-photo img').getAttribute('src');
-  await page.getByRole('button', { name: 'Next photograph', exact: true }).click();
-  assert.notEqual(await page.locator('.gallery-photo img').getAttribute('src'), photo);
-  await screenshot(page, 'photography');
-  await close(page);
-  await open(page, 'camp-film');
+  assert.notEqual(await page.locator('.gallery-photo img').getAttribute('src'), firstPhoto);
+  await close();
+  await page.getByRole('button', { name: 'Cinema', exact: true }).click();
+  await page.getByRole('button', { name: /The One Camp/ }).click();
   assert.equal(await page.locator('video').getAttribute('preload'), 'none');
-  assert.equal(await page.locator('video').evaluate((video) => video.paused), true);
-  assert.match(await page.locator('video').getAttribute('src'), /photo\.devonlabs\.space/);
-  await close(page);
-  assert.equal(await page.locator('video').count(), 0);
-  await open(page, 'hardware');
-  assert.equal(
-    await page.locator('.work-links a').getAttribute('href'),
-    'https://shop.1337sheets.com/'
-  );
-  await close(page);
-  await open(page, 'sharply');
-  assert.equal(await page.locator('.fork-note').isVisible(), true);
-  await close(page);
-  await travel(page, 'HeadshotFlow');
-  await page.waitForTimeout(500);
-  assert.ok(Math.abs((await position(page))[0] + 17) < 0.2);
-  assert.equal(await page.locator('.nearby-work').isVisible(), true);
-  await page.locator('canvas').focus();
-  await page.keyboard.press('Enter');
-  assert.equal(await page.locator('.work-detail h1').textContent(), 'HeadshotFlow');
-  await page.keyboard.press('Escape');
-  assert.equal(await page.locator('dialog[open]').count(), 0);
-  const frame = await page.locator('canvas').evaluate((canvas) => canvas.toDataURL());
-  await page.getByRole('button', { name: 'Switch to night' }).click();
-  const activeColors = await page
-    .getByRole('button', { name: 'Switch to day' })
-    .evaluate((button) => {
-      const style = getComputedStyle(button);
-      return { foreground: style.color, background: style.backgroundColor };
-    });
-  assert.notEqual(
-    activeColors.foreground,
-    activeColors.background,
-    'Active hovered icon is visible'
-  );
-  await page.waitForTimeout(300);
-  assert.notEqual(await page.locator('canvas').evaluate((canvas) => canvas.toDataURL()), frame);
-  await screenshot(page, 'night');
-  await page.getByRole('button', { name: 'Switch to day' }).click();
-  await page.getByRole('button', { name: 'Enable sound' }).click();
-  assert.equal(
-    await page.getByRole('button', { name: 'Mute sound' }).getAttribute('aria-pressed'),
-    'true'
-  );
-  await page.getByRole('button', { name: 'Mute sound' }).click();
-  await page.getByRole('button', { name: 'Open settings' }).click();
-  await page.getByRole('combobox', { name: 'Rendering quality' }).selectOption('low');
-  await close(page);
-  assert.equal(await page.locator('.world').getAttribute('data-renderer'), 'webgl');
-  await page.getByRole('button', { name: 'Start circuit', exact: true }).click();
-  await page.waitForFunction(() => document.querySelector('.world')?.dataset.checkpoint === '1');
-  assert.equal(await page.locator('.race-status').isVisible(), true);
-  await page.waitForTimeout(250);
-  assert.notEqual(await page.locator('.race-status strong').textContent(), '0:00.0');
-  await page.getByRole('button', { name: 'End circuit', exact: true }).click();
-  await page.getByRole('button', { name: 'Open achievements' }).click();
-  assert.equal(await page.locator('.achievement').count(), 4);
-  assert.ok((await page.locator('.achievement.earned').count()) >= 1);
-  await close(page);
-  await page.reload({ waitUntil: 'networkidle' });
-  await page.waitForFunction(() => document.querySelector('.world')?.dataset.renderer === 'webgl');
-  await page.getByRole('button', { name: 'Open achievements' }).click();
-  assert.ok(
-    (await page.locator('.achievement.earned').count()) >= 1,
-    'Achievements persist across reload'
-  );
-  await close(page);
-  for (const width of [1440, 768, 390, 320]) {
-    await page.setViewportSize({ width, height: 850 });
-    await page.waitForTimeout(200);
+  assert.equal(await page.locator('video').evaluate((v) => v.paused), true);
+  await close();
+  await page.getByRole('button', { name: 'The constellation', exact: true }).click();
+  assert.equal(await page.locator('.paper-constellation button').count(), 12);
+  await close();
+  await page.getByRole('button', { name: 'All work', exact: true }).click();
+  assert.equal(await page.locator('.room-projects button').count(), 12);
+  await page.getByRole('searchbox').fill('Headshot');
+  await page.locator('.room-projects button').click();
+  assert.equal(await page.locator('.portrait-preview').count(), 1);
+  await close();
+  await page.getByRole('button', { name: 'Software lab', exact: true }).click();
+  assert.equal(await page.locator('.room-projects button').count(), 9);
+  await close();
+  for (const width of [768, 390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.getByRole('button', { name: 'Hardware bench', exact: true }).click();
+    await page.getByRole('button', { name: /1337 Sheets/ }).click();
     assert.equal(
-      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-      true,
-      `No overflow at ${width}`
+      await page.getByRole('link', { name: 'Visit the shop' }).getAttribute('href'),
+      'https://shop.1337sheets.com/'
     );
-    for (const selector of [
-      '.world-tools',
-      '.world-actions',
-      '.world-status',
-      '.world-signature',
-    ]) {
-      const bounds = await page.locator(selector).boundingBox();
-      assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= width, `${selector} fits at ${width}`);
-    }
-    const statusBounds = await page.locator('.world-status').boundingBox();
-    const actionBounds = await page.locator('.world-actions').boundingBox();
-    assert.ok(
-      statusBounds.x + statusBounds.width <= actionBounds.x,
-      `Status and actions do not overlap at ${width}`
-    );
-    await index(page);
-    assert.equal(await page.locator('.index-rows > button').count(), 12);
-    assert.equal(
-      await page.locator('dialog').evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth),
-      true
-    );
-    await close(page);
-    if (width === 390) await screenshot(page, 'mobile');
+    await close();
   }
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  assert.equal(
-    await page.locator('.world-signature').evaluate((el) => getComputedStyle(el).animationName),
-    'none'
-  );
-  assert.deepEqual(errors, [], 'No application errors');
-
-  const mobile = await browser.newContext({
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => (document.querySelector('main').scrollTop = 0));
+  await page.screenshot({ path: `${screenshots}/mobile.png` });
+  const touch = await browser.newPage({
     viewport: { width: 390, height: 844 },
-    isMobile: true,
     hasTouch: true,
+    isMobile: true,
   });
-  const touch = await mobile.newPage();
-  await ready(touch);
-  const origin = await position(touch);
-  const stick = await touch.locator('.joystick').boundingBox();
-  const cdp = await mobile.newCDPSession(touch);
-  const point = { x: stick.x + stick.width / 2, y: stick.y + stick.height / 2 };
-  await cdp.send('Input.dispatchTouchEvent', {
-    type: 'touchStart',
-    touchPoints: [{ ...point, radiusX: 3, radiusY: 3 }],
-  });
-  await cdp.send('Input.dispatchTouchEvent', {
-    type: 'touchMove',
-    touchPoints: [{ x: point.x, y: point.y - 35, radiusX: 3, radiusY: 3 }],
-  });
-  await touch.waitForTimeout(1000);
-  await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-  const destination = await position(touch);
-  assert.ok(
-    Math.hypot(destination[0] - origin[0], destination[2] - origin[2]) > 1,
-    'Touch joystick walks'
-  );
-  await touch.getByRole('button', { name: 'Return to entrance', exact: true }).tap();
-  await touch.waitForTimeout(600);
-  await touch.getByRole('button', { name: 'Jump', exact: true }).tap();
-  await touch.waitForFunction(
-    () => JSON.parse(localStorage.getItem('devon-workshop-v1') || '{}').jumped === true
-  );
-  await touch.getByRole('button', { name: 'Open project index' }).tap();
-  await touch.locator('[data-project="the-best"]').tap();
-  await loadedImage(touch, '.gallery-photo img');
-  const heading = await touch.locator('.work-detail h1').boundingBox();
-  const header = await touch.locator('.dialog-top').boundingBox();
-  assert.ok(heading.y >= header.y + header.height, 'Project heading is below the sticky header');
-  assert.equal(
-    await touch.locator('.gallery-photo img').evaluate((img) => img.naturalWidth > 0),
-    true
-  );
-  await screenshot(touch, 'mobile-gallery');
-  await mobile.close();
-
-  const fallback = await browser.newContext();
-  await fallback.addInitScript(() => {
-    const original = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function (type, ...args) {
-      if (type === 'webgl' || type === 'webgl2' || type === 'experimental-webgl') return null;
-      return original.call(this, type, ...args);
-    };
-  });
-  const basic = await fallback.newPage();
-  basic.setDefaultTimeout(30000);
-  await basic.goto(url, { waitUntil: 'networkidle' });
-  await basic.waitForSelector('.world-fallback');
-  assert.equal(await basic.locator('.fallback-works > button').count(), 12);
-  await basic
-    .locator('.fallback-works')
-    .getByRole('button', { name: /Strider/ })
-    .click();
-  assert.equal(await basic.locator('.work-detail h1').textContent(), 'Strider');
-  await fallback.close();
-  await page
-    .locator('canvas')
-    .evaluate((canvas) =>
-      canvas.dispatchEvent(new Event('webglcontextlost', { cancelable: true }))
-    );
-  await page.waitForSelector('.world-fallback');
-  assert.equal(await page.locator('.fallback-works > button').count(), 12);
+  await touch.goto(process.env.TEST_URL || 'http://127.0.0.1:3011');
+  await touch.getByRole('button', { name: 'A spare lens', exact: true }).tap();
+  await touch.getByRole('button', { name: 'Take it', exact: true }).tap();
+  await touch.locator('dialog').waitFor({ state: 'hidden' });
+  await touch.getByRole('button', { name: 'Your pockets', exact: true }).tap();
+  assert.equal(await touch.locator('.pocket-items button:enabled').count(), 1);
+  await touch.close();
+  assert.deepEqual(errors, []);
   console.log(
-    'Passed: first-person world pixels, walking/jump/entrance, paused overlays, all destinations, source links, previews, real photos, map travel, settings, circuit timer, persistence, four viewport widths, mobile walking/taps, reduced motion, and WebGL fallback.'
+    'Passed: static 2D room, media viewers, constellation, search, four viewports, and console health.'
   );
 } finally {
   await browser.close();
