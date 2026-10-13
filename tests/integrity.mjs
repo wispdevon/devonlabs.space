@@ -6,7 +6,7 @@ for (const [source, image] of Object.entries(manifest)) {
   const original = await sharp(`public${source}`).metadata();
   assert.equal(image.width, original.width);
   assert.equal(image.height, original.height);
-  const sizes = source.startsWith('/photography/events/') ? [320, 400, 640, 960, 1600] : [320, 640, 960, 1600];
+  const sizes = source.startsWith('/photography/bundles/') ? [200, 320, 400, 640, 960, 1600] : source.startsWith('/photography/events/') ? [200, 320, 400, 640, 960, 1600] : [320, 640, 960, 1600];
   assert.deepEqual(image.variants.map(item => item.width), [...new Set(sizes.map(width => Math.min(width, original.width)))]);
   for (const variant of image.variants) {
     assert.match(variant.src, /-[a-f0-9]{16}\.webp$/);

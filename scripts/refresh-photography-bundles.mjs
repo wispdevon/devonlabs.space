@@ -8,7 +8,6 @@ import sharp from 'sharp';
 const FEED_URL = 'https://photo.devonlabs.space/rss/';
 const PHOTO_HOST = new URL(FEED_URL).hostname;
 const MAX_STORIES = 3;
-const MAX_PHOTOS_PER_STORY = 3;
 const MAX_IMAGE_EDGE = 1600;
 const REQUEST_TIMEOUT_MS = 30_000;
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -172,7 +171,7 @@ function validSnapshotShape(snapshot) {
     if (
       !story || typeof story.title !== 'string' || !story.title.trim() ||
       typeof story.url !== 'string' || typeof story.publishedAt !== 'string' || !Number.isFinite(Date.parse(story.publishedAt)) ||
-      !Array.isArray(story.photos) || story.photos.length < 1 || story.photos.length > MAX_PHOTOS_PER_STORY
+      !Array.isArray(story.photos) || story.photos.length < 1
     ) return false;
 
     try {
@@ -310,7 +309,6 @@ export async function refreshPhotographyBundles({
           source: candidate.source,
           alt: candidate.alt || `Photo from ${story.title}`,
         });
-        if (photos.length === MAX_PHOTOS_PER_STORY) break;
       }
       if (!photos.length) throw new Error(`Story has no distinct images: ${story.title}`);
       snapshot.push({ title: story.title, url: story.url, publishedAt: story.publishedAt, photos });

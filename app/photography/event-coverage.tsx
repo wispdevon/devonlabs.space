@@ -2,12 +2,13 @@ import coverage from '../../data/event-coverage.json';
 import ResponsiveImage from '../portfolio/responsive-image';
 import { Arrow } from '../portfolio/site-shell';
 import { photographyPackages, photographyGuarantee, photographyDelivery, formatShopPrice } from '../../data/shop';
+import Masonry from './masonry';
 
 type EventPhoto = (typeof coverage.events)[number]['photos'][number];
 
 function Photograph({ photo, priority = false }: { photo: EventPhoto; priority?: boolean }) {
   return <figure>
-    <ResponsiveImage src={photo.image} alt={photo.alt} width={photo.width} height={photo.height} priority={priority} sizes="(max-width: 600px) calc((100vw - 52px) / 2), (max-width: 850px) calc((100vw - 100px) / 2), (max-width: 1280px) calc((100vw - 384px - clamp(60px, 8vw, 140px) - 40px) / 3), 270px" />
+    <ResponsiveImage src={photo.image} alt={photo.alt} width={photo.width} height={photo.height} priority={priority} sizes="(max-width: 600px) calc((100vw - 52px) / 2), (max-width: 850px) calc((100vw - 100px) / 3), 280px" />
     <figcaption>{photo.caption}</figcaption>
   </figure>;
 }
@@ -31,9 +32,9 @@ export default function EventCoverage() {
         <span className="mono"><time dateTime={event.date}>{new Date(`${event.date}T12:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' })}</time> · {event.photos.length} photographs</span>
       </div>
       <p className="event-story-description">{event.description}</p>
-      <div className="event-coverage-photos">
+      <Masonry className="event-coverage-photos">
         {event.photos.map((photo, index) => <Photograph key={photo.id} photo={photo} priority={eventIndex === 0 && index === 0} />)}
-      </div>
+      </Masonry>
       {event.source ? <a className="text-link event-story-source" href={event.source}>View the event collection <Arrow /></a> : null}
     </article>)}
     <div className="event-coverage-enquiry">

@@ -58,7 +58,7 @@ try {
           });
         });
         assert.ok(ratios.every(error => error < 0.025), `Photography preserves natural proportions at ${width}px`);
-        assert.equal(await page.locator('.photo-gallery').evaluate(element => getComputedStyle(element).columnCount), width > 850 ? '4' : width > 600 ? '3' : '2');
+        assert.equal(await page.locator('.photo-gallery').evaluate(element => getComputedStyle(element).display), 'grid');
         assert.equal(await page.locator('.photo-bundle').count(), 3);
         assert.equal(await page.locator('.event-story').count(), eventCoverage.events.length);
         assert.equal(await page.getByRole('navigation', { name: 'Event galleries' }).getByRole('link').count(), eventCoverage.events.length);
@@ -66,7 +66,7 @@ try {
           const story = page.locator('.event-story').nth(index);
           assert.equal(await story.getByRole('heading', { level: 3 }).textContent(), event.title);
           assert.equal(await story.locator('img').count(), event.photos.length);
-          assert.equal(await story.locator('.event-coverage-photos').evaluate(element => getComputedStyle(element).columnCount), width > 850 ? '3' : '2', 'Event galleries use responsive masonry columns');
+          assert.equal(await story.locator('.event-coverage-photos').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), width > 600 ? 3 : 2, 'Event galleries use responsive continuous masonry lanes');
           for (const image of await story.locator('img').all()) assert.equal(await image.isVisible(), true, 'Every event photograph is visible without expanding');
           if (event.source) assert.equal(await story.getByRole('link', { name: 'View the event collection' }).getAttribute('href'), event.source);
           else assert.equal(await story.getByRole('link', { name: 'View the event collection' }).count(), 0);

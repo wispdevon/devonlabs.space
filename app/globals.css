@@ -131,6 +131,17 @@ button.text-link { padding: 0; border: 0; background: transparent; font: inherit
   .photo-bundle-images img:last-child { grid-column: 1 / -1; }
 }
 .gallery-photo:hover { box-shadow: 0 0 0 2px var(--accent); }
+.page-photography .dynamic-masonry { --masonry-gap: 20; --masonry-columns: 3; display: block; column-count: 3; column-gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.page-photography .dynamic-masonry[data-packed='true'] { display: grid; column-count: auto; grid-auto-rows: 1px; row-gap: 0; }
+.dynamic-masonry > .masonry-item { min-width: 0; break-inside: avoid; margin-bottom: 20px; }
+.dynamic-masonry[data-packed='true'] > .masonry-item { margin-bottom: 0; }
+.masonry-content { display: flow-root; }
+.page-photography .dynamic-masonry .gallery-photo, .page-photography .dynamic-masonry figure { margin: 0; }
+.page-photography .dynamic-masonry img { display: block; width: 100%; height: auto; object-fit: contain; }
+@media (max-width: 600px) {
+  .page-photography .dynamic-masonry { --masonry-gap: 12; --masonry-columns: 2; column-count: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; }
+  .dynamic-masonry > .masonry-item { margin-bottom: 12px; }
+}
 .gallery-caption { font-family: 'Devon Mono', monospace; font-size: .8125rem; margin-top: 22px !important; }
 .photo-dialog { width: min(1100px, 94vw); max-height: 94svh; padding: 20px; border: 1px solid var(--divider); border-radius: 8px; background: var(--surface); color: var(--foreground); }
 .photo-dialog::backdrop { background: rgb(15 8 28 / 80%); }

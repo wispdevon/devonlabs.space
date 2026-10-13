@@ -14,7 +14,7 @@ for (const directory of ['workshop/photos', 'developer', 'coffee', 'workshop', '
     const bytes = await readFile(`public${source}`);
     const metadata = await sharp(bytes).metadata();
     const variants = [];
-    const sizes = directory === 'photography/events' ? [320, 400, 640, 960, 1600] : [320, 640, 960, 1600];
+    const sizes = directory === 'photography/bundles' ? [200, 320, 400, 640, 960, 1600] : directory === 'photography/events' ? [200, 320, 400, 640, 960, 1600] : [320, 640, 960, 1600];
     for (const width of [...new Set(sizes.map(size => Math.min(size, metadata.width)))]) {
       const { data, info } = await sharp(bytes).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 78 }).toBuffer({ resolveWithObject: true });
       const hash = createHash('sha256').update(data).digest('hex').slice(0, 16);

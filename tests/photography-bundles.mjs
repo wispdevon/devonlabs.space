@@ -77,7 +77,7 @@ async function makeWorkspace(t, { withFallback = false } = {}) {
   return { root, snapshotPath, bundleDirectory, snapshot };
 }
 
-test('refreshes the newest three image stories and stores up to three unique capped local images each', async t => {
+test('refreshes the newest three image stories and stores every unique image without a three-photo limit', async t => {
   const { root, snapshotPath, bundleDirectory } = await makeWorkspace(t);
   await mkdir(bundleDirectory, { recursive: true });
   const staleGeneratedFilename = 'photo-00000000000000000000.webp';
@@ -102,7 +102,7 @@ test('refreshes the newest three image stories and stores up to three unique cap
       ),
       content: imageMarkup(
         { src: 'https://photo.devonlabs.space/third.jpg', alt: 'Blue scene' },
-        { src: 'https://photo.devonlabs.space/fourth.jpg', alt: 'Should be beyond the three-image limit' },
+        { src: 'https://photo.devonlabs.space/fourth.jpg', alt: 'Fourth unique image' },
       ),
     }),
     feedItem({ title: 'Middle story', date: 'Wed, 08 Apr 2026 08:00:00 GMT', slug: 'middle', description: imageMarkup({ src: 'https://photo.devonlabs.space/vertical.jpg', alt: 'Vertical portrait' }) }),
@@ -126,11 +126,12 @@ test('refreshes the newest three image stories and stores up to three unique cap
   const bundles = JSON.parse(await readFile(snapshotPath, 'utf8'));
   assert.deepEqual(bundles.map(bundle => bundle.title), ['Newest story', 'Middle story', 'Older story']);
   assert.equal(bundles[0].publishedAt, 'Thu, 09 Apr 2026 08:00:00 GMT');
-  assert.equal(bundles[0].photos.length, 3, 'content-identical URLs do not consume a distinct-image slot');
+  assert.equal(bundles[0].photos.length, 4, 'content-identical URLs do not consume a distinct-image slot');
   assert.deepEqual(bundles[0].photos.map(photo => photo.source), [
     'https://photo.devonlabs.space/large.jpg',
     'https://photo.devonlabs.space/small.jpg',
     'https://photo.devonlabs.space/third.jpg',
+    'https://photo.devonlabs.space/fourth.jpg',
   ]);
   assert.equal(bundles[0].photos[0].alt, 'Photo from Newest story');
   assert.equal(bundles[0].photos[1].alt, 'A small image');
@@ -143,7 +144,7 @@ test('refreshes the newest three image stories and stores up to three unique cap
   const smallMetadata = await sharp(smallFile).metadata();
   assert.deepEqual([smallMetadata.width, smallMetadata.height], [320, 200], 'small images are not enlarged');
   for (const bundle of bundles) {
-    assert.ok(bundle.photos.length >= 1 && bundle.photos.length <= 3);
+    assert.ok(bundle.photos.length >= 1);
     for (const photo of bundle.photos) {
       const file = path.join(root, 'public', photo.image.slice(1));
       const metadata = await sharp(file).metadata();
