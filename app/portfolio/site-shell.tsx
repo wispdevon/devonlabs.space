@@ -26,7 +26,7 @@ const colors: Record<PortfolioPage, [string, string, string]> = {
 export function pageMetadata(page: PortfolioPage, description: string): Metadata {
   const entry = pages.find(item => item.id === page)!;
   const title = `${entry.label} — Devon Labs`;
-  return { title, description, alternates: { canonical: entry.href }, openGraph: { title, description, url: entry.href, siteName: 'Devon Labs', type: 'website' } };
+  return { title, description, twitter: { card: 'summary_large_image', title, description, images: ['/developer/immichinko.webp'] }, alternates: { canonical: entry.href }, openGraph: { title, description, url: entry.href, siteName: 'Devon Labs', type: 'website' } };
 }
 
 export function Arrow() { return <span aria-hidden="true">↗</span>; }
@@ -44,11 +44,11 @@ export default function SiteShell({ page, children }: { page: PortfolioPage; chi
     <div className="portfolio-shell">
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="p-header">
-        <Link href="/" className="p-wordmark">Devon Labs</Link>
-        <div className="p-navigation"><nav aria-label="Main navigation">{pages.map(item => <Link key={item.id} href={item.href} aria-current={item.id === page ? 'page' : undefined}>{item.label}</Link>)}</nav><ThemeToggle /></div>
+        <Link prefetch={false} href="/" className="p-wordmark">Devon Labs</Link>
+        <div className="p-navigation"><nav aria-label="Main navigation">{pages.map(item => <Link prefetch={false} key={item.id} href={item.href} aria-current={item.id === page ? 'page' : undefined}>{item.label}</Link>)}</nav><ThemeToggle /></div>
       </header>
       <main id="main" key={page}>{children}</main>
-      <footer className="p-footer"><Link href="/">Devon Labs</Link><div><a href="https://github.com/wispdevon">GitHub</a><a href="https://bsky.app/profile/wispdevon.bsky.social">Bluesky</a><a href="https://www.last.fm/user/wisp-">Last.fm</a></div></footer>
+      <footer className="p-footer"><Link prefetch={false} href="/">Devon Labs</Link><div><a href="https://github.com/wispdevon">GitHub</a><a href="https://bsky.app/profile/wispdevon.bsky.social">Bluesky</a><a href="https://www.last.fm/user/wisp-">Last.fm</a></div></footer>
     </div>
   </div>;
 }

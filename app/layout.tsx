@@ -49,7 +49,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable}`}>
+    <html suppressHydrationWarning lang="en" className={`${bodyFont.variable} ${displayFont.variable}`}>
+      <head><script dangerouslySetInnerHTML={{ __html: `(function(){var p;try{p=localStorage.getItem('devon-portfolio-theme')}catch(e){}document.documentElement.dataset.theme=p==='dark'||(p!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'})()` }} /></head>
       <body>{children}</body>
     </html>
   );

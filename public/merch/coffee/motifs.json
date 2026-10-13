@@ -1,0 +1,119 @@
+[
+  {
+    "name": "blossom",
+    "file": "motifs/blossom.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      58,
+      1355,
+      245,
+      220
+    ],
+    "clipPolygon": "65,1440 86,1406 99,1364 137,1381 166,1358 203,1380 242,1368 267,1400 301,1450 233,1490 204,1510 200,1575 176,1575 170,1510 123,1480 74,1483"
+  },
+  {
+    "name": "upright-leaf",
+    "file": "motifs/upright-leaf.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      580,
+      65,
+      200,
+      405
+    ],
+    "clipPolygon": "590,441 585,328 620,195 703,116 775,72 735,228 675,354 642,459"
+  },
+  {
+    "name": "fruit-branch",
+    "file": "motifs/fruit-branch.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      810,
+      1310,
+      295,
+      250
+    ],
+    "clipPolygon": "820,1443 857,1415 918,1423 940,1380 986,1310 1066,1316 1080,1403 1020,1461 1104,1548 1085,1560 986,1477 926,1503 839,1492"
+  },
+  {
+    "name": "bean-back",
+    "file": "motifs/bean-back.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      1159,
+      1243,
+      70,
+      98
+    ],
+    "clipPolygon": null
+  },
+  {
+    "name": "stamens",
+    "file": "motifs/stamens.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      80,
+      1195,
+      220,
+      144
+    ],
+    "clipPolygon": null
+  },
+  {
+    "name": "bean-front",
+    "file": "motifs/bean-front.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      1160,
+      1395,
+      70,
+      90
+    ],
+    "clipPolygon": null
+  },
+  {
+    "name": "leaf",
+    "file": "motifs/leaf.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      75,
+      253,
+      541,
+      258
+    ],
+    "clipPolygon": "77,278 209,261 430,259 539,378 613,476 526,507 301,482 172,417"
+  },
+  {
+    "name": "fruit-section",
+    "file": "motifs/fruit-section.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      513,
+      1460,
+      94,
+      94
+    ],
+    "clipPolygon": "ellipse"
+  },
+  {
+    "name": "seed-section",
+    "file": "motifs/seed-section.svg",
+    "source": "sources/coffea-arabica.jpg",
+    "license": "Public domain",
+    "crop": [
+      675,
+      1335,
+      125,
+      117
+    ],
+    "clipPolygon": "ellipse"
+  }
+]

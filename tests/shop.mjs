@@ -1,0 +1,70 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import AxeBuilder from '@axe-core/playwright';
+const origin = new URL(process.env.TEST_URL || 'http://127.0.0.1:3017').origin;
+const browser = await chromium.launch();
+try {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', permissions: ['clipboard-read', 'clipboard-write'] });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto(`${origin}/shop/`);
+  assert.equal(await page.locator('.shop-product').count(), 5);
+  assert.equal(await page.getByRole('heading', { name: /mug/i }).count(), 0);
+  assert.equal(await page.locator('#artwork-credits').count(), 0);
+  assert.equal(await page.getByRole('heading', { name: 'After Hours shirt', exact: true }).count(), 1);
+  assert.equal(await page.getByRole('heading', { name: 'Devon Labs shirt', exact: true }).count(), 0);
+  await page.getByRole('button', { name: 'Prepare order email' }).click();
+  assert.equal(await page.locator('.order-preview').count(), 0, 'Incomplete request cannot prepare');
+  await page.getByLabel('Requested shirt size').selectOption('L');
+  await page.getByLabel('Quantity (required)').fill('2');
+  await page.getByLabel('Your name').fill('ทดสอบ & Example');
+  await page.getByLabel('Reply email').fill('test@example.com');
+  await page.getByLabel('Delivery province').fill('ภูเก็ต');
+  await page.getByLabel('Notes (optional)').fill('Please quote delivery & confirm sizing.');
+  await page.getByRole('button', { name: 'Prepare order email' }).click();
+  await page.getByRole('heading', { name: 'Your request is ready to send' }).waitFor();
+  assert.equal(await page.locator('.order-preview').evaluate(e => e === document.activeElement), true);
+  let draft = new URL(await page.getByRole('link', { name: 'Open email draft' }).getAttribute('href'));
+  assert.equal(draft.pathname, 'wisp@devonlabs.space');
+  assert.match(draft.searchParams.get('body'), /Product: After Hours shirt\nRequested size: L\nQuantity: 2/);
+  assert.match(draft.searchParams.get('body'), /ทดสอบ & Example/);
+  assert.match(draft.searchParams.get('body'), /ภูเก็ต/);
+  assert.match(draft.searchParams.get('body'), /Country: Thailand/);
+  assert.match(draft.searchParams.get('body'), /Unit price: US\$24.99\nSubtotal: US\$49.98/);
+  await page.getByRole('button', { name: 'Copy request', exact: true }).click();
+  await page.getByRole('status').getByText(/Request copied/).waitFor();
+  assert.equal(await page.evaluate(() => navigator.clipboard.readText()), draft.searchParams.get('body'));
+  for (const theme of ['light', 'dark']) {
+    await page.evaluate(theme => { document.documentElement.dataset.theme = theme; }, theme);
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+    assert.deepEqual(results.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })), [], `Order preview accessibility ${theme}`);
+  }
+  await page.getByRole('radio', { name: 'Geometric light', exact: true }).check();
+  assert.equal(await page.locator('.order-preview').count(), 0, 'Changed selection clears stale email');
+  assert.equal(await page.locator('#order-size, #order-quantity, #order-province, #order-country').count(), 0, 'Digital file needs no physical size, quantity or shipping address');
+  await page.getByRole('button', { name: 'Prepare order email' }).click();
+  draft = new URL(await page.getByRole('link', { name: 'Open email draft' }).getAttribute('href'));
+  assert.match(draft.searchParams.get('body'), /Product: Geometric light\nDelivery: Digital file by email/);
+  assert.match(draft.searchParams.get('body'), /Unit price: US\$14.99\nSubtotal: US\$14.99/);
+  assert.doesNotMatch(draft.searchParams.get('body'), /Delivery province|Country:|Requested size|THB/);
+  await page.evaluate(() => { Object.defineProperty(navigator.clipboard, 'writeText', { value: () => Promise.reject(new Error('Blocked')) }); });
+  await page.getByRole('button', { name: 'Copy request', exact: true }).click();
+  await page.getByRole('status').getByText(/Copy is unavailable/).waitFor();
+  assert.equal(await page.getByLabel('Request text', { exact: true }).inputValue(), draft.searchParams.get('body'));
+  await page.getByLabel('Your name').fill('   ');
+  await page.getByRole('button', { name: 'Prepare order email' }).click();
+  assert.equal(await page.locator('.order-preview').count(), 0, 'Whitespace-only name is rejected');
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Shop form fits ${width}px`);
+  }
+  assert.deepEqual(errors, []);
+  const noJS = await browser.newContext({ javaScriptEnabled: false });
+  const fallback = await noJS.newPage();
+  await fallback.goto(`${origin}/shop/`);
+  assert.ok(await fallback.getByRole('link', { name: 'wisp@devonlabs.space', exact: true }).count());
+  assert.equal(await fallback.locator('.shop-closing .__cf_email__').count(), 0, 'Direct contact link survives Cloudflare without JavaScript');
+  await noJS.close();
+  console.log('Passed shirts/prints catalog, request validation, Thai text, email encoding, clipboard and fallback, changed-size reset, focus, both-theme accessibility, four widths, and direct email without JavaScript. No email was sent.');
+} finally { await browser.close(); }

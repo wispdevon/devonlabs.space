@@ -1,0 +1,297 @@
+{
+  "events": [
+    {
+      "id": "lighthouse-prom",
+      "title": "Lighthouse Prom",
+      "date": "2026-06-19",
+      "description": "Formal portraits, dinner, and dancing across the evening.",
+      "source": null,
+      "albumId": "7705db7b-2836-493f-b2be-989995f7ba0b",
+      "photos": [
+        {
+          "id": "17e6f5a1-f389-4bc6-902a-fd3a2f282c7e",
+          "image": "/photography/events/lighthouse-prom/formal-portrait.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Three guests pose together in formalwear.",
+          "caption": "Three guests pose together in formalwear."
+        },
+        {
+          "id": "154d3711-d2f7-483e-aa64-29e47e0f3f25",
+          "image": "/photography/events/lighthouse-prom/dinner-guests.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Guests sit together at dinner.",
+          "caption": "Guests sit together at dinner."
+        },
+        {
+          "id": "bc6050c2-9884-4e29-94d6-7674fc7d7abc",
+          "image": "/photography/events/lighthouse-prom/evening-portrait.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A guest poses in a light suit during the evening.",
+          "caption": "A guest poses in a light suit during the evening."
+        },
+        {
+          "id": "4d190010-ff9e-4d70-8491-996641d4b96f",
+          "image": "/photography/events/lighthouse-prom/friends-at-prom.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Friends pose together during the event.",
+          "caption": "Friends pose together during the event."
+        },
+        {
+          "id": "ff9e7be7-0838-48e4-9b22-f1a1f204bf3f",
+          "image": "/photography/events/lighthouse-prom/guests-on-the-dance-floor.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Guests dance near the stage.",
+          "caption": "Guests dance near the stage."
+        },
+        {
+          "id": "a3f77ee9-b443-4ef5-9003-4b2be1ddddac",
+          "image": "/photography/events/lighthouse-prom/prom-group-portrait.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A group poses for a portrait at the event.",
+          "caption": "A group poses for a portrait at the event."
+        },
+        {
+          "id": "15a19100-5387-463e-8ae4-f6992001dd8a",
+          "image": "/photography/events/lighthouse-prom/evening-dancing.webp",
+          "date": "2026-06-19",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Guests dance together beneath the event lights.",
+          "caption": "Guests dance together beneath the event lights."
+        }
+      ]
+    },
+    {
+      "id": "sunday-christmas-25",
+      "title": "Sunday Christmas '25",
+      "date": "2025-12-21",
+      "description": "Shared meals, festive portraits, and moments under the lights.",
+      "source": null,
+      "albumId": "769a7ff2-12f4-4a5e-ae05-937b0dc2d3e4",
+      "photos": [
+        {
+          "id": "1fa27b3b-d973-4b7e-be17-2ec6b2ff82ae",
+          "image": "/photography/events/sunday-christmas-25/speaker-under-holiday-lights.webp",
+          "date": "2025-12-21",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A person holds a microphone and gestures beneath the festive lights.",
+          "caption": "A person holds a microphone and gestures beneath the festive lights."
+        },
+        {
+          "id": "9dd5d39e-0f87-4c92-a501-dede5270ff9c",
+          "image": "/photography/events/sunday-christmas-25/guest-with-box.webp",
+          "date": "2025-12-21",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A smiling attendee holds a box among the guests.",
+          "caption": "A smiling attendee holds a box among the guests."
+        },
+        {
+          "id": "00144372-7c2e-4e2d-af2b-278f856bd1a8",
+          "image": "/photography/events/sunday-christmas-25/festive-friends.webp",
+          "date": "2025-12-21",
+          "width": 1333,
+          "height": 2000,
+          "alt": "Two attendees pose together with festive lights behind them.",
+          "caption": "Two attendees pose together with festive lights behind them."
+        },
+        {
+          "id": "cc66867a-5cd9-418e-8eaa-ed41eddf6a75",
+          "image": "/photography/events/sunday-christmas-25/outdoor-table.webp",
+          "date": "2025-12-21",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Guests gather around an outdoor table.",
+          "caption": "Guests gather around an outdoor table."
+        },
+        {
+          "id": "df3c0d8a-18e4-4e72-ba7d-9230e8b37913",
+          "image": "/photography/events/sunday-christmas-25/santa-hat-friends.webp",
+          "date": "2025-12-21",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Two attendees smile together, one wearing a Santa hat.",
+          "caption": "Two attendees smile together, one wearing a Santa hat."
+        },
+        {
+          "id": "ae0b3ae6-ac3a-4278-8642-b834c7964450",
+          "image": "/photography/events/sunday-christmas-25/table-conversation.webp",
+          "date": "2025-12-21",
+          "width": 2000,
+          "height": 1333,
+          "alt": "An attendee laughs during a conversation at the table.",
+          "caption": "An attendee laughs during a conversation at the table."
+        },
+        {
+          "id": "d4d3de1e-811c-480d-ad30-a97beb2a48f0",
+          "image": "/photography/events/sunday-christmas-25/santa-hat-portrait.webp",
+          "date": "2025-12-21",
+          "width": 1333,
+          "height": 2000,
+          "alt": "A guest poses in a Santa hat.",
+          "caption": "A guest poses in a Santa hat."
+        }
+      ]
+    },
+    {
+      "id": "christ-music-festival-25",
+      "title": "Christ Music Festival '25",
+      "date": "2025-12-09",
+      "endDate": "2025-12-14",
+      "description": "Stage performances, festival crowds, and moments between sets.",
+      "source": "https://photo.devonlabs.space/christ-music-festival-25/",
+      "albumId": "fe97a377-a126-4e66-a4f7-de5f5b6cf063",
+      "photos": [
+        {
+          "id": "5c6ba3c6-4c95-49d0-ae81-19725f8ef1e5",
+          "image": "/photography/events/christ-music-festival-25/stage-and-crowd.webp",
+          "date": "2025-12-13",
+          "width": 2000,
+          "height": 1333,
+          "alt": "The festival stage glows above the audience at night.",
+          "caption": "The festival stage glows above the audience at night."
+        },
+        {
+          "id": "98621fc8-a935-4af6-a14c-565bfb2b8737",
+          "image": "/photography/events/christ-music-festival-25/festival-crowd.webp",
+          "date": "2025-12-10",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Festivalgoers gather beneath the evening lights.",
+          "caption": "Festivalgoers gather beneath the evening lights."
+        },
+        {
+          "id": "fcdbaedf-0daf-437c-9605-3e6769eede60",
+          "image": "/photography/events/christ-music-festival-25/people-onstage.webp",
+          "date": "2025-12-10",
+          "width": 2000,
+          "height": 1333,
+          "alt": "People share the stage beneath the festival rigging.",
+          "caption": "People share the stage beneath the festival rigging."
+        },
+        {
+          "id": "1db61d45-c365-4234-9089-53b91ea5f64a",
+          "image": "/photography/events/christ-music-festival-25/festival-stage-moment.webp",
+          "date": "2025-12-12",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A moment onstage beneath the festival lights.",
+          "caption": "A moment onstage beneath the festival lights."
+        },
+        {
+          "id": "8eaf4015-7986-4096-a502-ab1980cb6a57",
+          "image": "/photography/events/christ-music-festival-25/singer-under-stage-lights.webp",
+          "date": "2025-12-13",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A singer performs beneath colored stage lights.",
+          "caption": "A singer performs beneath colored stage lights."
+        },
+        {
+          "id": "453f60bc-71c1-4c35-935b-3b1e9c4dbbe2",
+          "image": "/photography/events/christ-music-festival-25/audience-after-dark.webp",
+          "date": "2025-12-13",
+          "width": 2000,
+          "height": 1333,
+          "alt": "The festival audience gathers near the stage after dark.",
+          "caption": "The festival audience gathers near the stage after dark."
+        },
+        {
+          "id": "fd57ebf6-0428-422a-aeda-4eab95c08bdc",
+          "image": "/photography/events/christ-music-festival-25/keyboard-performance.webp",
+          "date": "2025-12-14",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A musician plays keyboard onstage.",
+          "caption": "A musician plays keyboard onstage."
+        }
+      ]
+    },
+    {
+      "id": "worship-miromir",
+      "title": "Worship @ Miromir",
+      "date": "2025-10-03",
+      "description": "An outdoor music gathering and shared moments after dark.",
+      "source": null,
+      "albumId": "879ff188-c64c-4a02-9d6c-fb8afd7d793d",
+      "photos": [
+        {
+          "id": "1e241827-5ce0-4ac0-805d-fdc69c2daebe",
+          "image": "/photography/events/worship-miromir/acoustic-at-dusk.webp",
+          "date": "2025-10-03",
+          "width": 2000,
+          "height": 1333,
+          "alt": "An acoustic performer plays as dusk settles.",
+          "caption": "An acoustic performer plays as dusk settles."
+        },
+        {
+          "id": "b8f77d5f-9b2b-4429-b354-05beb50d399c",
+          "image": "/photography/events/worship-miromir/musicians-and-city-lights.webp",
+          "date": "2025-10-03",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Musicians perform with city lights in the background.",
+          "caption": "Musicians perform with city lights in the background."
+        },
+        {
+          "id": "a8dc124c-3f3b-490a-9c8e-0ed34df898f4",
+          "image": "/photography/events/worship-miromir/guitar-close-up.webp",
+          "date": "2025-10-03",
+          "width": 1333,
+          "height": 2000,
+          "alt": "A close view of a musician’s hand playing bass guitar.",
+          "caption": "A close view of a musician’s hand playing bass guitar."
+        },
+        {
+          "id": "904e34c8-bdf9-428f-b1db-c31ec94134d5",
+          "image": "/photography/events/worship-miromir/performer-with-microphone.webp",
+          "date": "2025-10-03",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A performer holds a microphone among the small audience.",
+          "caption": "A performer holds a microphone among the small audience."
+        },
+        {
+          "id": "3b75285c-c483-4082-a128-898daeffd296",
+          "image": "/photography/events/worship-miromir/audience-hands-raised.webp",
+          "date": "2025-10-03",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Audience members raise their hands during the gathering.",
+          "caption": "Audience members raise their hands during the gathering."
+        },
+        {
+          "id": "3b424a9c-d260-436b-9b93-f9d69e9a63b3",
+          "image": "/photography/events/worship-miromir/acoustic-performer-after-dark.webp",
+          "date": "2025-10-03",
+          "width": 2000,
+          "height": 1333,
+          "alt": "A guitarist plays outdoors after dark.",
+          "caption": "A guitarist plays outdoors after dark."
+        },
+        {
+          "id": "e0f900a9-d987-4aad-82dc-f1d169577fdb",
+          "image": "/photography/events/worship-miromir/shared-music-moment.webp",
+          "date": "2025-10-03",
+          "width": 2000,
+          "height": 1333,
+          "alt": "Two attendees lift their hands during the music.",
+          "caption": "Two attendees lift their hands during the music."
+        }
+      ]
+    }
+  ]
+}

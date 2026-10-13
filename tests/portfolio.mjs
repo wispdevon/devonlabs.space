@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import AxeBuilder from '@axe-core/playwright';
 import { chromium } from 'playwright';
 
 // Rings crossing the date line must be split, including their closing edge.
 const mapCountries = JSON.parse(await readFile(new URL('../data/world-countries.json', import.meta.url)));
+const eventCoverage = JSON.parse(await readFile(new URL('../data/event-coverage.json', import.meta.url)));
 for (const country of mapCountries) {
   for (const ring of country.path.split('Z')) {
     const points = [...ring.matchAll(/[ML]([\d.-]+),([\d.-]+)/g)].map(match => [Number(match[1]), Number(match[2])]);
@@ -25,7 +27,8 @@ const routes = [
 ];
 const browser = await chromium.launch({ headless: true });
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  const page = await context.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -35,12 +38,55 @@ try {
     assert.equal(await page.getByRole('heading', { level: 1 }).textContent(), title);
     assert.equal(await page.getByRole('navigation').getByRole('link', { name: label, exact: true }).getAttribute('aria-current'), 'page');
     assert.equal(new URL(await page.locator('link[rel="canonical"]').getAttribute('href')).pathname, path);
+    assert.equal(await page.locator('meta[name="twitter:title"]').getAttribute('content'), await page.title());
     for (const width of [1440, 768, 390, 320]) {
       await page.setViewportSize({ width, height: 1000 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `${label} overflows at ${width}px`);
       if (label === 'Shop') assert.equal(await page.locator('h1').evaluate(heading => heading.scrollWidth <= heading.clientWidth && getComputedStyle(heading).whiteSpace === 'nowrap'), true, `Shop title fits one line at ${width}px`);
+      if (label === 'Photography') {
+        assert.equal(await page.locator('.event-story details, .event-story summary').count(), 0);
+        assert.equal(await page.getByRole('heading', { name: 'AM Wedding', exact: true }).count(), 0);
+        const ratios = await page.locator('.photo-gallery img, .photo-bundle-images img, .event-coverage-photos img').evaluateAll(async images => {
+          // Let responsive sources settle after a viewport change before decoding.
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          await Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); }));
+          // Density-corrected naturalWidth/Height and client sizes round to whole pixels.
+          // Compare precise layout against original dimensions verified by the integrity suite.
+          return images.map(image => {
+            const bounds = image.getBoundingClientRect();
+            return Math.abs(bounds.width / bounds.height - Number(image.getAttribute('width')) / Number(image.getAttribute('height')));
+          });
+        });
+        assert.ok(ratios.every(error => error < 0.025), `Photography preserves natural proportions at ${width}px`);
+        assert.equal(await page.locator('.photo-gallery').evaluate(element => getComputedStyle(element).columnCount), width > 850 ? '4' : width > 600 ? '3' : '2');
+        assert.equal(await page.locator('.photo-bundle').count(), 3);
+        assert.equal(await page.locator('.event-story').count(), eventCoverage.events.length);
+        assert.equal(await page.getByRole('navigation', { name: 'Event galleries' }).getByRole('link').count(), eventCoverage.events.length);
+        for (const [index, event] of eventCoverage.events.entries()) {
+          const story = page.locator('.event-story').nth(index);
+          assert.equal(await story.getByRole('heading', { level: 3 }).textContent(), event.title);
+          assert.equal(await story.locator('img').count(), event.photos.length);
+          assert.equal(await story.locator('.event-coverage-photos').evaluate(element => getComputedStyle(element).columnCount), width > 850 ? '3' : '2', 'Event galleries use responsive masonry columns');
+          for (const image of await story.locator('img').all()) assert.equal(await image.isVisible(), true, 'Every event photograph is visible without expanding');
+          if (event.source) assert.equal(await story.getByRole('link', { name: 'View the event collection' }).getAttribute('href'), event.source);
+          else assert.equal(await story.getByRole('link', { name: 'View the event collection' }).count(), 0);
+        }
+        assert.match(await page.getByRole('link', { name: 'Enquire about coverage' }).getAttribute('href'), /^mailto:wisp@devonlabs\.space\?subject=Event%20photography%20enquiry$/);
+      }
     }
   }
+  for (const theme of ['light', 'dark']) {
+    for (const [, path] of routes) {
+      await page.goto(`${origin}${path}`);
+      await page.evaluate(theme => localStorage.setItem('devon-portfolio-theme', theme), theme);
+      await page.reload();
+      await page.waitForFunction(theme => document.querySelector('.theme-toggle').getAttribute('aria-pressed') === String(theme === 'dark'), theme);
+      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+      assert.deepEqual(results.violations.map(item => ({ id: item.id, nodes: item.nodes.map(node => node.target) })), [], `Accessibility: ${path} ${theme}`);
+    }
+  }
+  await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; localStorage.setItem('devon-portfolio-theme', 'light'); });
+  await page.reload();
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.getByRole('navigation').getByRole('link', { name: 'Work', exact: true }).click();
   await page.waitForURL(`${origin}/work/`);
@@ -52,18 +98,26 @@ try {
   await page.waitForURL(`${origin}/coffee/`);
   await page.getByLabel('Explore an origin').selectOption('076');
   assert.equal(await page.locator('.origin-detail h3').innerText(), 'Brazil');
-  assert.equal(await page.locator('.origin-status').innerText(), 'To try');
-  await page.getByRole('checkbox', { name: 'Brazil', exact: true }).check();
-  assert.equal(await page.locator('.origin-status').innerText(), 'Checked off');
-  assert.match(await page.locator('.checklist-count').innerText(), /1 \/ 25/);
+  assert.equal(await page.locator('.origin-status').innerText(), 'Tried');
+  assert.equal(await page.getByRole('checkbox').count(), 0);
+  await page.evaluate(() => localStorage.setItem('devon-coffee-origins', '["076"]'));
   await page.reload();
-  assert.equal(await page.getByRole('checkbox', { name: 'Brazil', exact: true }).isChecked(), true);
-  await page.getByRole('checkbox', { name: 'Brazil', exact: true }).uncheck();
-  assert.match(await page.locator('.checklist-count').innerText(), /0 \/ 25/);
+  await page.getByLabel('Explore an origin').selectOption('076');
+  assert.equal(await page.locator('.origin-status').innerText(), 'Tried');
+  assert.equal(await page.locator('.checklist-count').count(), 0);
   for (const gear of ['Hario V60', 'Flair Neo', 'ROKpresso Classic', 'Mischief M40', 'Hario Switch']) assert.equal(await page.getByRole('heading', { name: gear, exact: true }).count(), 1);
-  await page.locator('.origin-map path').filter({ has: page.locator('title', { hasText: /^Ethiopia$/ }) }).click();
+  await page.locator('.origin-map path').filter({ has: page.locator('title', { hasText: /^Ethiopia:/ }) }).click();
   assert.equal(await page.locator('.origin-detail h3').innerText(), 'Ethiopia');
   assert.equal(await page.locator('.coffee-photos button').count(), 4);
+  assert.equal(await page.locator('#history-title + ul li').count(), 14);
+  assert.equal(await page.locator('#history-title + ul li').filter({ hasText: 'Favorite' }).count(), 4);
+  assert.deepEqual(await page.locator('#next-title + ul li').allTextContents(), ['Burundi', 'India', 'Yemen']);
+  await page.getByLabel('Explore an origin').selectOption('764');
+  assert.equal(await page.locator('.origin-status').innerText(), 'Tried · Favorite');
+  await page.getByLabel('Explore an origin').selectOption('887');
+  assert.equal(await page.locator('.origin-status').innerText(), 'To try next');
+  assert.match(await page.locator('.coffee-method-list').innerText(), /20 g \/ 250 ml/);
+  assert.equal(await page.locator('.coffee-conversation a[href="https://discord.gg/TVvDd4CUeP"]').count(), 1);
   await page.locator('.coffee-photos img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
   await page.getByRole('button', { name: 'Open coffee photograph 1', exact: true }).click();
   assert.equal(await page.locator('.photo-dialog').evaluate(dialog => dialog.open), true);
@@ -76,6 +130,7 @@ try {
     assert.equal(await player.getAttribute('preload'), 'none');
     await player.evaluate(async video => { video.muted = true; await video.play(); });
     await page.waitForFunction(video => video.currentTime > 0, await player.elementHandle());
+    assert.equal(await player.evaluate(video => video.videoWidth), 2160);
     await player.evaluate(video => video.pause());
   }
   assert.equal(await page.locator('.coffee-conversation a[href^="mailto:wisp@devonlabs.space"]').count(), 1);
@@ -97,7 +152,7 @@ try {
   assert.equal(await page.locator('.working-with li svg').count(), 6);
   assert.equal(await page.locator('.find-me a').count(), 5);
   assert.equal(await page.locator('.find-me a[href="https://bsky.app/profile/wispdevon.bsky.social"]').count(), 1);
-  assert.equal(await page.locator('.contact-portrait').getAttribute('src'), '/developer/profile.jpg');
+  assert.match(await page.locator('.contact-portrait').getAttribute('src'), /generated\/images\/profile-/);
   await page.locator('.contact-portrait').evaluate(image => { image.loading = 'eager'; return image.decode(); });
   assert.equal(await page.locator('.find-me a[href="https://github.com/wispdevon"]').count(), 1);
   assert.equal(await page.locator('.find-me a[href="https://www.last.fm/user/wisp-"]').count(), 1);
@@ -117,19 +172,19 @@ try {
   await page.getByRole('button', { name: 'Dark mode', exact: true }).click();
   await page.getByRole('navigation').getByRole('link', { name: 'Software', exact: true }).click();
   await page.waitForURL(`${origin}/software/`);
-  await page.waitForFunction(() => document.querySelector('.portfolio')?.dataset.theme === 'dark');
-  assert.equal(await page.locator('.featured-project').count(), 3);
-  assert.equal(await page.locator('.more-tools li').count(), 6);
+  await page.waitForFunction(() => document.documentElement.dataset.theme === 'dark');
+  assert.equal(await page.locator('.featured-project').count(), 6);
+  assert.equal(await page.locator('.more-tools li').count(), 3);
+  assert.equal(await page.locator('.website-project').count(), 3);
+  for (const preview of await page.locator('.website-preview img').all()) assert.equal(await preview.evaluate(image => getComputedStyle(image).filter), 'none');
   await page.reload();
-  await page.waitForFunction(() => document.querySelector('.portfolio')?.dataset.theme === 'dark');
+  await page.waitForFunction(() => document.documentElement.dataset.theme === 'dark');
   await page.getByRole('button', { name: 'Dark mode', exact: true }).click();
   await page.getByRole('navigation').getByRole('link', { name: 'Photography', exact: true }).click();
   await page.waitForURL(`${origin}/photography/`);
   assert.equal(await page.locator('.photo-gallery button').count(), 12);
-  await page.getByRole('button', { name: 'Original', exact: true }).click();
   assert.equal(await page.locator('.photo-gallery img').first().evaluate(image => getComputedStyle(image).filter), 'none');
-  await page.getByRole('button', { name: 'Duotone', exact: true }).click();
-  assert.match(await page.locator('.photo-gallery img').first().evaluate(image => getComputedStyle(image).filter), /tone-photography/);
+  assert.equal(await page.getByRole('button', { name: 'Duotone', exact: true }).count(), 0);
   const opener = page.getByRole('button', { name: 'Open photograph 1', exact: true });
   await opener.click();
   await page.locator('dialog').waitFor({ state: 'visible' });
@@ -147,15 +202,20 @@ try {
   const video = page.locator('video');
   assert.equal(await video.getAttribute('preload'), 'none');
   assert.equal(await video.evaluate(video => video.paused), true);
+  await video.evaluate(async video => { video.muted = true; await video.play(); });
+  await page.waitForFunction(video => video.currentTime > 0, await video.elementHandle());
+  await video.evaluate(video => video.pause());
   await page.getByRole('navigation').getByRole('link', { name: 'Shop', exact: true }).click();
   await page.waitForURL(`${origin}/shop/`);
-  assert.equal(await page.locator('.shop-product').count(), 4);
+  assert.equal(await page.locator('.shop-product').count(), 5);
+  assert.equal(await page.getByRole('heading', { name: /mug/i }).count(), 0);
   assert.equal(await page.locator('a[href*="1337sheets"], a[href="/workshop/"]').count(), 0);
+  for (const image of await page.locator('.shop-products img').all()) assert.equal(await image.evaluate(image => getComputedStyle(image).filter), 'none');
   await page.locator('.shop-products img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode(); })));
   await page.goto(`${origin}/workshop/`);
   assert.equal(new URL(page.url()).pathname, '/shop/');
   assert.deepEqual(errors, []);
-  console.log('Passed: seven routes, contact links, four widths, Work links, coffee map/checklist persistence, confirmed gear, brew calculator, theme persistence, gallery controls, film player, shop title and workshop redirect.');
+  console.log('Passed: seven routes, contact links, four widths, Work links, published coffee history and favorites, confirmed gear, brew calculator, theme persistence, original-color gallery, website previews, film player, shop title and workshop redirect.');
 } finally {
   await browser.close();
 }

@@ -3,44 +3,55 @@
   "album": "Home Coffee",
   "photos": [
     {
+      "image": "/coffee/photo-05.webp",
+      "alt": "ROK manual espresso brewer and coffee glass at the home coffee station",
+      "width": 4032,
+      "height": 3024,
+      "id": "42e2519b-7ecd-4222-81ff-077d4e734306"
+    },
+    {
+      "image": "/coffee/photo-06.webp",
+      "alt": "Hario Switch brewing over a glass server beside the hand grinder and coffee bags",
+      "width": 4128,
+      "height": 3096,
+      "id": "81c3782e-e43a-45a4-a459-1a03373cbf5a"
+    },
+    {
       "image": "/coffee/photo-01.webp",
       "alt": "A coffee bag held in front of a wall of saved coffee packaging and brewing gear",
       "width": 1600,
       "height": 1200
     },
     {
-      "image": "/coffee/photo-02.webp",
-      "alt": "Coffee bags and brew notes pinned above the home coffee station",
-      "width": 1200,
-      "height": 1600
-    },
-    {
-      "image": "/coffee/photo-03.webp",
-      "alt": "Thai coffee beans held beside the collection of coffee bags",
-      "width": 1200,
-      "height": 1600
-    },
-    {
-      "image": "/coffee/photo-04.webp",
-      "alt": "Close-up of a Thai coffee bag at the home coffee station",
-      "width": 1200,
-      "height": 1600
+      "image": "/coffee/photo-07.webp",
+      "alt": "A green Nineteen Degrees North coffee bag held in one hand",
+      "width": 4032,
+      "height": 3024,
+      "id": "a1935c90-9e66-4879-8413-35ffa8d568e4"
     }
   ],
   "videos": [
     {
-      "src": "/coffee/brewing-01.mp4",
+      "src": "https://im.devonlabs.space/api/assets/28e49bfa-34ba-4095-8d10-f2afd4a04841/original?key=V6JHB9lt4t1JrpkoYwuqtj_mnQ0NFAgJnu5Riy46YAszH2K_TB3QIt11ZutylTVD-Mc",
       "poster": "/coffee/poster-01.webp",
-      "title": "Manual espresso / ROKpresso",
-      "width": 720,
-      "height": 960
+      "title": "Home coffee / brewing process",
+      "width": 2160,
+      "height": 2880,
+      "codec": "av1",
+      "original": true,
+      "bytes": 61920891
     },
     {
-      "src": "/coffee/brewing-02.mp4",
+      "src": "/coffee/brewing-original-82b5ad05e20ed6e7.mp4",
       "poster": "/coffee/poster-02.webp",
       "title": "Pour-over / Hario Switch",
-      "width": 540,
-      "height": 960
+      "width": 2160,
+      "height": 3840,
+      "codec": "h264",
+      "original": true,
+      "bytes": 18259146,
+      "sha256": "82b5ad05e20ed6e74c9c449eb0d46125393ed7cc61cc4c3d731cfbaf3a67cda2"
     }
-  ]
+  ],
+  "fetchedAt": "2026-10-11T11:54:17.787Z"
 }

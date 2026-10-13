@@ -11,9 +11,13 @@
     "deploy": "npm run build && wrangler pages deploy out --project-name devonlabs-space",
     "refresh:github": "node scripts/refresh-github.mjs",
     "refresh:media": "node scripts/refresh-workshop.mjs",
+    "refresh:bundles": "node scripts/refresh-photography-bundles.mjs",
     "lint": "eslint",
-    "test": "node tests/workshop.mjs",
-    "test:browser": "node tests/portfolio.mjs"
+    "test": "node --test tests/photography-bundles.mjs && node tests/integrity.mjs",
+    "test:browser": "node tests/portfolio.mjs && node tests/loading.mjs && node tests/shop.mjs && node tests/coverage.mjs",
+    "images": "node scripts/generate-images.mjs",
+    "prebuild": "npm run refresh:bundles && npm run images",
+    "predev": "npm run images"
   },
   "engines": {
     "node": ">=22"
@@ -25,12 +29,15 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "playwright": "^1.62.1",
+    "sharp": "^0.35.5",
     "typescript": "^5",
     "wrangler": "^4.149.0"
   }

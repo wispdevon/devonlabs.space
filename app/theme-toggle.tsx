@@ -3,34 +3,39 @@
 import { useEffect, useRef } from 'react';
 
 const preferenceKey = 'devon-portfolio-theme';
+let sessionPreference: string | null = null;
 
 export default function ThemeToggle() {
+  const preference = useRef<string | null>(null);
   const button = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const canvas = button.current?.closest<HTMLElement>('.portfolio');
+    preference.current = sessionPreference;
+    const canvas = document.documentElement;
     if (!canvas) return;
     const system = window.matchMedia('(prefers-color-scheme: dark)');
-    let preference: string | null = null;
-    try { preference = localStorage.getItem(preferenceKey); } catch { /* Use the system theme when storage is unavailable. */ }
+    try { preference.current = localStorage.getItem(preferenceKey); } catch { /* Use the system theme when storage is unavailable. */ }
     const apply = () => {
-      const dark = preference === 'dark' || (preference !== 'light' && system.matches);
+      const dark = preference.current === 'dark' || (preference.current !== 'light' && system.matches);
       canvas.dataset.theme = dark ? 'dark' : 'light';
       button.current?.setAttribute('aria-pressed', String(dark));
     };
     const onSystemChange = () => {
-      try { preference = localStorage.getItem(preferenceKey); } catch { /* Keep the current preference. */ }
+      try { preference.current = localStorage.getItem(preferenceKey); } catch { /* Keep the current preference. */ }
       apply();
     };
     apply();
     system.addEventListener('change', onSystemChange);
-    return () => system.removeEventListener('change', onSystemChange);
+    window.addEventListener('storage', onSystemChange);
+    return () => { system.removeEventListener('change', onSystemChange); window.removeEventListener('storage', onSystemChange); };
   }, []);
 
   function toggle() {
-    const canvas = button.current?.closest<HTMLElement>('.portfolio');
+    const canvas = document.documentElement;
     if (!canvas) return;
     const theme = canvas.dataset.theme === 'dark' ? 'light' : 'dark';
+    sessionPreference = theme;
+    preference.current = theme;
     canvas.dataset.theme = theme;
     button.current?.setAttribute('aria-pressed', String(theme === 'dark'));
     try { localStorage.setItem(preferenceKey, theme); } catch { /* The toggle still works without storage. */ }

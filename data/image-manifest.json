@@ -1,0 +1,2498 @@
+{
+  "/workshop/photos/01.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/01-320-745ba17d2ffef575.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 18416
+      },
+      {
+        "src": "/generated/images/01-640-3675b4d14538e26d.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 68480
+      },
+      {
+        "src": "/generated/images/01-960-338e5eec16352fb0.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 124204
+      },
+      {
+        "src": "/generated/images/01-1066-3e57eafeb8c87d3d.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 197278
+      }
+    ]
+  },
+  "/workshop/photos/02.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/02-320-52ca04c848cd1f11.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 20962
+      },
+      {
+        "src": "/generated/images/02-640-1bd225625dd5ad0d.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 69558
+      },
+      {
+        "src": "/generated/images/02-960-f5c2f7267f2b2a0e.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 130046
+      },
+      {
+        "src": "/generated/images/02-1066-6a2f39a6dbea227a.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 196872
+      }
+    ]
+  },
+  "/workshop/photos/03.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/03-320-0024d9215674711c.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 26700
+      },
+      {
+        "src": "/generated/images/03-640-c8e9b94099ef3f33.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 79538
+      },
+      {
+        "src": "/generated/images/03-960-0ffe268bf4143fa6.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 136666
+      },
+      {
+        "src": "/generated/images/03-1066-afd5fc5c587238f9.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 195128
+      }
+    ]
+  },
+  "/workshop/photos/04.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/04-320-75b4236e2ec694ba.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 33578
+      },
+      {
+        "src": "/generated/images/04-640-22b96c8a533d88a4.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 90092
+      },
+      {
+        "src": "/generated/images/04-960-92d92494beeb29ef.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 151456
+      },
+      {
+        "src": "/generated/images/04-1066-b9868cc338a9c920.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 213658
+      }
+    ]
+  },
+  "/workshop/photos/05.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/05-320-0a71ee5f93ca5fa1.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 8554
+      },
+      {
+        "src": "/generated/images/05-640-c476be2d93c8f726.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 21116
+      },
+      {
+        "src": "/generated/images/05-960-9461ce12cdf7d0e3.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 35578
+      },
+      {
+        "src": "/generated/images/05-1600-87568c5a69f327c8.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 75780
+      }
+    ]
+  },
+  "/workshop/photos/06.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/06-320-13836a42d09b9e71.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 21316
+      },
+      {
+        "src": "/generated/images/06-640-9dca598d8323a66e.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 47984
+      },
+      {
+        "src": "/generated/images/06-960-b971ee4379e1fc14.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 76020
+      },
+      {
+        "src": "/generated/images/06-1066-179a4ffbb214a468.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 91460
+      }
+    ]
+  },
+  "/workshop/photos/07.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/07-320-0e9b2f9e1216d004.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 14960
+      },
+      {
+        "src": "/generated/images/07-640-6ec10170dc99c8c8.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 41192
+      },
+      {
+        "src": "/generated/images/07-960-4e18e0157c3bf96b.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 69900
+      },
+      {
+        "src": "/generated/images/07-1066-ee336116f62d553d.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 101270
+      }
+    ]
+  },
+  "/workshop/photos/08.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/08-320-ed69aa6c511552cb.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 19338
+      },
+      {
+        "src": "/generated/images/08-640-bbfbf6a5a3912c69.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 54684
+      },
+      {
+        "src": "/generated/images/08-960-c68f44a12018c73e.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 93152
+      },
+      {
+        "src": "/generated/images/08-1066-b02dc6bb1a1ddfa4.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 133226
+      }
+    ]
+  },
+  "/workshop/photos/09.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/09-320-49c6b560f417abc0.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 16274
+      },
+      {
+        "src": "/generated/images/09-640-7bcaec320dd9567c.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 40728
+      },
+      {
+        "src": "/generated/images/09-960-5f0a60c24f9bc398.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 66764
+      },
+      {
+        "src": "/generated/images/09-1066-9350ea228f17f8b6.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 89594
+      }
+    ]
+  },
+  "/workshop/photos/10.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/10-320-14417dc0a47f66a9.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10772
+      },
+      {
+        "src": "/generated/images/10-640-6a29a0130db4074d.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 26966
+      },
+      {
+        "src": "/generated/images/10-960-971552f5b95347eb.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 45250
+      },
+      {
+        "src": "/generated/images/10-1600-3eddb128e1c81a86.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 91732
+      }
+    ]
+  },
+  "/workshop/photos/11.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/11-320-268309610760516e.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 12922
+      },
+      {
+        "src": "/generated/images/11-640-32dda08d663ab53c.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 31792
+      },
+      {
+        "src": "/generated/images/11-960-f157f05f99a9ba36.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 50320
+      },
+      {
+        "src": "/generated/images/11-1066-7e2acc93d0a52e45.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 65846
+      }
+    ]
+  },
+  "/workshop/photos/12.webp": {
+    "width": 1067,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/12-320-aaefa7d74d58a3d5.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 12342
+      },
+      {
+        "src": "/generated/images/12-640-636edb75ed0a4328.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 36288
+      },
+      {
+        "src": "/generated/images/12-960-c1a8dffe3a164100.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 65306
+      },
+      {
+        "src": "/generated/images/12-1067-e667d2cd4a4394d6.webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 99750
+      }
+    ]
+  },
+  "/developer/contact-sheet.webp": {
+    "width": 1400,
+    "height": 1174,
+    "variants": [
+      {
+        "src": "/generated/images/contact-sheet-320-c5545352161fd810.webp",
+        "width": 320,
+        "height": 268,
+        "bytes": 6252
+      },
+      {
+        "src": "/generated/images/contact-sheet-640-eed5236e35bc24f4.webp",
+        "width": 640,
+        "height": 537,
+        "bytes": 15366
+      },
+      {
+        "src": "/generated/images/contact-sheet-960-11f45f58afc4d0fb.webp",
+        "width": 960,
+        "height": 805,
+        "bytes": 25764
+      },
+      {
+        "src": "/generated/images/contact-sheet-1400-373920734a222c04.webp",
+        "width": 1400,
+        "height": 1174,
+        "bytes": 45466
+      }
+    ]
+  },
+  "/developer/headshotflow.webp": {
+    "width": 1400,
+    "height": 914,
+    "variants": [
+      {
+        "src": "/generated/images/headshotflow-320-7985d214233dfd2b.webp",
+        "width": 320,
+        "height": 209,
+        "bytes": 5336
+      },
+      {
+        "src": "/generated/images/headshotflow-640-1f8c6e923537d14b.webp",
+        "width": 640,
+        "height": 418,
+        "bytes": 13418
+      },
+      {
+        "src": "/generated/images/headshotflow-960-b355ff5070f967eb.webp",
+        "width": 960,
+        "height": 627,
+        "bytes": 21960
+      },
+      {
+        "src": "/generated/images/headshotflow-1400-c34fe7ca0540a9d2.webp",
+        "width": 1400,
+        "height": 914,
+        "bytes": 42368
+      }
+    ]
+  },
+  "/developer/immichinko.webp": {
+    "width": 1400,
+    "height": 1037,
+    "variants": [
+      {
+        "src": "/generated/images/immichinko-320-ad561de692094b52.webp",
+        "width": 320,
+        "height": 237,
+        "bytes": 2172
+      },
+      {
+        "src": "/generated/images/immichinko-640-c1d44e108bc8c27e.webp",
+        "width": 640,
+        "height": 474,
+        "bytes": 6294
+      },
+      {
+        "src": "/generated/images/immichinko-960-0ac815797c605cae.webp",
+        "width": 960,
+        "height": 711,
+        "bytes": 11360
+      },
+      {
+        "src": "/generated/images/immichinko-1400-d424f4c16c52af75.webp",
+        "width": 1400,
+        "height": 1037,
+        "bytes": 22856
+      }
+    ]
+  },
+  "/developer/profile.jpg": {
+    "width": 460,
+    "height": 460,
+    "variants": [
+      {
+        "src": "/generated/images/profile-320-5ad984cdcdf2bc30.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 10836
+      },
+      {
+        "src": "/generated/images/profile-460-8017ccd8b62d62aa.webp",
+        "width": 460,
+        "height": 460,
+        "bytes": 18390
+      }
+    ]
+  },
+  "/developer/quester.webp": {
+    "width": 1440,
+    "height": 960,
+    "variants": [
+      {
+        "src": "/generated/images/quester-320-0d792c8201d0e7d7.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 3592
+      },
+      {
+        "src": "/generated/images/quester-640-ced034b6b3027944.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 9432
+      },
+      {
+        "src": "/generated/images/quester-960-4f4a7593d3730e17.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 16254
+      },
+      {
+        "src": "/generated/images/quester-1440-a95bd6fac6573b2f.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 48910
+      }
+    ]
+  },
+  "/developer/sharply.webp": {
+    "width": 1440,
+    "height": 960,
+    "variants": [
+      {
+        "src": "/generated/images/sharply-320-bf78d9610200d3fc.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 5686
+      },
+      {
+        "src": "/generated/images/sharply-640-240fc93febada26a.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 15178
+      },
+      {
+        "src": "/generated/images/sharply-960-60c8c37d86fd7d54.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 25404
+      },
+      {
+        "src": "/generated/images/sharply-1440-3348d5bf135e98b8.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 50302
+      }
+    ]
+  },
+  "/developer/strider.webp": {
+    "width": 1440,
+    "height": 960,
+    "variants": [
+      {
+        "src": "/generated/images/strider-320-f9eaf0b85b5fef4c.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 2140
+      },
+      {
+        "src": "/generated/images/strider-640-406a6a8f2137273f.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 5864
+      },
+      {
+        "src": "/generated/images/strider-960-dc12532c74fbf72a.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 9636
+      },
+      {
+        "src": "/generated/images/strider-1440-e592a08db95c48e5.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 38354
+      }
+    ]
+  },
+  "/developer/wisp.jpg": {
+    "width": 192,
+    "height": 192,
+    "variants": [
+      {
+        "src": "/generated/images/wisp-192-34f03da301d03860.webp",
+        "width": 192,
+        "height": 192,
+        "bytes": 5554
+      }
+    ]
+  },
+  "/coffee/photo-01.webp": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "src": "/generated/images/photo-01-320-9e7c1dd088c8b9b9.webp",
+        "width": 320,
+        "height": 240,
+        "bytes": 15634
+      },
+      {
+        "src": "/generated/images/photo-01-640-c232d7d766dc67df.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 41562
+      },
+      {
+        "src": "/generated/images/photo-01-960-7ed0859e93502075.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 70250
+      },
+      {
+        "src": "/generated/images/photo-01-1600-70ebab0ed3bf2ebe.webp",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 148536
+      }
+    ]
+  },
+  "/coffee/photo-02.webp": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/photo-02-320-3e460ac0423d8424.webp",
+        "width": 320,
+        "height": 427,
+        "bytes": 22554
+      },
+      {
+        "src": "/generated/images/photo-02-640-3ba8a8df6d1657ef.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 61704
+      },
+      {
+        "src": "/generated/images/photo-02-960-56accda9f7703326.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 99506
+      },
+      {
+        "src": "/generated/images/photo-02-1200-3235227b318c48b2.webp",
+        "width": 1200,
+        "height": 1600,
+        "bytes": 156614
+      }
+    ]
+  },
+  "/coffee/photo-03.webp": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/photo-03-320-40d429658967e943.webp",
+        "width": 320,
+        "height": 427,
+        "bytes": 24244
+      },
+      {
+        "src": "/generated/images/photo-03-640-861a4e1544ac8741.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 64804
+      },
+      {
+        "src": "/generated/images/photo-03-960-72f46571cd14662d.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 103446
+      },
+      {
+        "src": "/generated/images/photo-03-1200-ada7ecad656cd504.webp",
+        "width": 1200,
+        "height": 1600,
+        "bytes": 160182
+      }
+    ]
+  },
+  "/coffee/photo-04.webp": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/photo-04-320-24b8e6c83b9d6164.webp",
+        "width": 320,
+        "height": 427,
+        "bytes": 10962
+      },
+      {
+        "src": "/generated/images/photo-04-640-02b421189067eb87.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 26228
+      },
+      {
+        "src": "/generated/images/photo-04-960-87301e7450d3fba1.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 42164
+      },
+      {
+        "src": "/generated/images/photo-04-1200-277ec9be247f0eb9.webp",
+        "width": 1200,
+        "height": 1600,
+        "bytes": 62652
+      }
+    ]
+  },
+  "/coffee/photo-05.webp": {
+    "width": 4032,
+    "height": 3024,
+    "variants": [
+      {
+        "src": "/generated/images/photo-05-320-7b6b67b4cf587166.webp",
+        "width": 320,
+        "height": 240,
+        "bytes": 17864
+      },
+      {
+        "src": "/generated/images/photo-05-640-dc1c83fc1f7f6346.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 56708
+      },
+      {
+        "src": "/generated/images/photo-05-960-7bcbc09b43433deb.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 110162
+      },
+      {
+        "src": "/generated/images/photo-05-1600-8434931824410b8e.webp",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 243600
+      }
+    ]
+  },
+  "/coffee/photo-06.webp": {
+    "width": 4128,
+    "height": 3096,
+    "variants": [
+      {
+        "src": "/generated/images/photo-06-320-eaad927cbe42be9d.webp",
+        "width": 320,
+        "height": 240,
+        "bytes": 14206
+      },
+      {
+        "src": "/generated/images/photo-06-640-00584b8612ec42f5.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 41482
+      },
+      {
+        "src": "/generated/images/photo-06-960-a76de60b15905412.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 76424
+      },
+      {
+        "src": "/generated/images/photo-06-1600-797aa8259dbd0c00.webp",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 163682
+      }
+    ]
+  },
+  "/coffee/photo-07.webp": {
+    "width": 4032,
+    "height": 3024,
+    "variants": [
+      {
+        "src": "/generated/images/photo-07-320-cbdf12b5a7bbfe42.webp",
+        "width": 320,
+        "height": 240,
+        "bytes": 6126
+      },
+      {
+        "src": "/generated/images/photo-07-640-a68380d8a32eac2a.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 14502
+      },
+      {
+        "src": "/generated/images/photo-07-960-90589bf63307aff9.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 24490
+      },
+      {
+        "src": "/generated/images/photo-07-1600-00fe8c92211b4a4e.webp",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 48196
+      }
+    ]
+  },
+  "/coffee/poster-01.webp": {
+    "width": 960,
+    "height": 1280,
+    "variants": [
+      {
+        "src": "/generated/images/poster-01-320-7961c2aea3ef0d08.webp",
+        "width": 320,
+        "height": 427,
+        "bytes": 18280
+      },
+      {
+        "src": "/generated/images/poster-01-640-7e19d65162499369.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 40772
+      },
+      {
+        "src": "/generated/images/poster-01-960-9469c8759c33b2e1.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 70312
+      }
+    ]
+  },
+  "/coffee/poster-02.webp": {
+    "width": 960,
+    "height": 1707,
+    "variants": [
+      {
+        "src": "/generated/images/poster-02-320-90f3c4d40d6ab46f.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 12972
+      },
+      {
+        "src": "/generated/images/poster-02-640-167ab1f3ef032ee7.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 32598
+      },
+      {
+        "src": "/generated/images/poster-02-960-d465b811d77bb9db.webp",
+        "width": 960,
+        "height": 1707,
+        "bytes": 59330
+      }
+    ]
+  },
+  "/workshop/camp-poster.jpg": {
+    "width": 1920,
+    "height": 1080,
+    "variants": [
+      {
+        "src": "/generated/images/camp-poster-320-43965d0ec990dd08.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 11084
+      },
+      {
+        "src": "/generated/images/camp-poster-640-e713017e9d5d120a.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 24608
+      },
+      {
+        "src": "/generated/images/camp-poster-960-7d1e325924465ad8.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 39234
+      },
+      {
+        "src": "/generated/images/camp-poster-1600-0ed0a5606b447d20.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 69086
+      }
+    ]
+  },
+  "/photography/bundles/dare-to-be-music-2026-1.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/dare-to-be-music-2026-1-320-c90687c906031680.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 12550
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-1-640-ea9915efd47c3042.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 38312
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-1-960-31ec56066593d9d4.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 72378
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-1-1600-bb65c6dbf177ef27.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 147952
+      }
+    ]
+  },
+  "/photography/bundles/dare-to-be-music-2026-2.jpg": {
+    "width": 1365,
+    "height": 2048,
+    "variants": [
+      {
+        "src": "/generated/images/dare-to-be-music-2026-2-320-3ee9f0da3464b4af.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 17802
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-2-640-f12d6c2bcdbbc238.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 46078
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-2-960-dbeb0b61bec68fda.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 77494
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-2-1365-2bdbfe261611c0ae.webp",
+        "width": 1365,
+        "height": 2048,
+        "bytes": 129666
+      }
+    ]
+  },
+  "/photography/bundles/dare-to-be-music-2026-3.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/dare-to-be-music-2026-3-320-bc64400652addf60.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 11644
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-3-640-264722306026068b.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 32006
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-3-960-74b4328722c105af.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 54976
+      },
+      {
+        "src": "/generated/images/dare-to-be-music-2026-3-1600-dd7a83314df1015c.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 108560
+      }
+    ]
+  },
+  "/photography/bundles/heat-break-khao-sok-1.jpg": {
+    "width": 1080,
+    "height": 607,
+    "variants": [
+      {
+        "src": "/generated/images/heat-break-khao-sok-1-320-bdbf73e9d0b5780f.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 16994
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-1-640-ca47a1c472eb537e.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 49722
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-1-960-b18c1019d867aba1.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 80644
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-1-1080-bc3017b61f47b7e0.webp",
+        "width": 1080,
+        "height": 607,
+        "bytes": 92160
+      }
+    ]
+  },
+  "/photography/bundles/heat-break-khao-sok-2.jpg": {
+    "width": 1080,
+    "height": 607,
+    "variants": [
+      {
+        "src": "/generated/images/heat-break-khao-sok-2-320-25429178b52eec9e.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 18700
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-2-640-add8a7a3e48e457f.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 70326
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-2-960-cfcfd769074384bf.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 149742
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-2-1080-87e263c1a6083e97.webp",
+        "width": 1080,
+        "height": 607,
+        "bytes": 185132
+      }
+    ]
+  },
+  "/photography/bundles/heat-break-khao-sok-3.jpg": {
+    "width": 1080,
+    "height": 607,
+    "variants": [
+      {
+        "src": "/generated/images/heat-break-khao-sok-3-320-559756fe35c3f4dd.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 20766
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-3-640-3a00b37af8b917af.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 76120
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-3-960-47d8f11d26cf64a3.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 157252
+      },
+      {
+        "src": "/generated/images/heat-break-khao-sok-3-1080-738871dc6636a99a.webp",
+        "width": 1080,
+        "height": 607,
+        "bytes": 193226
+      }
+    ]
+  },
+  "/photography/bundles/hoopoecino-phuket-1.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/hoopoecino-phuket-1-320-b10bf79894cbbfcb.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9738
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-1-640-9e7621b8497d8fdb.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 24566
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-1-960-f7136704fcb38f57.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 44044
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-1-1600-5a234ec3b2630024.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 87528
+      }
+    ]
+  },
+  "/photography/bundles/hoopoecino-phuket-2.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/hoopoecino-phuket-2-320-ab1e1e91e12eed4d.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10960
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-2-640-75df964d460ae03b.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 28440
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-2-960-c43cae94997578d6.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 50900
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-2-1600-592120541838e62b.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 102164
+      }
+    ]
+  },
+  "/photography/bundles/hoopoecino-phuket-3.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/hoopoecino-phuket-3-320-977d6502b841e01d.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 12340
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-3-640-04b01b759aab5edc.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 38596
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-3-960-d2bb831bb959136a.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 75634
+      },
+      {
+        "src": "/generated/images/hoopoecino-phuket-3-1600-2835ef4f83c03b81.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 162602
+      }
+    ]
+  },
+  "/photography/bundles/photo-511220ec3ebd17e74ed4.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-511220ec3ebd17e74ed4-320-1540379c6c954935.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 11864
+      },
+      {
+        "src": "/generated/images/photo-511220ec3ebd17e74ed4-640-434c7eb52a681555.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 31754
+      },
+      {
+        "src": "/generated/images/photo-511220ec3ebd17e74ed4-960-c61891c2be06a0ee.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 53560
+      },
+      {
+        "src": "/generated/images/photo-511220ec3ebd17e74ed4-1600-400a369de0f7de15.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 107460
+      }
+    ]
+  },
+  "/photography/bundles/photo-52a3f47cb65b4f8fe5ed.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-52a3f47cb65b4f8fe5ed-320-1589425f0f232d14.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10290
+      },
+      {
+        "src": "/generated/images/photo-52a3f47cb65b4f8fe5ed-640-80db9cc29c1451b4.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 24002
+      },
+      {
+        "src": "/generated/images/photo-52a3f47cb65b4f8fe5ed-960-9f8633e881271639.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 39206
+      },
+      {
+        "src": "/generated/images/photo-52a3f47cb65b4f8fe5ed-1600-5dae9da330573a00.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 75886
+      }
+    ]
+  },
+  "/photography/bundles/photo-553f6e051d3634efb17a.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-553f6e051d3634efb17a-320-78f0c01b61a12675.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 12034
+      },
+      {
+        "src": "/generated/images/photo-553f6e051d3634efb17a-640-e42dfcc1186c04b4.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 29482
+      },
+      {
+        "src": "/generated/images/photo-553f6e051d3634efb17a-960-3444035f573a2eb7.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 48876
+      },
+      {
+        "src": "/generated/images/photo-553f6e051d3634efb17a-1600-573ea382279e9292.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 99488
+      }
+    ]
+  },
+  "/photography/bundles/photo-6c25e04a233e2382a6b9.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-6c25e04a233e2382a6b9-320-cd98e908cbdda951.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9450
+      },
+      {
+        "src": "/generated/images/photo-6c25e04a233e2382a6b9-640-9dd935e7b5f04929.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 22032
+      },
+      {
+        "src": "/generated/images/photo-6c25e04a233e2382a6b9-960-eef69857eff207d3.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 36898
+      },
+      {
+        "src": "/generated/images/photo-6c25e04a233e2382a6b9-1600-4a3983a676eccb9d.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 74492
+      }
+    ]
+  },
+  "/photography/bundles/photo-8a51539e1c1b87dbc0d2.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/photo-8a51539e1c1b87dbc0d2-320-412eabcb7b48c592.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 9632
+      },
+      {
+        "src": "/generated/images/photo-8a51539e1c1b87dbc0d2-640-b1026de35b6bdba1.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 22178
+      },
+      {
+        "src": "/generated/images/photo-8a51539e1c1b87dbc0d2-960-6153a6dd4085b7ae.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 34454
+      },
+      {
+        "src": "/generated/images/photo-8a51539e1c1b87dbc0d2-1066-4f027967985c1625.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 41380
+      }
+    ]
+  },
+  "/photography/bundles/photo-c37ea1d4ba2188c5c8b9.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-c37ea1d4ba2188c5c8b9-320-a9cb328c6602caab.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 14386
+      },
+      {
+        "src": "/generated/images/photo-c37ea1d4ba2188c5c8b9-640-fa802235706539a9.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 39070
+      },
+      {
+        "src": "/generated/images/photo-c37ea1d4ba2188c5c8b9-960-4e1458ba6535b7e7.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 66416
+      },
+      {
+        "src": "/generated/images/photo-c37ea1d4ba2188c5c8b9-1600-be66b9e680a81656.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 138842
+      }
+    ]
+  },
+  "/photography/bundles/photo-db0ffae92d3e695ee6b8.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-db0ffae92d3e695ee6b8-320-89511fe02bf47236.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10840
+      },
+      {
+        "src": "/generated/images/photo-db0ffae92d3e695ee6b8-640-2f43557650d90137.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 37674
+      },
+      {
+        "src": "/generated/images/photo-db0ffae92d3e695ee6b8-960-51b828ed1c27629e.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 72210
+      },
+      {
+        "src": "/generated/images/photo-db0ffae92d3e695ee6b8-1600-9ee818dbdbb20694.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 165010
+      }
+    ]
+  },
+  "/photography/bundles/photo-dfa4bb2b156805d6be09.webp": {
+    "width": 1066,
+    "height": 1600,
+    "variants": [
+      {
+        "src": "/generated/images/photo-dfa4bb2b156805d6be09-320-0fe56f9c68c01de9.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 14412
+      },
+      {
+        "src": "/generated/images/photo-dfa4bb2b156805d6be09-640-475166cbcb09db3f.webp",
+        "width": 640,
+        "height": 961,
+        "bytes": 35998
+      },
+      {
+        "src": "/generated/images/photo-dfa4bb2b156805d6be09-960-99bd782309dfe719.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 56688
+      },
+      {
+        "src": "/generated/images/photo-dfa4bb2b156805d6be09-1066-05e7d0550553ca2e.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 74432
+      }
+    ]
+  },
+  "/photography/bundles/photo-edc534c226e67dfe7c01.webp": {
+    "width": 1600,
+    "height": 1066,
+    "variants": [
+      {
+        "src": "/generated/images/photo-edc534c226e67dfe7c01-320-a330cb1161935875.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 6406
+      },
+      {
+        "src": "/generated/images/photo-edc534c226e67dfe7c01-640-deaeabf12a602644.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 14314
+      },
+      {
+        "src": "/generated/images/photo-edc534c226e67dfe7c01-960-1261ef6f0c7e9fed.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 23668
+      },
+      {
+        "src": "/generated/images/photo-edc534c226e67dfe7c01-1600-2dcf9f07fcc7d2f5.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 47728
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/audience-after-dark.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/audience-after-dark-320-6dabd08133d0e450.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 14548
+      },
+      {
+        "src": "/generated/images/audience-after-dark-400-da4b10e043d40083.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 19492
+      },
+      {
+        "src": "/generated/images/audience-after-dark-640-8ddbfbcc3fe41143.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 35992
+      },
+      {
+        "src": "/generated/images/audience-after-dark-960-4c490560a10f7de3.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 58878
+      },
+      {
+        "src": "/generated/images/audience-after-dark-1600-c14a624df52dce07.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 106866
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/festival-crowd.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/festival-crowd-320-2839420a635b26c2.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 11598
+      },
+      {
+        "src": "/generated/images/festival-crowd-400-f1815bdbf78261de.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 15944
+      },
+      {
+        "src": "/generated/images/festival-crowd-640-cb5245d6cb9712a8.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 30206
+      },
+      {
+        "src": "/generated/images/festival-crowd-960-287adca6e93e1b51.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 50318
+      },
+      {
+        "src": "/generated/images/festival-crowd-1600-d38550c567a2af6e.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 91690
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/festival-stage-moment.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/festival-stage-moment-320-789499c3ef377f49.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 14324
+      },
+      {
+        "src": "/generated/images/festival-stage-moment-400-408c4f4b2ca246fe.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 19796
+      },
+      {
+        "src": "/generated/images/festival-stage-moment-640-95069421159275a3.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 38120
+      },
+      {
+        "src": "/generated/images/festival-stage-moment-960-ec445119f8664775.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 65584
+      },
+      {
+        "src": "/generated/images/festival-stage-moment-1600-57521081b937f941.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 119832
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/keyboard-performance.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/keyboard-performance-320-e49d177170293322.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 11296
+      },
+      {
+        "src": "/generated/images/keyboard-performance-400-2e0a662e7741aca1.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 15134
+      },
+      {
+        "src": "/generated/images/keyboard-performance-640-3ae0853e8c11154c.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 27652
+      },
+      {
+        "src": "/generated/images/keyboard-performance-960-c9628cc06b4c8f79.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 44252
+      },
+      {
+        "src": "/generated/images/keyboard-performance-1600-011bd53c7852f79e.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 77478
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/people-onstage.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/people-onstage-320-2f0479ebd13f3ebd.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 16296
+      },
+      {
+        "src": "/generated/images/people-onstage-400-574dfbfdde73487c.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 22544
+      },
+      {
+        "src": "/generated/images/people-onstage-640-1ff23be6cbeb0ea5.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 42360
+      },
+      {
+        "src": "/generated/images/people-onstage-960-9f2fdecc5126b3bf.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 70680
+      },
+      {
+        "src": "/generated/images/people-onstage-1600-d1b04ed8438990dd.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 125206
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/singer-under-stage-lights.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/singer-under-stage-lights-320-fddc386006e5e9d4.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9186
+      },
+      {
+        "src": "/generated/images/singer-under-stage-lights-400-a7dd30080234eef8.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 12434
+      },
+      {
+        "src": "/generated/images/singer-under-stage-lights-640-3314508547b037d0.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 23050
+      },
+      {
+        "src": "/generated/images/singer-under-stage-lights-960-58f0ea2f89716bdd.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 37872
+      },
+      {
+        "src": "/generated/images/singer-under-stage-lights-1600-8c7f1bbb28081eae.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 70740
+      }
+    ]
+  },
+  "/photography/events/christ-music-festival-25/stage-and-crowd.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/stage-and-crowd-320-091963a63f98105a.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 7478
+      },
+      {
+        "src": "/generated/images/stage-and-crowd-400-73751fac1eba961d.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 10592
+      },
+      {
+        "src": "/generated/images/stage-and-crowd-640-d4078fcd1e8563c2.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 21296
+      },
+      {
+        "src": "/generated/images/stage-and-crowd-960-526c37e9da7b46db.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 37352
+      },
+      {
+        "src": "/generated/images/stage-and-crowd-1600-d8d2bf5838e9d757.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 69576
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/dinner-guests.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/dinner-guests-320-4d707a3075f83126.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9098
+      },
+      {
+        "src": "/generated/images/dinner-guests-400-b102130dc074c2bd.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 12224
+      },
+      {
+        "src": "/generated/images/dinner-guests-640-c2a4a4471e429453.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 21490
+      },
+      {
+        "src": "/generated/images/dinner-guests-960-e8057fd344148fb9.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 36846
+      },
+      {
+        "src": "/generated/images/dinner-guests-1600-a37fbf5145626fff.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 76722
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/evening-dancing.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/evening-dancing-320-94e7ba0b2688afdd.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 12652
+      },
+      {
+        "src": "/generated/images/evening-dancing-400-cced88cc7741e937.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 17340
+      },
+      {
+        "src": "/generated/images/evening-dancing-640-93a62062bbde9452.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 33402
+      },
+      {
+        "src": "/generated/images/evening-dancing-960-8ad202efa4ca3c39.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 58178
+      },
+      {
+        "src": "/generated/images/evening-dancing-1600-fb5f67565738b188.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 108824
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/evening-portrait.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/evening-portrait-320-cfb052d83978ae30.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10264
+      },
+      {
+        "src": "/generated/images/evening-portrait-400-8c8794e5911ae8fc.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 15352
+      },
+      {
+        "src": "/generated/images/evening-portrait-640-9c236b05c71b0456.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 34328
+      },
+      {
+        "src": "/generated/images/evening-portrait-960-a6c8e2f49ad896bc.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 69286
+      },
+      {
+        "src": "/generated/images/evening-portrait-1600-c8ad6d72291b42c4.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 163430
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/formal-portrait.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/formal-portrait-320-5446e58971501238.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 5174
+      },
+      {
+        "src": "/generated/images/formal-portrait-400-eda98c0c5e8cf779.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 7018
+      },
+      {
+        "src": "/generated/images/formal-portrait-640-cae6f07927a8d2ee.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 12768
+      },
+      {
+        "src": "/generated/images/formal-portrait-960-38108862b240ccdf.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 22194
+      },
+      {
+        "src": "/generated/images/formal-portrait-1600-68e67f823f814755.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 46024
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/friends-at-prom.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/friends-at-prom-320-e0c78813b41ae630.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9842
+      },
+      {
+        "src": "/generated/images/friends-at-prom-400-27a1d7965308eac0.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 13674
+      },
+      {
+        "src": "/generated/images/friends-at-prom-640-d9578ed790adc77b.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 28150
+      },
+      {
+        "src": "/generated/images/friends-at-prom-960-5b6e8af52eced6f1.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 49406
+      },
+      {
+        "src": "/generated/images/friends-at-prom-1600-1a3145c053846056.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 95660
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/guests-on-the-dance-floor.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/guests-on-the-dance-floor-320-c218f664b525075f.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10586
+      },
+      {
+        "src": "/generated/images/guests-on-the-dance-floor-400-c120f504812eea7e.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 14438
+      },
+      {
+        "src": "/generated/images/guests-on-the-dance-floor-640-079761e1a839b0ea.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 27228
+      },
+      {
+        "src": "/generated/images/guests-on-the-dance-floor-960-d95ae7fe76a47fff.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 46142
+      },
+      {
+        "src": "/generated/images/guests-on-the-dance-floor-1600-7bd3a353eb99fa1b.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 85406
+      }
+    ]
+  },
+  "/photography/events/lighthouse-prom/prom-group-portrait.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/prom-group-portrait-320-e125ff5ecd1d7518.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10812
+      },
+      {
+        "src": "/generated/images/prom-group-portrait-400-874925392e8d0a16.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 15210
+      },
+      {
+        "src": "/generated/images/prom-group-portrait-640-68089ac7ec6a1cd4.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 28672
+      },
+      {
+        "src": "/generated/images/prom-group-portrait-960-a7cd45e0267027bf.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 50020
+      },
+      {
+        "src": "/generated/images/prom-group-portrait-1600-cf2f260e8e385977.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 93068
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/festive-friends.webp": {
+    "width": 1333,
+    "height": 2000,
+    "variants": [
+      {
+        "src": "/generated/images/festive-friends-320-6b13c9958d03ea1c.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 20332
+      },
+      {
+        "src": "/generated/images/festive-friends-400-1770ccbcd4617050.webp",
+        "width": 400,
+        "height": 600,
+        "bytes": 27658
+      },
+      {
+        "src": "/generated/images/festive-friends-640-56ffa56a57db3348.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 50306
+      },
+      {
+        "src": "/generated/images/festive-friends-960-77e046a81af05730.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 84310
+      },
+      {
+        "src": "/generated/images/festive-friends-1333-43188d56cbbc9642.webp",
+        "width": 1333,
+        "height": 2000,
+        "bytes": 143778
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/guest-with-box.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/guest-with-box-320-c8de02d8a148a699.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10570
+      },
+      {
+        "src": "/generated/images/guest-with-box-400-86a22910dbe8bcab.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 13950
+      },
+      {
+        "src": "/generated/images/guest-with-box-640-0420ad17074167a4.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 24688
+      },
+      {
+        "src": "/generated/images/guest-with-box-960-f9204a1ddd32b780.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 40492
+      },
+      {
+        "src": "/generated/images/guest-with-box-1600-6b5991043e4609f1.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 73040
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/outdoor-table.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/outdoor-table-320-f617b9d045296406.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 18248
+      },
+      {
+        "src": "/generated/images/outdoor-table-400-a14114d6585c76b7.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 25084
+      },
+      {
+        "src": "/generated/images/outdoor-table-640-813855f1208774e0.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 46206
+      },
+      {
+        "src": "/generated/images/outdoor-table-960-9acfc5e4eb3e85d4.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 74570
+      },
+      {
+        "src": "/generated/images/outdoor-table-1600-b3237222eeddec87.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 133290
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/santa-hat-friends.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/santa-hat-friends-320-4f0353cb6d074191.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 9942
+      },
+      {
+        "src": "/generated/images/santa-hat-friends-400-7041f59743e40f8a.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 13452
+      },
+      {
+        "src": "/generated/images/santa-hat-friends-640-d056bca2ee6859b6.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 24058
+      },
+      {
+        "src": "/generated/images/santa-hat-friends-960-ce58041ec2011fdd.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 39714
+      },
+      {
+        "src": "/generated/images/santa-hat-friends-1600-54e3b34ccd6ce84b.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 72326
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/santa-hat-portrait.webp": {
+    "width": 1333,
+    "height": 2000,
+    "variants": [
+      {
+        "src": "/generated/images/santa-hat-portrait-320-c1bc65e7a84462cf.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 9288
+      },
+      {
+        "src": "/generated/images/santa-hat-portrait-400-2c36af4d8d6a4901.webp",
+        "width": 400,
+        "height": 600,
+        "bytes": 12728
+      },
+      {
+        "src": "/generated/images/santa-hat-portrait-640-c86930390937d473.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 23960
+      },
+      {
+        "src": "/generated/images/santa-hat-portrait-960-692d1850f7377939.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 42226
+      },
+      {
+        "src": "/generated/images/santa-hat-portrait-1333-0ab26e08d38ae87a.webp",
+        "width": 1333,
+        "height": 2000,
+        "bytes": 69938
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/speaker-under-holiday-lights.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/speaker-under-holiday-lights-320-0049ccf6d42dafa2.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 6752
+      },
+      {
+        "src": "/generated/images/speaker-under-holiday-lights-400-b5a1fe2a65dfe085.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 8902
+      },
+      {
+        "src": "/generated/images/speaker-under-holiday-lights-640-25879978bf4470b4.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 15252
+      },
+      {
+        "src": "/generated/images/speaker-under-holiday-lights-960-03661b06ac35c7d0.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 24684
+      },
+      {
+        "src": "/generated/images/speaker-under-holiday-lights-1600-e2cb3b1489e138b0.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 46052
+      }
+    ]
+  },
+  "/photography/events/sunday-christmas-25/table-conversation.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/table-conversation-320-1cd5ac9e9642bd7c.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 8822
+      },
+      {
+        "src": "/generated/images/table-conversation-400-363f951894dcece3.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 11504
+      },
+      {
+        "src": "/generated/images/table-conversation-640-dfcd3a50fc74957f.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 21230
+      },
+      {
+        "src": "/generated/images/table-conversation-960-ba07656957e63519.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 35992
+      },
+      {
+        "src": "/generated/images/table-conversation-1600-71b05652d986a982.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 67390
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/acoustic-at-dusk.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/acoustic-at-dusk-320-5fb9a4c67a3e9c3b.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 7612
+      },
+      {
+        "src": "/generated/images/acoustic-at-dusk-400-d98c81c76c29cccf.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 10204
+      },
+      {
+        "src": "/generated/images/acoustic-at-dusk-640-40e95f8eed3ae9f1.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 18174
+      },
+      {
+        "src": "/generated/images/acoustic-at-dusk-960-a49417162f5a462f.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 30264
+      },
+      {
+        "src": "/generated/images/acoustic-at-dusk-1600-a0e501943b7c0bda.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 55946
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/acoustic-performer-after-dark.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/acoustic-performer-after-dark-320-0c31326e24b3d952.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 7304
+      },
+      {
+        "src": "/generated/images/acoustic-performer-after-dark-400-fe97def480fad981.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 9796
+      },
+      {
+        "src": "/generated/images/acoustic-performer-after-dark-640-3d7ad091ad441cac.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 18288
+      },
+      {
+        "src": "/generated/images/acoustic-performer-after-dark-960-04d601cec4c3a3f6.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 33018
+      },
+      {
+        "src": "/generated/images/acoustic-performer-after-dark-1600-6200c8b8928f1d0b.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 69264
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/audience-hands-raised.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/audience-hands-raised-320-0c5f15df3214d6fd.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 6642
+      },
+      {
+        "src": "/generated/images/audience-hands-raised-400-cd6a9d2ff3b0d534.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 8952
+      },
+      {
+        "src": "/generated/images/audience-hands-raised-640-42ff90f70673668e.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 16110
+      },
+      {
+        "src": "/generated/images/audience-hands-raised-960-07f4a3694533419a.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 27100
+      },
+      {
+        "src": "/generated/images/audience-hands-raised-1600-9374f0ad9c5512ad.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 53828
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/guitar-close-up.webp": {
+    "width": 1333,
+    "height": 2000,
+    "variants": [
+      {
+        "src": "/generated/images/guitar-close-up-320-f8685f8d2e156cf7.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 6808
+      },
+      {
+        "src": "/generated/images/guitar-close-up-400-96edacc9e1ba7554.webp",
+        "width": 400,
+        "height": 600,
+        "bytes": 9160
+      },
+      {
+        "src": "/generated/images/guitar-close-up-640-1bef3f37443da3e5.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 17258
+      },
+      {
+        "src": "/generated/images/guitar-close-up-960-90d9cb8c4bef2672.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 33650
+      },
+      {
+        "src": "/generated/images/guitar-close-up-1333-4e4897505057e45c.webp",
+        "width": 1333,
+        "height": 2000,
+        "bytes": 77462
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/musicians-and-city-lights.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/musicians-and-city-lights-320-6a9d12b2845b85cb.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 8198
+      },
+      {
+        "src": "/generated/images/musicians-and-city-lights-400-a1e8643d9980068f.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 11048
+      },
+      {
+        "src": "/generated/images/musicians-and-city-lights-640-9cdb04e941f66283.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 20414
+      },
+      {
+        "src": "/generated/images/musicians-and-city-lights-960-4a8c849243d1e04a.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 34604
+      },
+      {
+        "src": "/generated/images/musicians-and-city-lights-1600-02187b9b34479ec9.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 67778
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/performer-with-microphone.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/performer-with-microphone-320-7d0119a08b773d27.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 7840
+      },
+      {
+        "src": "/generated/images/performer-with-microphone-400-f03480af658d385c.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 10838
+      },
+      {
+        "src": "/generated/images/performer-with-microphone-640-767561d6eb4781ef.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 22192
+      },
+      {
+        "src": "/generated/images/performer-with-microphone-960-3c3c7508f5daca98.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 40362
+      },
+      {
+        "src": "/generated/images/performer-with-microphone-1600-a51621efba2bb136.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 80048
+      }
+    ]
+  },
+  "/photography/events/worship-miromir/shared-music-moment.webp": {
+    "width": 2000,
+    "height": 1333,
+    "variants": [
+      {
+        "src": "/generated/images/shared-music-moment-320-4afbdf7e7233a2da.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 5852
+      },
+      {
+        "src": "/generated/images/shared-music-moment-400-19ad3f58558c5fe5.webp",
+        "width": 400,
+        "height": 267,
+        "bytes": 7930
+      },
+      {
+        "src": "/generated/images/shared-music-moment-640-7588c2480f789ee7.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 14578
+      },
+      {
+        "src": "/generated/images/shared-music-moment-960-96a9996b6ac2d30b.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 24012
+      },
+      {
+        "src": "/generated/images/shared-music-moment-1600-ebbfa0501aca66d0.webp",
+        "width": 1600,
+        "height": 1066,
+        "bytes": 44328
+      }
+    ]
+  },
+  "/shop/after-hours-shirt.webp": {
+    "width": 1536,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/generated/images/after-hours-shirt-320-76bb4c9e547ae721.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 4658
+      },
+      {
+        "src": "/generated/images/after-hours-shirt-640-0840e23da3183d57.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 12546
+      },
+      {
+        "src": "/generated/images/after-hours-shirt-960-53b8783a72c9487f.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 23046
+      },
+      {
+        "src": "/generated/images/after-hours-shirt-1536-fb8b2d0c706849ed.webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 46698
+      }
+    ]
+  },
+  "/shop/coffee-artwork.webp": {
+    "width": 1600,
+    "height": 1650,
+    "variants": [
+      {
+        "src": "/generated/images/coffee-artwork-320-a5c2d2cf335be2df.webp",
+        "width": 320,
+        "height": 330,
+        "bytes": 6752
+      },
+      {
+        "src": "/generated/images/coffee-artwork-640-7a8d7d99cc2321dd.webp",
+        "width": 640,
+        "height": 660,
+        "bytes": 15570
+      },
+      {
+        "src": "/generated/images/coffee-artwork-960-b0079c9cc462992b.webp",
+        "width": 960,
+        "height": 990,
+        "bytes": 23670
+      },
+      {
+        "src": "/generated/images/coffee-artwork-1600-44e72dddba6419fa.webp",
+        "width": 1600,
+        "height": 1650,
+        "bytes": 44028
+      }
+    ]
+  },
+  "/shop/devon-labs-shirt.webp": {
+    "width": 1254,
+    "height": 1254,
+    "variants": [
+      {
+        "src": "/generated/images/devon-labs-shirt-320-bff083e1da291e88.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 4690
+      },
+      {
+        "src": "/generated/images/devon-labs-shirt-640-db97457fb4f00fe4.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 12710
+      },
+      {
+        "src": "/generated/images/devon-labs-shirt-960-18d322dec3f22bc5.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 24806
+      },
+      {
+        "src": "/generated/images/devon-labs-shirt-1254-096d9ac2fa546c47.webp",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 49192
+      }
+    ]
+  }
+}
