@@ -31,6 +31,8 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Verify exported website
+        env:
+          TEST_URL: http://127.0.0.1:3011
         run: |
           npm run start -- --ip 127.0.0.1 --port 3011 > /tmp/pages-preview.log 2>&1 &
           for attempt in $(seq 1 30); do

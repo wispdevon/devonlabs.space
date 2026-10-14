@@ -75,6 +75,26 @@ try {
       }
     }
   }
+  // Navigation updates route styling without replacing the shared layout DOM.
+  await page.evaluate(() => {
+    window.layoutNodes = [...document.querySelectorAll('.p-header, main, .p-footer')];
+  });
+  for (const [label, path, title] of routes) {
+    await page.getByRole('navigation').getByRole('link', { name: label, exact: true }).click();
+    await page.waitForURL(`${origin}${path}`);
+    await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
+    assert.equal(await page.locator('.portfolio').count(), 1);
+    assert.equal(await page.locator(`.portfolio.page-${label.toLowerCase()}`).count(), 1);
+    assert.equal(await page.getByRole('navigation').locator('[aria-current="page"]').count(), 1);
+    assert.equal(await page.getByRole('navigation').getByRole('link', { name: label, exact: true }).getAttribute('aria-current'), 'page');
+    assert.equal(await page.evaluate(() => window.layoutNodes.every((node, index) => node === document.querySelectorAll('.p-header, main, .p-footer')[index])), true, 'Shared header, main and footer persist');
+  }
+  const noScript = await browser.newContext({ javaScriptEnabled: false });
+  const staticPage = await noScript.newPage();
+  await staticPage.goto(`${origin}/photography/`);
+  assert.equal(await staticPage.locator('.portfolio.page-photography').count(), 1);
+  assert.equal(await staticPage.getByRole('navigation').getByRole('link', { name: 'Photography', exact: true }).getAttribute('aria-current'), 'page');
+  await noScript.close();
   for (const theme of ['light', 'dark']) {
     for (const [, path] of routes) {
       await page.goto(`${origin}${path}`);
@@ -199,12 +219,21 @@ try {
   assert.equal(await opener.evaluate(button => button === document.activeElement), true);
   await page.getByRole('navigation').getByRole('link', { name: 'Film', exact: true }).click();
   await page.waitForURL(`${origin}/film/`);
-  const video = page.locator('video');
+  assert.equal(await page.locator('.film-story').count(), 2);
+  const video = page.getByRole('region', { name: 'The One Camp ’26', exact: true }).locator('video');
   assert.equal(await video.getAttribute('preload'), 'none');
   assert.equal(await video.evaluate(video => video.paused), true);
   await video.evaluate(async video => { video.muted = true; await video.play(); });
   await page.waitForFunction(video => video.currentTime > 0, await video.elementHandle());
   await video.evaluate(video => video.pause());
+  const coffeeFilm = page.getByRole('region', { name: 'Home Coffee', exact: true }).locator('video');
+  assert.equal(await coffeeFilm.getAttribute('preload'), 'none');
+  assert.equal(await coffeeFilm.evaluate(video => video.paused), true);
+  await coffeeFilm.evaluate(async video => { video.muted = true; await video.play(); });
+  await page.waitForFunction(video => video.currentTime > 0, await coffeeFilm.elementHandle());
+  assert.equal(await coffeeFilm.evaluate(video => video.videoWidth), 2160);
+  assert.equal(await coffeeFilm.evaluate(video => video.videoHeight), 2880);
+  await coffeeFilm.evaluate(video => video.pause());
   await page.getByRole('navigation').getByRole('link', { name: 'Shop', exact: true }).click();
   await page.waitForURL(`${origin}/shop/`);
   assert.equal(await page.locator('.shop-product').count(), 5);

@@ -2,14 +2,15 @@ import Image from './portfolio/responsive-image';
 import Link from 'next/link';
 import { Boxes, Code2, Container, Database, Terminal, Webhook } from 'lucide-react';
 import { profile } from '../data/profile';
-import SiteShell, { ForwardArrow, pageMetadata } from './portfolio/site-shell';
+import { ForwardArrow } from './portfolio/site-shell';
+import { pageMetadata } from './portfolio/page-metadata';
 import DiscordHandle from './portfolio/discord-handle';
 
 export const metadata = pageMetadata('about', profile.headline);
 const stackIcons = [Code2, Boxes, Database, Container, Terminal, Webhook];
 
 export default function AboutPage() {
-  return <SiteShell page="about">
+  return <>
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-introduction"><h1 id="about-title">Hello, I’m Wisp.</h1><p className="about-lead">{profile.headline}</p><p className="about-summary">{profile.introduction}</p></div>
       <figure className="about-photo"><div className="duotone"><Image src="/workshop/photos/01.webp" alt="Architectural columns and geometric details, in violet and lime duotone" width={1066} height={1600} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(100vw - 64px), (max-width: 1140px) calc(100vw - 300px - clamp(60px, 8vw, 140px)), 738px" priority /></div><figcaption>A frame from <Link prefetch={false} href="/photography/">The Best.</Link></figcaption></figure>
@@ -28,5 +29,5 @@ export default function AboutPage() {
       </div>
     </div>
     <div className="color-band"><p>{profile.tagline}</p><Link prefetch={false} href="/software/">Explore the software <ForwardArrow /></Link></div>
-  </SiteShell>;
+  </>;
 }

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import SiteShell from './portfolio/site-shell';
 
 const bodyFont = localFont({
   src: [{ path: '../public/fonts/inter-roman.woff2', weight: '100 900', style: 'normal' }],
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html suppressHydrationWarning lang="en" className={`${bodyFont.variable} ${displayFont.variable}`}>
       <head><script dangerouslySetInnerHTML={{ __html: `(function(){var p;try{p=localStorage.getItem('devon-portfolio-theme')}catch(e){}document.documentElement.dataset.theme=p==='dark'||(p!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'})()` }} /></head>
-      <body>{children}</body>
+      <body><SiteShell>{children}</SiteShell></body>
     </html>
   );
 }

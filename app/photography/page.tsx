@@ -1,5 +1,6 @@
 import media from '../../data/workshop-media.json';
-import SiteShell, { Arrow, pageMetadata } from '../portfolio/site-shell';
+import { Arrow } from '../portfolio/site-shell';
+import { pageMetadata } from '../portfolio/page-metadata';
 import Gallery from './gallery';
 import bundles from '../../data/photography-bundles.json';
 import ResponsiveImage from '../portfolio/responsive-image';
@@ -9,7 +10,7 @@ import Masonry from './masonry';
 export const metadata = pageMetadata('photography', 'People, places, and the moments in between. Photographs by Wisp.');
 
 export default function PhotographyPage() {
-  return <SiteShell page="photography"><div className="page-heading"><h1>Photography</h1><div className="heading-summary"><p>People, places, and the moments in between.</p><a className="text-link" href={media.source}>Open The Best <Arrow /></a></div></div><EventCoverage /><Gallery />
+  return <><div className="page-heading"><h1>Photography</h1><div className="heading-summary"><p>People, places, and the moments in between.</p><a className="text-link" href={media.source}>Open The Best <Arrow /></a></div></div><EventCoverage /><Gallery />
     <section className="photo-bundles" aria-labelledby="photo-bundles-heading">
       <h2 id="photo-bundles-heading">Photo bundles</h2>
       <p>Latest photo stories from The Depot.</p>
@@ -19,5 +20,5 @@ export default function PhotographyPage() {
         <a className="text-link" href={bundle.url}>View the full photo bundle <Arrow /></a>
       </article>)}
     </section>
-  </SiteShell>;
+  </>;
 }

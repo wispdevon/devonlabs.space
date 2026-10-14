@@ -1,5 +1,5 @@
 import Image from '../portfolio/responsive-image';
-import SiteShell, { pageMetadata } from '../portfolio/site-shell';
+import { pageMetadata } from '../portfolio/page-metadata';
 import { shopProducts, formatShopPrice } from '../../data/shop';
 import ShopOffers, { ShopContactLink } from './shop-offers';
 
@@ -8,7 +8,7 @@ export const metadata = pageMetadata('shop', 'Phuket photography coverage from T
 export default function ShopPage() {
   const shopContactBody = 'Hello Wisp, I’d like to ask about an item in your Shop.\n\nItem:\nQuestion:';
 
-  return <SiteShell page="shop">
+  return <>
     <section className="shop-heading" aria-labelledby="shop-title"><p className="mono shop-eyebrow">Devon Labs / Shop</p><h1 id="shop-title">Hardware &amp; curiosities</h1><p className="shop-lead">Photography for your moments. Shirts for everyday. Photo files to print your way.</p><p className="shop-notice">Photography coverage is priced in Thai baht; shirts and digital photo files are priced in US dollars. Shirt shipping is confirmed separately before payment. Merchandise images show design previews.</p><ShopContactLink subject="Devon Labs enquiry — Shop" body={shopContactBody} ariaLabel="Contact me about the shop" className="text-link shop-order-link" /></section>
     <ShopOffers />
     <section aria-label="Shirts and prints" className="shop-products">
@@ -44,5 +44,5 @@ export default function ShopPage() {
         </article>;
       })}
     </section>
-  </SiteShell>;
+  </>;
 }

@@ -2,6 +2,8 @@
 
 A static portfolio for software, photography, film, coffee, and the Devon Labs Shop. Built with Next.js and exported for Cloudflare Pages.
 
+`app/layout.tsx` owns the shared shell; pages provide content and metadata. Small client components handle active navigation and page colors.
+
 ## Development
 
 Use Node.js 22 (`.nvmrc`) and npm:

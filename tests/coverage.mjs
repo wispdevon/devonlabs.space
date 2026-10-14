@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 
-const origin = new URL(process.env.TEST_URL || 'http://127.0.0.1:3018').origin;
+const origin = new URL(process.env.TEST_URL || 'http://127.0.0.1:3011').origin;
 const browser = await chromium.launch();
 
 function emailDetails(href) {

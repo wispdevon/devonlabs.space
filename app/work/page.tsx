@@ -1,12 +1,13 @@
 import Image from '../portfolio/responsive-image';
 import Link from 'next/link';
 import { profile } from '../../data/profile';
-import SiteShell, { ForwardArrow, pageMetadata } from '../portfolio/site-shell';
+import { ForwardArrow } from '../portfolio/site-shell';
+import { pageMetadata } from '../portfolio/page-metadata';
 
 export const metadata = pageMetadata('work', 'Product design, software, photography, and collaborative film by Wisp.');
 
 export default function WorkPage() {
-  return <SiteShell page="work">
+  return <>
     <div className="page-heading"><h1>Work</h1><p>From first idea to final detail.</p></div>
     <p className="editorial-intro">{profile.whatIMake}</p>
     <section className="work-index" aria-label="Areas of work">
@@ -17,5 +18,5 @@ export default function WorkPage() {
       <article className="work-entry"><span className="mono work-number">05 / Hardware</span><div><h2>Blackhole Badge</h2><p>A wireless research badge built around an ESP32 and dual nRF24 radios for 2.4 GHz spectrum testing. Modular options span a bare PCB, a DIY kit, and assembled versions, with an optional OLED display.</p><p className="work-disciplines mono">Embedded hardware · Wireless research · Modular builds</p><a className="text-link" href="https://shop.1337sheets.com/products/blackhole-badge">Explore Blackhole Badge <ForwardArrow /></a></div></article>
     </section>
     <div className="work-contact"><p>Get in touch.</p>{/* Cloudflare's email rewriting changes server markup before hydration. This trusted, static HTML opts this public link out. */}<span dangerouslySetInnerHTML={{ __html: '<!--email_off--><a href="mailto:wisp@devonlabs.space">wisp@devonlabs.space <span aria-hidden="true">→</span></a><!--/email_off-->' }} /></div>
-  </SiteShell>;
+  </>;
 }
