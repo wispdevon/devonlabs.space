@@ -23,6 +23,7 @@ With the preview running, run `npm run test:browser` in another terminal. Set `T
 
 ## Content
 
+- [Project inventory](docs/project-inventory.md): central tracking across project stages, maintained separately from the curated public portfolio.
 - `data/profile.ts`, `data/developer-projects.ts`, `data/portfolio-summaries.ts`: About and portfolio content.
 - `data/event-coverage.json`, `data/photography-bundles.json`: event galleries and recent photo stories.
 - `data/coffee.ts`, `data/shop.ts`: coffee guide and shop offerings.
