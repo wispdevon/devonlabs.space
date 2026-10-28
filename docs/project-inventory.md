@@ -30,5 +30,5 @@ Coverage is incremental: the entries below were individually reconciled through 
 - Repository: [wispdevon/devonlabs.space](https://github.com/wispdevon/devonlabs.space).
 - Website: [devonlabs.space](https://devonlabs.space), as configured in the project.
 - Status: maintained, with incremental inventory development.
-- Last meaningful update: 2026-10-28 — established this inventory and project-local maintenance guidance.
-- Next steps: expand coverage as other projects are reviewed, keep status and links current, and maintain the public portfolio deliberately. The existing GitHub-oriented portfolio integration has not been migrated.
+- Last meaningful update: 2026-10-28 — established the inventory and maintenance guidance; added a repeatable [TTFB benchmark and baseline](ttfb.md). Homepage median TTFB was 73.7 ms from Cloudflare BKK; zone configuration and an optimized after measurement await zone access. No production configuration or deployment changed.
+- Next steps: finish the Cloudflare configuration experiment after zone access is available, compare before/after measurements and verify content freshness; expand inventory coverage as projects are reviewed. The existing GitHub-oriented portfolio integration has not been migrated.

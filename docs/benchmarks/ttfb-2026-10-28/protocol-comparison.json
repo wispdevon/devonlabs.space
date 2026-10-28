@@ -1,0 +1,362 @@
+[
+  {
+    "sample": 0,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 72.946,
+    "pretransfer_ms": 34.829,
+    "curl_exit": 0
+  },
+  {
+    "sample": 0,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 61.434000000000005,
+    "pretransfer_ms": 22.07,
+    "curl_exit": 0
+  },
+  {
+    "sample": 1,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 69.25399999999999,
+    "pretransfer_ms": 35.464000000000006,
+    "curl_exit": 0
+  },
+  {
+    "sample": 1,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 62.108,
+    "pretransfer_ms": 22.46,
+    "curl_exit": 0
+  },
+  {
+    "sample": 2,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 72.86800000000001,
+    "pretransfer_ms": 32.817,
+    "curl_exit": 0
+  },
+  {
+    "sample": 2,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 59.549,
+    "pretransfer_ms": 22.788,
+    "curl_exit": 0
+  },
+  {
+    "sample": 3,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 70.18599999999999,
+    "pretransfer_ms": 35.17,
+    "curl_exit": 0
+  },
+  {
+    "sample": 3,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 53.961,
+    "pretransfer_ms": 19.642,
+    "curl_exit": 0
+  },
+  {
+    "sample": 4,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 77.064,
+    "pretransfer_ms": 35.283,
+    "curl_exit": 0
+  },
+  {
+    "sample": 4,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 61.722,
+    "pretransfer_ms": 20.433,
+    "curl_exit": 0
+  },
+  {
+    "sample": 5,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 76.586,
+    "pretransfer_ms": 33.168000000000006,
+    "curl_exit": 0
+  },
+  {
+    "sample": 5,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 58.406,
+    "pretransfer_ms": 20.84,
+    "curl_exit": 0
+  },
+  {
+    "sample": 6,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 82.662,
+    "pretransfer_ms": 40.006,
+    "curl_exit": 0
+  },
+  {
+    "sample": 6,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 100.128,
+    "pretransfer_ms": 44.357,
+    "curl_exit": 0
+  },
+  {
+    "sample": 7,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 90.146,
+    "pretransfer_ms": 33.558,
+    "curl_exit": 0
+  },
+  {
+    "sample": 7,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 59.826,
+    "pretransfer_ms": 20.573999999999998,
+    "curl_exit": 0
+  },
+  {
+    "sample": 8,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 77.268,
+    "pretransfer_ms": 33.446,
+    "curl_exit": 0
+  },
+  {
+    "sample": 8,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 58.793,
+    "pretransfer_ms": 22.343999999999998,
+    "curl_exit": 0
+  },
+  {
+    "sample": 9,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 75.151,
+    "pretransfer_ms": 34.454,
+    "curl_exit": 0
+  },
+  {
+    "sample": 9,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 64.019,
+    "pretransfer_ms": 21.526,
+    "curl_exit": 0
+  },
+  {
+    "sample": 10,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 77.46799999999999,
+    "pretransfer_ms": 32.591,
+    "curl_exit": 0
+  },
+  {
+    "sample": 10,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 53.839,
+    "pretransfer_ms": 18.945,
+    "curl_exit": 0
+  },
+  {
+    "sample": 11,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 77.47800000000001,
+    "pretransfer_ms": 39.153,
+    "curl_exit": 0
+  },
+  {
+    "sample": 11,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 59.471000000000004,
+    "pretransfer_ms": 19.727999999999998,
+    "curl_exit": 0
+  },
+  {
+    "sample": 12,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 89.36800000000001,
+    "pretransfer_ms": 36.007999999999996,
+    "curl_exit": 0
+  },
+  {
+    "sample": 12,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 55.226,
+    "pretransfer_ms": 19.542,
+    "curl_exit": 0
+  },
+  {
+    "sample": 13,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 68.741,
+    "pretransfer_ms": 35.031,
+    "curl_exit": 0
+  },
+  {
+    "sample": 13,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 65.359,
+    "pretransfer_ms": 21.561,
+    "curl_exit": 0
+  },
+  {
+    "sample": 14,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 69.294,
+    "pretransfer_ms": 36.967,
+    "curl_exit": 0
+  },
+  {
+    "sample": 14,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 54.275999999999996,
+    "pretransfer_ms": 19.015,
+    "curl_exit": 0
+  },
+  {
+    "sample": 15,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 71.135,
+    "pretransfer_ms": 37.157000000000004,
+    "curl_exit": 0
+  },
+  {
+    "sample": 15,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 55.367,
+    "pretransfer_ms": 20.625999999999998,
+    "curl_exit": 0
+  },
+  {
+    "sample": 16,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 66.78399999999999,
+    "pretransfer_ms": 34.912,
+    "curl_exit": 0
+  },
+  {
+    "sample": 16,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 57.071999999999996,
+    "pretransfer_ms": 21.14,
+    "curl_exit": 0
+  },
+  {
+    "sample": 17,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 82.19500000000001,
+    "pretransfer_ms": 40.038,
+    "curl_exit": 0
+  },
+  {
+    "sample": 17,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 57.192,
+    "pretransfer_ms": 18.901,
+    "curl_exit": 0
+  },
+  {
+    "sample": 18,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 72.657,
+    "pretransfer_ms": 31.361,
+    "curl_exit": 0
+  },
+  {
+    "sample": 18,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 89.769,
+    "pretransfer_ms": 36.685,
+    "curl_exit": 0
+  },
+  {
+    "sample": 19,
+    "protocol": "h2",
+    "http_code": 200,
+    "http_version": "2",
+    "ttfb_ms": 74.349,
+    "pretransfer_ms": 35.111999999999995,
+    "curl_exit": 0
+  },
+  {
+    "sample": 19,
+    "protocol": "h3",
+    "http_code": 200,
+    "http_version": "3",
+    "ttfb_ms": 57.08,
+    "pretransfer_ms": 22.158,
+    "curl_exit": 0
+  }
+]

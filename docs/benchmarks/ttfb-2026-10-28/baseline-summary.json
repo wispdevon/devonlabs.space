@@ -1,0 +1,250 @@
+{
+  "jsonl": "baseline.jsonl",
+  "label": "baseline",
+  "method": "GET, independent curl process per sample (fresh TCP/TLS connection), round-robin routes",
+  "routes": {
+    "home": {
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ms": {
+        "max": 35.879,
+        "min": 14.848,
+        "p50": 16.073,
+        "p95": 19.289
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 114.723,
+        "min": 63.992,
+        "p50": 73.735,
+        "p95": 97.443
+      },
+      "dns_ms": {
+        "max": 20.294,
+        "min": 0.927,
+        "p50": 1.069,
+        "p95": 1.367
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "pretransfer_ms": {
+        "max": 59.266,
+        "min": 31.564,
+        "p50": 35.639,
+        "p95": 41.942
+      },
+      "response_wait_ms": {
+        "max": 64.318,
+        "min": 30.403,
+        "p50": 36.694,
+        "p95": 56.196
+      },
+      "statuses": {
+        "200": 30
+      },
+      "tls_ms": {
+        "max": 59.22,
+        "min": 31.52,
+        "p50": 35.582,
+        "p95": 41.896
+      },
+      "total_ms": {
+        "max": 117.013,
+        "min": 65.608,
+        "p50": 75.741,
+        "p95": 99.329
+      }
+    },
+    "photography": {
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ms": {
+        "max": 19.284,
+        "min": 14.91,
+        "p50": 16.655,
+        "p95": 17.893
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 111.76,
+        "min": 69.132,
+        "p50": 76.308,
+        "p95": 97.34
+      },
+      "dns_ms": {
+        "max": 1.217,
+        "min": 0.935,
+        "p50": 1.041,
+        "p95": 1.137
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "pretransfer_ms": {
+        "max": 42.104,
+        "min": 31.802,
+        "p50": 35.599,
+        "p95": 41.393
+      },
+      "response_wait_ms": {
+        "max": 78.591,
+        "min": 33.876,
+        "p50": 40.114,
+        "p95": 58.552
+      },
+      "statuses": {
+        "200": 30
+      },
+      "tls_ms": {
+        "max": 42.054,
+        "min": 31.752,
+        "p50": 35.549,
+        "p95": 41.335
+      },
+      "total_ms": {
+        "max": 138.931,
+        "min": 96.662,
+        "p50": 108.149,
+        "p95": 133.046
+      }
+    },
+    "shop": {
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ms": {
+        "max": 18.785,
+        "min": 14.368,
+        "p50": 16.262,
+        "p95": 18.377
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 88.208,
+        "min": 65.932,
+        "p50": 75.779,
+        "p95": 83.438
+      },
+      "dns_ms": {
+        "max": 1.689,
+        "min": 0.884,
+        "p50": 1.083,
+        "p95": 1.366
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "pretransfer_ms": {
+        "max": 43.198,
+        "min": 32.526,
+        "p50": 35.766,
+        "p95": 40.209
+      },
+      "response_wait_ms": {
+        "max": 54.337,
+        "min": 31.382,
+        "p50": 38.731,
+        "p95": 44.754
+      },
+      "statuses": {
+        "200": 30
+      },
+      "tls_ms": {
+        "max": 43.146,
+        "min": 32.475,
+        "p50": 35.714,
+        "p95": 40.16
+      },
+      "total_ms": {
+        "max": 89.669,
+        "min": 67.794,
+        "p50": 77.536,
+        "p95": 85.671
+      }
+    },
+    "software": {
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ms": {
+        "max": 17.682,
+        "min": 13.784,
+        "p50": 15.698,
+        "p95": 17.536
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 340.516,
+        "min": 62.798,
+        "p50": 71.278,
+        "p95": 96.452
+      },
+      "dns_ms": {
+        "max": 1.332,
+        "min": 0.939,
+        "p50": 1.047,
+        "p95": 1.22
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "pretransfer_ms": {
+        "max": 40.901,
+        "min": 30.548,
+        "p50": 35.257,
+        "p95": 39.392
+      },
+      "response_wait_ms": {
+        "max": 301.793,
+        "min": 31.516,
+        "p50": 35.564,
+        "p95": 57.76
+      },
+      "statuses": {
+        "200": 30
+      },
+      "tls_ms": {
+        "max": 40.853,
+        "min": 30.486,
+        "p50": 35.204,
+        "p95": 39.338
+      },
+      "total_ms": {
+        "max": 342.539,
+        "min": 64.842,
+        "p50": 73.367,
+        "p95": 98.84
+      }
+    }
+  },
+  "samples_per_route": 30,
+  "started_at_utc": "20261028T140201Z",
+  "ttfb_note": "curl_ttfb_ms=time_starttransfer; response_wait_ms=time_starttransfer-time_pretransfer"
+}
