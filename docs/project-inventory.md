@@ -2,7 +2,7 @@
 
 This is the central inventory for projects across experiments, active development, maintenance, paused work, and archives. The public portfolio remains curated separately in `data/developer-projects.ts` and `data/portfolio-summaries.ts`.
 
-Coverage is incremental: the entries below were reviewed during the learning-journal work on 2026-10-28. This is not yet an exhaustive audit of every project. Add or reconcile entries as projects are worked on; verify actual repository identity and state before updating them. Keep confidential details outside this repository.
+Coverage is incremental: the entries below were individually reconciled through 2026-10-28. This is not yet an exhaustive audit of every project. Add or reconcile entries as projects are worked on; verify actual repository identity and state before updating them. Keep confidential details outside this repository.
 
 ## Upstreamer
 
@@ -13,6 +13,16 @@ Coverage is incremental: the entries below were reviewed during the learning-jou
 - Last meaningful update: 2026-10-28 — added a learning journal with independent storage, recovery, Markdown export, and an agent learning-note workflow on `feature/learning-journal`.
 - Verification: 11 unit/package tests and 30 Chromium browser tests passed, alongside typecheck, lint, skill validation, and production build. Desktop/mobile production preview and both themes were checked; other browser engines remain untested. Final evidence lives in the repository's `docs/learning/2026-10-28-learning-journal.md`.
 - Next steps: review the completed journal work and evaluate practice prompts after using it on a real task. Deployment is separate.
+
+## MIFARE Pay
+
+- Purpose: prepaid card operations and administrative tools for a supervised pilot.
+- Repository: [wispdevon/mifare-pay](https://github.com/wispdevon/mifare-pay) (**private repository**).
+- Website: [mf.devonlabs.space](https://mf.devonlabs.space).
+- Status: actively maintained; release `v30.1` is live.
+- Last meaningful update: 2026-10-27 — shipped streamlined administration settings and guarded linked-import undo in release `v30.1`.
+- Verification: 60 frontend tests, 38 backend unit tests, and 45 integration checks passed before release. The public service and static asset checksums were verified after deployment.
+- Next steps: maintain the current supervised release and triage future operator feedback.
 
 ## Devon Labs
 
