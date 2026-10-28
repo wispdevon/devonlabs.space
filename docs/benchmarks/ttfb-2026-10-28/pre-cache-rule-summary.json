@@ -1,0 +1,329 @@
+{
+  "base_url": "https://devonlabs.space",
+  "jsonl": "pre-cache-rule.jsonl",
+  "label": "pre-cache-rule",
+  "latency_percentiles_use_only": "curl exit code 0 and HTTP 200 responses",
+  "method": "GET, independent curl process per sample (fresh TCP/TLS connection), round-robin routes",
+  "routes": {
+    "home": {
+      "ages": [],
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ready_ms": {
+        "max": 36.864,
+        "min": 14.021,
+        "p50": 15.551,
+        "p95": 18.707
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 107.604,
+        "min": 67.358,
+        "p50": 71.967,
+        "p95": 99.558
+      },
+      "dns_ms": {
+        "max": 22.026,
+        "min": 0.939,
+        "p50": 1.083,
+        "p95": 3.914
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "invalid_latency_samples": 0,
+      "non_200_responses": 0,
+      "pretransfer_ready_ms": {
+        "max": 59.199,
+        "min": 32.285,
+        "p50": 35.377,
+        "p95": 38.4
+      },
+      "response_wait_ms": {
+        "max": 64.284,
+        "min": 32.965,
+        "p50": 36.978,
+        "p95": 57.686
+      },
+      "statuses": {
+        "200": 30
+      },
+      "successful_latency_samples": 30,
+      "tcp_phase_ms": {
+        "max": 16.968,
+        "min": 12.998,
+        "p50": 14.294,
+        "p95": 16.356
+      },
+      "tls_phase_ms": {
+        "max": 22.282,
+        "min": 17.299,
+        "p50": 19.032,
+        "p95": 22.163
+      },
+      "tls_ready_ms": {
+        "max": 59.146,
+        "min": 32.207,
+        "p50": 35.325,
+        "p95": 38.344
+      },
+      "total_ms": {
+        "max": 109.028,
+        "min": 69.117,
+        "p50": 74.127,
+        "p95": 101.519
+      },
+      "transport_failures": 0
+    },
+    "photography": {
+      "ages": [],
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ready_ms": {
+        "max": 19.129,
+        "min": 14.231,
+        "p50": 15.398,
+        "p95": 18.397
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 116.367,
+        "min": 66.609,
+        "p50": 77.41,
+        "p95": 91.19
+      },
+      "dns_ms": {
+        "max": 1.896,
+        "min": 0.927,
+        "p50": 1.028,
+        "p95": 1.139
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "invalid_latency_samples": 0,
+      "non_200_responses": 0,
+      "pretransfer_ready_ms": {
+        "max": 41.755,
+        "min": 31.107,
+        "p50": 34.928,
+        "p95": 39.037
+      },
+      "response_wait_ms": {
+        "max": 78.095,
+        "min": 35.001,
+        "p50": 41.943,
+        "p95": 56.847
+      },
+      "statuses": {
+        "200": 30
+      },
+      "successful_latency_samples": 30,
+      "tcp_phase_ms": {
+        "max": 18.146,
+        "min": 13.263,
+        "p50": 14.32,
+        "p95": 17.321
+      },
+      "tls_phase_ms": {
+        "max": 24.063,
+        "min": 16.481,
+        "p50": 18.684,
+        "p95": 22.588
+      },
+      "tls_ready_ms": {
+        "max": 41.699,
+        "min": 31.057,
+        "p50": 34.882,
+        "p95": 38.985
+      },
+      "total_ms": {
+        "max": 466.322,
+        "min": 95.75,
+        "p50": 107.966,
+        "p95": 138.183
+      },
+      "transport_failures": 0
+    },
+    "shop": {
+      "ages": [],
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ready_ms": {
+        "max": 17.809,
+        "min": 14.685,
+        "p50": 15.319,
+        "p95": 17.382
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 91.426,
+        "min": 64.928,
+        "p50": 73.941,
+        "p95": 89.781
+      },
+      "dns_ms": {
+        "max": 2.195,
+        "min": 0.903,
+        "p50": 1.051,
+        "p95": 1.305
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "invalid_latency_samples": 0,
+      "non_200_responses": 0,
+      "pretransfer_ready_ms": {
+        "max": 43.709,
+        "min": 30.926,
+        "p50": 34.485,
+        "p95": 40.429
+      },
+      "response_wait_ms": {
+        "max": 55.544,
+        "min": 31.445,
+        "p50": 37.18,
+        "p95": 49.846
+      },
+      "statuses": {
+        "200": 30
+      },
+      "successful_latency_samples": 30,
+      "tcp_phase_ms": {
+        "max": 16.848,
+        "min": 13.63,
+        "p50": 14.214,
+        "p95": 16.412
+      },
+      "tls_phase_ms": {
+        "max": 28.914,
+        "min": 16.147,
+        "p50": 18.613,
+        "p95": 23.491
+      },
+      "tls_ready_ms": {
+        "max": 43.664,
+        "min": 30.859,
+        "p50": 34.427,
+        "p95": 40.375
+      },
+      "total_ms": {
+        "max": 93.646,
+        "min": 66.755,
+        "p50": 76.009,
+        "p95": 92.047
+      },
+      "transport_failures": 0
+    },
+    "software": {
+      "ages": [],
+      "cache_control": [
+        "public, max-age=0, must-revalidate"
+      ],
+      "cf_cache_statuses": {
+        "DYNAMIC": 30
+      },
+      "colo_codes": {
+        "BKK": 30
+      },
+      "connect_ready_ms": {
+        "max": 21.239,
+        "min": 14.299,
+        "p50": 15.736,
+        "p95": 19.731
+      },
+      "count": 30,
+      "curl_ttfb_ms": {
+        "max": 102.94,
+        "min": 65.139,
+        "p50": 77.347,
+        "p95": 91.675
+      },
+      "dns_ms": {
+        "max": 2.216,
+        "min": 0.921,
+        "p50": 1.084,
+        "p95": 1.256
+      },
+      "http_versions": {
+        "2": 30
+      },
+      "invalid_latency_samples": 0,
+      "non_200_responses": 0,
+      "pretransfer_ready_ms": {
+        "max": 47.784,
+        "min": 31.028,
+        "p50": 34.814,
+        "p95": 41.22
+      },
+      "response_wait_ms": {
+        "max": 55.726,
+        "min": 32.298,
+        "p50": 41.084,
+        "p95": 55.133
+      },
+      "statuses": {
+        "200": 30
+      },
+      "successful_latency_samples": 30,
+      "tcp_phase_ms": {
+        "max": 20.18,
+        "min": 13.19,
+        "p50": 14.598,
+        "p95": 18.754
+      },
+      "tls_phase_ms": {
+        "max": 26.489,
+        "min": 16.628,
+        "p50": 18.849,
+        "p95": 23.036
+      },
+      "tls_ready_ms": {
+        "max": 47.728,
+        "min": 30.977,
+        "p50": 34.764,
+        "p95": 41.173
+      },
+      "total_ms": {
+        "max": 105.392,
+        "min": 67.012,
+        "p50": 79.793,
+        "p95": 93.966
+      },
+      "transport_failures": 0
+    }
+  },
+  "samples_per_route_requested": 30,
+  "started_at_utc": "20261028T142832516234Z",
+  "timing_definitions": {
+    "connect_ready_ms": "time_connect, cumulative from transfer start (includes DNS)",
+    "curl_ttfb_ms": "time_starttransfer, cumulative from transfer start",
+    "dns_ms": "time_namelookup, cumulative from transfer start",
+    "pretransfer_ready_ms": "time_pretransfer, cumulative to request-ready point",
+    "response_wait_ms": "time_starttransfer - time_pretransfer",
+    "tcp_phase_ms": "time_connect - time_namelookup",
+    "tls_phase_ms": "time_appconnect - time_connect",
+    "tls_ready_ms": "time_appconnect, cumulative from transfer start (includes DNS and TCP)"
+  }
+}

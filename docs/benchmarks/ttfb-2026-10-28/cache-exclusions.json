@@ -1,0 +1,44 @@
+[
+  {
+    "case": "plain",
+    "status_line": "HTTP/2 200 ",
+    "cache": "HIT",
+    "age": "45",
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "case": "cookie",
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "case": "authorization",
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": null
+  },
+  {
+    "case": "range",
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": null
+  },
+  {
+    "case": "rsc",
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "case": "query",
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  }
+]

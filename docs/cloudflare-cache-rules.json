@@ -1,0 +1,46 @@
+{
+  "zone": "devonlabs.space",
+  "configured_on": "2026-10-28",
+  "before": {
+    "cache_rules": [],
+    "cache_response_rules": []
+  },
+  "rules": [
+    {
+      "description": "Devon Labs pages — anonymous HTML cache",
+      "phase": "http_request_cache_settings",
+      "expression": "(http.request.full_uri in {\"https://devonlabs.space/\" \"https://devonlabs.space/work/\" \"https://devonlabs.space/software/\" \"https://devonlabs.space/film/\" \"https://devonlabs.space/photography/\" \"https://devonlabs.space/coffee/\" \"https://devonlabs.space/shop/\"} and http.request.method in {\"GET\" \"HEAD\"} and http.cookie eq \"\" and not any(http.request.headers.names[*] in {\"authorization\" \"range\" \"rsc\"}))",
+      "action": "set_cache_settings",
+      "action_parameters": {
+        "cache": true,
+        "edge_ttl": {
+          "mode": "bypass_by_default",
+          "status_code_ttl": [
+            {
+              "status_code_range": {
+                "from": 201
+              },
+              "value": -1
+            }
+          ]
+        },
+        "browser_ttl": {
+          "mode": "respect_origin"
+        }
+      }
+    },
+    {
+      "description": "Devon Labs pages — 60s edge freshness",
+      "phase": "http_response_cache_settings",
+      "expression": "(http.request.full_uri in {\"https://devonlabs.space/\" \"https://devonlabs.space/work/\" \"https://devonlabs.space/software/\" \"https://devonlabs.space/film/\" \"https://devonlabs.space/photography/\" \"https://devonlabs.space/coffee/\" \"https://devonlabs.space/shop/\"} and http.request.method in {\"GET\" \"HEAD\"} and http.cookie eq \"\" and not any(http.request.headers.names[*] in {\"authorization\" \"range\" \"rsc\"})) and http.response.code eq 200 and any(http.response.headers[\"content-type\"][*] contains \"text/html\") and not any(http.response.headers.names[*] eq \"set-cookie\")",
+      "action": "set_cache_control",
+      "action_parameters": {
+        "s-maxage": {
+          "operation": "set",
+          "value": 60,
+          "cloudflare_only": true
+        }
+      }
+    }
+  ]
+}

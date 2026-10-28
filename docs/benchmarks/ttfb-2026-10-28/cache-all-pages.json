@@ -1,0 +1,114 @@
+[
+  {
+    "path": "/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "HIT",
+    "age": "24",
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "HIT",
+    "age": "24",
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/work/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/work/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/software/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/software/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/film/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/film/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/photography/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/photography/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/coffee/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/coffee/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/shop/",
+    "attempt": 0,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  },
+  {
+    "path": "/shop/",
+    "attempt": 1,
+    "status_line": "HTTP/2 200 ",
+    "cache": "DYNAMIC",
+    "age": null,
+    "cache_control": "public, max-age=0, must-revalidate"
+  }
+]

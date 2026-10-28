@@ -1,0 +1,10 @@
+{"time": 1793197931.716937, "cache": "HIT", "age": "58", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197936.8377776, "cache": "EXPIRED", "age": null, "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197941.9039466, "cache": "HIT", "age": "5", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197946.968674, "cache": "HIT", "age": "10", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197952.0315802, "cache": "HIT", "age": "15", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197957.0967708, "cache": "HIT", "age": "20", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197962.157859, "cache": "HIT", "age": "25", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197967.2267523, "cache": "HIT", "age": "30", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197972.2867725, "cache": "HIT", "age": "35", "cache_control": "public, max-age=0, must-revalidate"}
+{"time": 1793197977.3524303, "cache": "HIT", "age": "40", "cache_control": "public, max-age=0, must-revalidate"}

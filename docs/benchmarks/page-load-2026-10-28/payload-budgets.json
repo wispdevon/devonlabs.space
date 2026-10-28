@@ -1,0 +1,77 @@
+[
+  {
+    "route": "/",
+    "before": {
+      "html_raw": 36566,
+      "html_gzip9": 7562,
+      "javascript_raw": 578667,
+      "javascript_gzip9": 177657
+    },
+    "after": {
+      "html_raw": 36566,
+      "html_gzip9": 7561,
+      "javascript_raw": 578885,
+      "javascript_gzip9": 177765
+    }
+  },
+  {
+    "route": "/film/",
+    "before": {
+      "html_raw": 23362,
+      "html_gzip9": 5141,
+      "javascript_raw": 685285,
+      "javascript_gzip9": 196729
+    },
+    "after": {
+      "html_raw": 24946,
+      "html_gzip9": 5238,
+      "javascript_raw": 578613,
+      "javascript_gzip9": 177518
+    }
+  },
+  {
+    "route": "/photography/",
+    "before": {
+      "html_raw": 231824,
+      "html_gzip9": 38964,
+      "javascript_raw": 688838,
+      "javascript_gzip9": 197895
+    },
+    "after": {
+      "html_raw": 238955,
+      "html_gzip9": 40244,
+      "javascript_raw": 582237,
+      "javascript_gzip9": 178721
+    }
+  },
+  {
+    "route": "/coffee/",
+    "before": {
+      "html_raw": 181198,
+      "html_gzip9": 57166,
+      "javascript_raw": 818976,
+      "javascript_gzip9": 245955
+    },
+    "after": {
+      "html_raw": 183782,
+      "html_gzip9": 57328,
+      "javascript_raw": 712186,
+      "javascript_gzip9": 226749
+    }
+  },
+  {
+    "route": "/software/",
+    "before": {
+      "html_raw": 40137,
+      "html_gzip9": 6849,
+      "javascript_raw": 576858,
+      "javascript_gzip9": 176645
+    },
+    "after": {
+      "html_raw": 40137,
+      "html_gzip9": 6849,
+      "javascript_raw": 577076,
+      "javascript_gzip9": 176753
+    }
+  }
+]

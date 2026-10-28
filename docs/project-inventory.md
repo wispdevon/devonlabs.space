@@ -30,5 +30,5 @@ Coverage is incremental: the entries below were individually reconciled through 
 - Repository: [wispdevon/devonlabs.space](https://github.com/wispdevon/devonlabs.space).
 - Website: [devonlabs.space](https://devonlabs.space), as configured in the project.
 - Status: maintained, with incremental inventory development.
-- Last meaningful update: 2026-10-28 — established the inventory and maintenance guidance; added a repeatable [TTFB benchmark and baseline](ttfb.md). Homepage median TTFB was 73.7 ms from Cloudflare BKK; zone configuration and an optimized after measurement await zone access. No production configuration or deployment changed.
-- Next steps: finish the Cloudflare configuration experiment after zone access is available, compare before/after measurements and verify content freshness; expand inventory coverage as projects are reviewed. The existing GitHub-oriented portfolio integration has not been migrated.
+- Last meaningful update: 2026-10-28 — configured short-lived Cloudflare HTML caching, reducing homepage median TTFB from 72.0 to 56.4 ms at BKK. Verified frontend changes reduce Coffee's controlled median load event from 3.12 to 2.10 seconds and hover-prepared Film navigation from 539 to 115 ms; production publication is in progress. [Measurements, limitations and cache policy](ttfb.md).
+- Next steps: verify the published deployment and content freshness, monitor performance across real devices, and expand inventory coverage as projects are reviewed. The existing GitHub-oriented portfolio integration has not been migrated.
