@@ -14,7 +14,7 @@
     "refresh:bundles": "node scripts/refresh-photography-bundles.mjs",
     "lint": "eslint",
     "test": "node --test tests/photography-bundles.mjs && node tests/integrity.mjs",
-    "test:browser": "node tests/portfolio.mjs && node tests/loading.mjs && node tests/shop.mjs && node tests/coverage.mjs && node tests/masonry.mjs",
+    "test:browser": "node tests/portfolio.mjs && node tests/loading.mjs && node tests/shop.mjs && node tests/coverage.mjs && node tests/masonry.mjs && node tests/navigation.mjs",
     "images": "node scripts/generate-images.mjs",
     "prebuild": "npm run refresh:bundles && npm run images",
     "predev": "npm run images"

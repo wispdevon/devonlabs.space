@@ -318,7 +318,6 @@ button.text-link { padding: 0; border: 0; background: transparent; font: inherit
 @keyframes portfolio-enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @keyframes portfolio-reveal { from { opacity: .35; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
-  .portfolio-shell > main { animation: portfolio-enter 650ms cubic-bezier(.22, 1, .36, 1) both; }
   .portfolio :is(a, button) { transition: color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
   .p-navigation nav a:hover { transform: translateX(4px); }
   .duotone img, .gallery-photo img { transition: transform 650ms cubic-bezier(.22, 1, .36, 1); }

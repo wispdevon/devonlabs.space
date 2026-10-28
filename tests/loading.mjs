@@ -11,8 +11,16 @@ try {
     page.on('request', request => requests.push(new URL(request.url()).pathname));
     page.on('response', async response => { if (response.request().resourceType() === 'image') images.push({ url: new URL(response.url()).pathname, bytes: (await response.body()).length }); });
     await page.goto(`${origin}/${route}/`);
+    if (route === 'coffee' && await page.evaluate(() => 'loading' in HTMLMediaElement.prototype)) {
+      assert.ok(!requests.some(url => /^\/coffee\/poster-/.test(url)), 'Offscreen video posters wait until the journal approaches the viewport');
+    }
     for (let y = 0; y < await page.evaluate(() => document.body.scrollHeight); y += 600) { await page.evaluate(y => window.scrollTo(0, y), y); await page.waitForTimeout(100); }
     await page.waitForLoadState('networkidle');
+    if (route === 'coffee') {
+      for (const poster of ['/coffee/poster-01.webp', '/coffee/poster-02.webp']) {
+        assert.ok(requests.includes(poster), 'Video posters load when scrolling to the journal');
+      }
+    }
     assert.equal(await page.locator('.expanded-photo').count(), 0);
     if (route === 'coffee') assert.ok(!requests.some(url => /(?:\/api\/assets\/.+\/original|\/coffee\/brewing[^/]*\.mp4)$/.test(url)), 'Original videos wait for playback');
     assert.ok(!requests.some(url => /^\/workshop\/photos\//.test(url)), 'No original Photography or unrelated About image before opening');
