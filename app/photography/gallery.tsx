@@ -1,17 +1,24 @@
-import type { ReactNode } from 'react';
 import media from '../../data/workshop-media.json';
 import ResponsiveImage from '../portfolio/responsive-image';
-import GalleryViewer from './gallery-viewer';
+import PhotoViewer, { type ViewerPhoto } from '../portfolio/photo-viewer';
 
 export default function Gallery() {
-  const thumbnails: ReactNode[] = media.photos.map(photo => <ResponsiveImage
-    key={photo.id}
-    src={photo.image}
-    alt={photo.alt}
-    width={photo.ratio > 1 ? 1600 : 1066}
-    height={photo.ratio > 1 ? 1066 : 1600}
-    sizes="(max-width: 600px) calc((100vw - 52px) / 2), (max-width: 850px) calc((100vw - 100px) / 3), 280px"
-  />);
+  const photos: ViewerPhoto[] = media.photos.map(photo => ({
+    image: photo.image,
+    alt: photo.alt,
+    width: photo.ratio > 1 ? 1600 : 1066,
+    height: photo.ratio > 1 ? 1066 : 1600,
+    thumbnail: <ResponsiveImage
+      src={photo.image}
+      alt={photo.alt}
+      width={photo.ratio > 1 ? 1600 : 1066}
+      height={photo.ratio > 1 ? 1066 : 1600}
+      sizes="(max-width: 600px) calc((100vw - 52px) / 2), (max-width: 850px) calc((100vw - 100px) / 3), 280px"
+    />,
+  }));
 
-  return <GalleryViewer thumbnails={thumbnails} />;
+  return <>
+    <PhotoViewer photos={photos} title="The Best" titleId="photo-dialog-title" thumbnailLabel="Open photograph" className="photo-gallery original-color" masonry />
+    <p className="gallery-caption">A selection from my public photograph collection.</p>
+  </>;
 }
