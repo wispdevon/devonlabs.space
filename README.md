@@ -25,6 +25,7 @@ With the preview running, run `npm run test:browser` in another terminal. Set `T
 
 - [Project inventory](docs/project-inventory.md): central tracking across project stages, maintained separately from the curated public portfolio.
 - [TTFB measurements](docs/ttfb.md): repeatable Cloudflare response benchmarks and the current optimization investigation.
+- [Desloppify comparison](docs/desloppify-2026-10-29.md): cleanup scope, scan limitations, and regression evidence.
 - `data/profile.ts`, `data/developer-projects.ts`, `data/portfolio-summaries.ts`: About and portfolio content.
 - `data/event-coverage.json`, `data/photography-bundles.json`: event galleries and recent photo stories.
 - `data/coffee.ts`, `data/shop.ts`: coffee guide and shop offerings.
@@ -36,7 +37,7 @@ Country outlines are derived from Natural Earth through [world-atlas](https://gi
 
 Photography uses continuous masonry lanes for event stories, the personal gallery, and photo-bundle previews: three lanes on desktop and two on mobile. ResizeObserver measures intrinsic image and caption heights, then places each item in the shortest lane without interior holes or cropping. Source order is preserved; without JavaScript, native CSS columns provide tight packing. Run `tests/masonry.mjs` with `TEST_URL` for gutter continuity, resize/repacking, image proportions, overlap, photo-viewer focus, and fallback checks.
 
-Media thumbnails and film posters resolve responsive image metadata during the static build, keeping the full image catalog out of client JavaScript. Navigation warms a route on hover or keyboard focus, while Save-Data and slow connections opt out. Coffee videos defer offscreen posters in browsers with native media lazy loading; originals still wait for playback. Cloudflare caches the seven canonical HTML pages for 60 seconds; see the [cache policy and deployment freshness procedure](docs/ttfb.md).
+Media thumbnails and film posters resolve responsive image metadata during the static build, keeping the full image catalog out of client JavaScript. Photography and Coffee share a photo viewer; each server-rendered thumbnail is paired with its original-photo metadata so selection does not depend on separate arrays staying in sync. Coffee videos render on the server. Navigation warms a route on hover or keyboard focus, while Save-Data and slow connections opt out. Coffee videos defer offscreen posters in browsers with native media lazy loading; originals still wait for playback. Cloudflare caches the seven canonical HTML pages for 60 seconds; see the [cache policy and deployment freshness procedure](docs/ttfb.md).
 
 Shop items now offer a direct Contact me email link instead of detail modals and an enquiry form. Photography package prices, durations, guaranteed minimum photo counts and delivery terms remain visible. Contact links prefill the selected item and work without JavaScript; no message is sent by the website.
 
