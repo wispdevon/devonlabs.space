@@ -1,7 +1,7 @@
 # Desloppify comparison version
 
 Date: 2026-10-29. Base: `5b8341f`. Tested source: `a405575` (including `4f4370e`). Branch: `desloppify/portfolio-preview`.
-This is a tested first cleanup pass, not a completed full-codebase assessment or deployment.
+The cleanup was merged to `main` and deployed on 2026-10-29 as commit `26ac895` at [Cloudflare deployment a972fa45](https://a972fa45.devonlabs-space.pages.dev). A second scan after the merge and dependency update found no new or changed Desloppify issues; objective score remains 66.9 and strict score 16.7. This is still a scoped cleanup, not a completed full-codebase assessment.
 
 ## Changes
 
@@ -25,7 +25,7 @@ Desloppify 1.0, TypeScript scanner:
 
 Two additional findings from a focused blind review were imported and resolved: repeated origin-label decisions and the viewers' parallel-array contract. The review covered abstraction fitness, mid-level elegance, and low-level elegance. The tool rejected scored import because the review did not cover all dimensions; only findings were imported. No subjective scores were claimed or overridden. All 20 scored subjective dimensions remain unassessed in tool state.
 
-The scan's test-coverage heuristic reports gaps despite the passing repository tests; it is not measured execution coverage. Its `next lint` detector reports reduced coverage; the project's actual `npm run lint` command passes. The three static-HTML security flags were inspected: the theme initializer is fixed code, Work uses a fixed public email link, and shop contact HTML escapes interpolated values to preserve Cloudflare's email-rewrite exemption. This pass does not certify security or resolve the remaining backlog.
+The scan's test-coverage heuristic reports gaps despite the passing repository tests; it is not measured execution coverage. Its `next lint` detector reports reduced coverage; the project's actual `npm run lint` command passes. The three static-HTML security flags were inspected: the theme initializer is fixed code, Work uses a fixed public email link, and shop contact HTML escapes interpolated values to preserve Cloudflare's email-rewrite exemption. This pass does not certify security or resolve the remaining backlog. The dependency audit separately found an advisory affecting the pinned Next.js version; Next.js was updated to 16.4.3 and `npm audit` reports zero vulnerabilities.
 
 Pin the language and omit generated code when reproducing a source scan. Once build and preview outputs existed, automatic language selection switched to JavaScript and scanned compiled assets; that intermediate run is not a before/after comparison. The final scan excludes dependency, build, preview, and screenshot outputs. The `.wrangler` exclusion may receive an unused-exclusion notice when no preview-generated sources exist.
 
@@ -41,11 +41,10 @@ Workflow reference: [official Desloppify guide](https://github.com/peteromallet/
 
 ## Verification
 
-- `npm run lint`, `npm test` (seven unit tests plus content/image/map integrity), and `npx tsc --noEmit` passed.
-- `npm run build` passed, including feed refresh and responsive-image generation. After the final focus fix, `npm run build --ignore-scripts` passed using those unchanged generated media assets; production compilation also checks TypeScript.
-- `TEST_URL=http://127.0.0.1:3013 npm run test:browser` passed on the final build: seven routes, 320/390/768/1440px layouts, both-theme accessibility, contact links, lazy loading, navigation intent, masonry, photo viewers, video playback, and no-JavaScript fallbacks.
+- On Node 22, `npm run lint`, `npm test` (seven unit tests plus content/image/map integrity), `npx tsc --noEmit`, `npm audit`, and the Next.js 16.4.3 production build passed.
+- The complete `npm run test:browser` suite passed on the merged build: seven routes, 320/390/768/1440px layouts, both-theme accessibility, contact links, lazy loading, navigation intent, masonry, photo viewers, video playback, and no-JavaScript fallbacks. GitHub Actions passed the same checks on `main` before deployment.
 - The new viewer checks cover every thumbnail/original pair, repeated opening, both wrap directions, keyboard and button navigation, Escape/Close focus return, pointer activation without focus, client route navigation, and server-rendered Coffee videos without JavaScript.
 - Coffee and Photography viewport screenshots were byte-identical after decoding at 390px and 1440px. Coffee SVG labels, checklist content, and selected-country status labels also matched the original. This is bounded visual parity evidence, not a claim about every scroll position or browser engine.
 - Chromium was tested through the repository's Playwright setup because this session exposed no in-app browser controller. Firefox, Safari, and physical touch devices were not tested.
 
-The source checkout and deployed website remain separate from this comparison branch. Future work is a full blind review, investigation of remaining source findings and test-detection limitations, and a separate deployment decision.
+The deployed site serves all seven checked routes with JavaScript assets matching the new Pages deployment; Cloudflare may inject its email-decoding script on the custom domain. Future work is a full blind review and investigation of remaining source findings and test-detection limitations.
