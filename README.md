@@ -23,7 +23,7 @@ With the preview running, run `npm run test:browser` in another terminal. Set `T
 
 ## Content
 
-- `/devlogs/`: dated development posts. The first post documents the personal Minecraft minigames network, with a contents list, architecture diagram, tradeoffs, and explicit live/staged/planned distinctions. Post metadata is in `data/devlogs.ts`; the article and shared reading styles are in `app/devlogs/`.
+- `/devlogs/`: dated development posts. The first post documents the personal Minecraft minigames network, with a contents list, architecture diagram, tradeoffs, and explicit live/staged/planned distinctions. Post metadata is in `data/devlogs.ts`; the article and shared reading styles are in `app/devlogs/`. See [publication notes](docs/devlogs.md) for sources, verification, and follow-up.
 - [Project inventory](docs/project-inventory.md): central tracking across project stages, maintained separately from the curated public portfolio.
 - [TTFB measurements](docs/ttfb.md): repeatable Cloudflare response benchmarks and the current optimization investigation.
 - [Desloppify comparison](docs/desloppify-2026-10-29.md): cleanup scope, scan limitations, and regression evidence.
