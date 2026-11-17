@@ -9,7 +9,7 @@ import { pages } from './site-config';
 function useCurrentPage() {
   const pathname = usePathname();
   const normalized = pathname === '/' ? '/' : `${pathname.replace(/\/$/, '')}/`;
-  return pages.find(page => page.href === normalized)?.id;
+  return pages.find(page => page.href === normalized || (page.href !== '/' && normalized.startsWith(page.href)))?.id;
 }
 
 export function PageFrame({ children }: { children: React.ReactNode }) {
