@@ -7,8 +7,8 @@ existing site shell and navigation before adding another publishing system.
 ## Minecraft minigames network — 18 November 2026
 
 - Post: [A Minecraft network that wakes up when you play](https://devonlabs.space/devlogs/minecraft-minigames-network/).
-- Production: [ab7d4276](https://ab7d4276.devonlabs-space.pages.dev), source commit `a5bb097095a1cc1398a0c11abd4605463e6859b2`.
-- Prior production retained for rollback: `a972fa45-7e19-499a-88be-4dd20c59c1aa`.
+- Production with screenshots: [11c870bd](https://11c870bd.devonlabs-space.pages.dev), source commit `4cc0ebeb5a61645d83a0bf2a88c01db199403bb3`.
+- Prior production retained for rollback: [ab7d4276](https://ab7d4276.devonlabs-space.pages.dev), source `a5bb097`.
 - Scope: public design and progress overview; no Minecraft service changes.
 
 The editorial sources are the MinecraftHosting project's current task queue,
@@ -82,3 +82,7 @@ Lint, unit/image-integrity checks, and the production build passed. Focused
 browser checks verified image decoding, 16:9 proportions, mobile/desktop layout,
 both themes, contents/keyboard navigation, no-JavaScript article content, and
 WCAG A/AA. Visual checks compared the source colors and rendered screenshots.
+
+The screenshot update passed the focused browser checks on production. The live
+article, five full-size WebPs, and twenty responsive variants match the tested
+export byte for byte. Original client PNGs were read only.
