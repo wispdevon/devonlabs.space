@@ -5692,5 +5692,155 @@
         "bytes": 49192
       }
     ]
+  },
+  "/devlogs/minigames-adventure-stations.webp": {
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "src": "/generated/images/minigames-adventure-stations-320-7f5ed728968d312e.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 8594
+      },
+      {
+        "src": "/generated/images/minigames-adventure-stations-640-00fe2feb05134017.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 25652
+      },
+      {
+        "src": "/generated/images/minigames-adventure-stations-960-416f15660d4545a8.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 46508
+      },
+      {
+        "src": "/generated/images/minigames-adventure-stations-1600-2ad54dccaf230b7e.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 100222
+      }
+    ]
+  },
+  "/devlogs/minigames-diversity-apiary.webp": {
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "src": "/generated/images/minigames-diversity-apiary-320-20eda57694df60fa.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 10566
+      },
+      {
+        "src": "/generated/images/minigames-diversity-apiary-640-2d9ce8c86140f2e6.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 32268
+      },
+      {
+        "src": "/generated/images/minigames-diversity-apiary-960-fbe123eb2fee4c7c.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 58356
+      },
+      {
+        "src": "/generated/images/minigames-diversity-apiary-1600-6bf5153299b38a28.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 126018
+      }
+    ]
+  },
+  "/devlogs/minigames-hub-overview.webp": {
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "src": "/generated/images/minigames-hub-overview-320-8cf3d2bddc5799af.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 11568
+      },
+      {
+        "src": "/generated/images/minigames-hub-overview-640-0d3aa7cbe3a85843.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 38844
+      },
+      {
+        "src": "/generated/images/minigames-hub-overview-960-56fb41d1c35d3dd6.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 74394
+      },
+      {
+        "src": "/generated/images/minigames-hub-overview-1600-30d36f1c06e8b9ff.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 164674
+      }
+    ]
+  },
+  "/devlogs/minigames-party-stations.webp": {
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "src": "/generated/images/minigames-party-stations-320-0a2b3b21413b676d.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 11826
+      },
+      {
+        "src": "/generated/images/minigames-party-stations-640-f63065fb55238058.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 35978
+      },
+      {
+        "src": "/generated/images/minigames-party-stations-960-19e7b0261289f11b.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 67432
+      },
+      {
+        "src": "/generated/images/minigames-party-stations-1600-249d15347f0c4b9c.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 141902
+      }
+    ]
+  },
+  "/devlogs/minigames-spawn-plaza.webp": {
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "src": "/generated/images/minigames-spawn-plaza-320-6ac27d5eed1bf307.webp",
+        "width": 320,
+        "height": 180,
+        "bytes": 13000
+      },
+      {
+        "src": "/generated/images/minigames-spawn-plaza-640-46c3cc02ae29f84f.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 43370
+      },
+      {
+        "src": "/generated/images/minigames-spawn-plaza-960-7a56316f5cc0df93.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 83752
+      },
+      {
+        "src": "/generated/images/minigames-spawn-plaza-1600-891693db70b16604.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 186394
+      }
+    ]
   }
 }

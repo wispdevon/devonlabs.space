@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from '../../portfolio/responsive-image';
 import { minigamesDevlog as post } from '../../../data/devlogs';
 import styles from '../devlogs.module.css';
 
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
   title: `${post.title} — Devon Labs`,
   description: post.description,
   alternates: { canonical: post.href },
-  openGraph: { title: post.title, description: post.description, url: post.href, type: 'article', publishedTime: `${post.date}T00:00:00+07:00`, authors: ['Wisp'] },
-  twitter: { card: 'summary', title: post.title, description: post.description },
+  openGraph: { title: post.title, description: post.description, url: post.href, type: 'article', publishedTime: `${post.date}T00:00:00+07:00`, authors: ['Wisp'], images: [{ url: '/devlogs/minigames-hub-overview.webp', width: 2560, height: 1440, alt: 'The Devon Labs hub and live instance board, captured in Minecraft.' }] },
+  twitter: { card: 'summary_large_image', title: post.title, description: post.description, images: ['/devlogs/minigames-hub-overview.webp'] },
 };
 
 const contents = [
@@ -24,6 +25,14 @@ const contents = [
   ['lessons', 'What I would carry forward'],
 ];
 
+function Screenshot({ name, alt, caption, priority = false }: { name: string; alt: string; caption: string; priority?: boolean }) {
+  const src = `/devlogs/minigames-${name}.webp`;
+  return <figure className={styles.screenshot}>
+    <Image src={src} alt={alt} width={2560} height={1440} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(100vw - 64px), 865px" priority={priority} />
+    <figcaption>{caption} Screenshot by Wisp, 18 November 2026. <a href={src}>Open full size</a>.</figcaption>
+  </figure>;
+}
+
 export default function MinecraftMinigamesDevlog() {
   return <article className={styles.article}>
     <header>
@@ -31,6 +40,7 @@ export default function MinecraftMinigamesDevlog() {
       <p className={styles.meta}><time dateTime={post.date}>{post.dateLabel}</time> · By Wisp · Design &amp; progress</p>
       <h1>{post.title}</h1>
       <p className={styles.lead}>Pick a game in the hub, let its server wake up, and play. Come back later and your world is still there. Behind that simple loop is a small network built around old adventure maps, limited resources, and a refusal to treat saved progress as disposable.</p>
+      <Screenshot name="hub-overview" alt="A stone courtyard framed by teal-roofed towers, with the Devon Labs live instance board in front of the central gate." caption="The always-on hub, with the instance board showing no game backends running at the moment of capture." priority />
       <dl className={styles.facts}>
         <div><dt>23 games</dt><dd>Registered in the network</dd></div>
         <div><dt>3 active</dt><dd>Game backends at a time</dd></div>
@@ -49,6 +59,7 @@ export default function MinecraftMinigamesDevlog() {
       <p>Minecraft maps are often small games in their own right. A puzzle map, a party game, and a long co-op adventure can have very different needs, even though they all arrive as a world download. I wanted to put that variety behind one familiar entrance.</p>
       <p>The player-facing loop is deliberately short: join the hub, choose a labelled display or open <code>/games</code>, and travel to the selected game when it is ready. <code>/hub</code> brings you back. The proxy and hub stay online; individual game servers run when people use them.</p>
       <p>The catalog includes the Diversity trilogy, party and competitive maps, adventure worlds, three Golf courses, and newer additions such as Roguefire, Apiary, and Sorcerer’s Book 2. The aim is a collection worth returning to, with each map’s rules and progress intact.</p>
+      <Screenshot name="spawn-plaza" alt="The hub’s central spawn plaza, welcome text, teal-lit buildings, and a purple portal beside the live instance board." caption="One entrance to the collection: the central plaza and welcome display inside Vulcan Lobby." />
     </section>
 
     <section id="constraints" tabIndex={-1} aria-labelledby="constraints-title">
@@ -112,6 +123,9 @@ export default function MinecraftMinigamesDevlog() {
       <p>Operators can place, move, hide, and change a station’s photo in game. The display entities and the physical build have separate lifecycles: moving a station does not move its stone podium, lights, or surrounding blocks. New games default to hidden displays, ready for manual placement after the operator builds their setting.</p>
       <p>Photo changes retain registered map IDs, while saved position and visibility stay bound to the hub world. Those files and world data belong together in backups. Rebuilding a display should not mean losing its identity or silently overwriting someone’s decoration.</p>
       <p>The approved next step connects the hub’s activities: walking guides, public cosmetics, twelve collectible spirits, rooftop parkour, and informational XP. Cosmetics are intended to be available to everyone; levels will not gate them. This larger progression experience is still work in progress.</p>
+      <Screenshot name="adventure-stations" alt="The Art of Defense and Aghanim’s Labyrinth 2 game previews set into a dark-stone arcade with teal lighting." caption="Adventure-game displays use the hub’s existing architecture, with a preview and a right-click prompt for each game." />
+      <Screenshot name="diversity-apiary" alt="Three teal Diversity stations and a glowing red Apiary CTM station beneath the Complete the Monument heading." caption="The Diversity trilogy and a manually placed Apiary CTM display share a themed corner of the hub." />
+      <Screenshot name="party-stations" alt="A wooden Mineparty photo station with a cake icon beside a red Mario Party station overlooking the plaza." caption="Mineparty and Mario Party have distinct physical builds around the same game-selection interaction." />
     </section>
 
     <section id="status" tabIndex={-1} aria-labelledby="status-title">
@@ -121,7 +135,7 @@ export default function MinecraftMinigamesDevlog() {
         <thead><tr><th scope="col">Area</th><th scope="col">State and next step</th></tr></thead>
         <tbody>
           <tr><th scope="row">Network core</th><td>Installed: 23 registered games, on-demand starts, three-game admission, 30-second empty shutdown, hub menus, and reset/snapshot support. Complete multiplayer and capacity testing remain open.</td></tr>
-          <tr><th scope="row">Latest map additions</th><td>Roguefire, Apiary, and Sorcerer’s Book 2 are activated. Their station definitions and previews are installed; the displays stay hidden until manually placed. Complete playthroughs remain unverified.</td></tr>
+          <tr><th scope="row">Latest map additions</th><td>Roguefire, Apiary, and Sorcerer’s Book 2 are activated. Their station definitions and previews are installed. New displays start hidden for manual placement; the Apiary display shown above has since been placed by hand. Complete playthroughs remain unverified.</td></tr>
           <tr><th scope="row">Cosmetics</th><td>The starter slice is live. The broader public selection has isolated-server checks and partial native-client checks; its live activation and remaining selection/transfer checks are pending.</td></tr>
           <tr><th scope="row">Hub progression</th><td>Approved design: walking guides, spirits, parkour, informational XP, and rankings. Full plugin-stack compatibility, implementation, and acceptance remain in progress.</td></tr>
           <tr><th scope="row">Honey Clicker</th><td>Queued separately from the 23-game baseline. Vanilla 1.20.4 intake and smoke checks are partial; the proposed initial cap is one player. Gameplay, meaningful save/restart acceptance, and network activation remain incomplete.</td></tr>

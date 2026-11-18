@@ -31,6 +31,9 @@
 .arrow { padding-left: 18px; color: var(--accent); }
 .branch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .diagram figcaption { line-height: 1.6; }
+.screenshot { margin-block: 28px; }
+.screenshot img { display: block; width: 100%; height: auto; }
+.screenshot figcaption { line-height: 1.6; max-width: 75ch; }
 .status { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: .9375rem; }
 .status caption { text-align: left; color: var(--secondary); padding-bottom: 12px; }
 .status th, .status td { border-bottom: 1px solid var(--divider); padding: 14px 12px 14px 0; text-align: left; vertical-align: top; }

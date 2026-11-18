@@ -7,7 +7,7 @@ const output = 'public/generated/images';
 await mkdir(output, { recursive: true });
 const manifest = {};
 const keep = new Set();
-for (const directory of ['workshop/photos', 'developer', 'coffee', 'workshop', 'photography/bundles', 'photography/events', 'shop']) {
+for (const directory of ['workshop/photos', 'developer', 'coffee', 'workshop', 'photography/bundles', 'photography/events', 'shop', 'devlogs']) {
   for (const name of (await readdir(`public/${directory}`, { recursive: directory === 'photography/events' })).sort()) {
     if (!/\.(webp|jpe?g|png)$/.test(name) || name === 'room.webp') continue;
     const source = `/${directory}/${name}`;

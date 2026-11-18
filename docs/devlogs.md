@@ -57,3 +57,28 @@ static export without a request-time Next.js server.
 The next editorial practice is to recheck the current queue against actual
 activation evidence before writing the next progress post. A successful server
 startup still does not establish a complete map playthrough.
+
+## Client screenshot follow-up — 18 November 2026
+
+The user supplied five fresh, HUD-free screenshots for this post. The original
+2560×1440 PNGs remain in the client; public WebP copies explicitly use sRGB,
+retain the entire frame, and use the existing responsive-image pipeline.
+
+| Capture | Public image | Subject |
+| --- | --- | --- |
+| `2026-11-18_07.04.07.png` | `minigames-hub-overview.webp` | Hub and empty instance board; article/social cover |
+| `2026-11-18_07.04.19.png` | `minigames-spawn-plaza.webp` | Welcome text and central plaza |
+| `2026-11-18_07.04.32.png` | `minigames-adventure-stations.webp` | Art of Defense and Aghanim’s Labyrinth 2 |
+| `2026-11-18_07.04.43.png` | `minigames-diversity-apiary.webp` | Diversity trilogy and placed Apiary station |
+| `2026-11-18_07.04.49.png` | `minigames-party-stations.webp` | Mineparty and Mario Party |
+
+All five have captions, alt text, and full-size links. The hero loads eagerly;
+the other four load lazily. Twenty responsive variants cover 320–1600px widths.
+The placement status now acknowledges the visible Apiary display. The plaza
+image contains the public join hostname as part of its in-game welcome signage;
+no player names, chat, coordinates, or private operational details are visible.
+
+Lint, unit/image-integrity checks, and the production build passed. Focused
+browser checks verified image decoding, 16:9 proportions, mobile/desktop layout,
+both themes, contents/keyboard navigation, no-JavaScript article content, and
+WCAG A/AA. Visual checks compared the source colors and rendered screenshots.
