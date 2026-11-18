@@ -119,3 +119,19 @@ repository/guide links, the setup contents anchor, three decoded screenshots,
 alt text, no horizontal overflow, WCAG A/AA and no runtime errors. Setup content
 and all three figures are present without JavaScript. Production publication
 and byte verification are recorded after deployment.
+
+Published as [1390f1ef](https://1390f1ef.devonlabs-space.pages.dev), source
+`610dca7183b7d2e5fd91631fbace5372abc64d82`. Prior production
+[11c870bd](https://11c870bd.devonlabs-space.pages.dev) remains available for
+rollback. Production desktop/mobile/no-JavaScript checks passed. All three
+original PNGs and twelve responsive variants match the tested export byte for
+byte. The article matches after removing exactly one observed Cloudflare
+analytics module and its added newline; no other HTML differences were accepted.
+Both GitLab README and guide links respond anonymously. The existing site CI
+run for the published source is
+[44297033850](https://github.com/wispdevon/devonlabs.space/actions/runs/44297033850).
+
+Capture lesson: wait for the selected control's actual ARIA state and finish
+finite animations before taking screenshots. An immediate capture can show a
+half-transitioned TLS choice or an import field before its upload widget is
+ready. Check the final image itself, not only whether the screenshot call ran.
