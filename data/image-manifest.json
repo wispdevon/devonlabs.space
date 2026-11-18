@@ -5842,5 +5842,95 @@
         "bytes": 186394
       }
     ]
+  },
+  "/devlogs/pelican-setup-egg-import.png": {
+    "width": 1440,
+    "height": 1100,
+    "variants": [
+      {
+        "src": "/generated/images/pelican-setup-egg-import-320-5fbf86725581295d.webp",
+        "width": 320,
+        "height": 244,
+        "bytes": 1882
+      },
+      {
+        "src": "/generated/images/pelican-setup-egg-import-640-bb3156e73855d414.webp",
+        "width": 640,
+        "height": 489,
+        "bytes": 6320
+      },
+      {
+        "src": "/generated/images/pelican-setup-egg-import-960-4028e251a9de1678.webp",
+        "width": 960,
+        "height": 733,
+        "bytes": 11452
+      },
+      {
+        "src": "/generated/images/pelican-setup-egg-import-1440-cfe9150bf7354249.webp",
+        "width": 1440,
+        "height": 1100,
+        "bytes": 19932
+      }
+    ]
+  },
+  "/devlogs/pelican-setup-environment.png": {
+    "width": 1440,
+    "height": 1050,
+    "variants": [
+      {
+        "src": "/generated/images/pelican-setup-environment-320-26cdfb8d1dcbcff8.webp",
+        "width": 320,
+        "height": 233,
+        "bytes": 2280
+      },
+      {
+        "src": "/generated/images/pelican-setup-environment-640-fc2d72a4f8b28c4e.webp",
+        "width": 640,
+        "height": 467,
+        "bytes": 7174
+      },
+      {
+        "src": "/generated/images/pelican-setup-environment-960-bbaafd4f21154d11.webp",
+        "width": 960,
+        "height": 700,
+        "bytes": 13042
+      },
+      {
+        "src": "/generated/images/pelican-setup-environment-1440-d2061713410e17cf.webp",
+        "width": 1440,
+        "height": 1050,
+        "bytes": 21904
+      }
+    ]
+  },
+  "/devlogs/pelican-setup-node.png": {
+    "width": 1440,
+    "height": 1100,
+    "variants": [
+      {
+        "src": "/generated/images/pelican-setup-node-320-7261c43aebeff688.webp",
+        "width": 320,
+        "height": 244,
+        "bytes": 2864
+      },
+      {
+        "src": "/generated/images/pelican-setup-node-640-2be6120d8eee3522.webp",
+        "width": 640,
+        "height": 489,
+        "bytes": 9840
+      },
+      {
+        "src": "/generated/images/pelican-setup-node-960-3632adafe188822e.webp",
+        "width": 960,
+        "height": 733,
+        "bytes": 18302
+      },
+      {
+        "src": "/generated/images/pelican-setup-node-1440-f976055cf86e90ec.webp",
+        "width": 1440,
+        "height": 1100,
+        "bytes": 31252
+      }
+    ]
   }
 }

@@ -86,3 +86,36 @@ WCAG A/AA. Visual checks compared the source colors and rendered screenshots.
 The screenshot update passed the focused browser checks on production. The live
 article, five full-size WebPs, and twenty responsive variants match the tested
 export byte for byte. Original client PNGs were read only.
+
+## Pelican source and setup follow-up — 18 November 2026
+
+The article now links to the separate public
+[Pelican Minigames repository](https://gitlab.com/wispd/pelican-minigames), whose
+README links back to the devlog. Its
+[illustrated setup guide](https://gitlab.com/wispd/pelican-minigames/-/blob/main/docs/pelican-setup.md)
+contains five real Pelican 1.0.0-rc.3 screenshots; the devlog reuses the
+Environment, Create Node and egg File import captures with captions, descriptive
+alt text and full-size links. Twelve responsive variants use the existing image
+pipeline. The original PNGs preserve screenshot text and colors.
+
+The captures came from a separate, fresh documentation panel in the disposable
+Ubuntu test environment. Example account/address values are synthetic; the
+password field is masked and no node tokens appear. The screenshot panel is
+stopped with its isolated data retained. No live Minecraft service was changed.
+The article explicitly keeps the personal network separate from toolkit
+publication and preserves pending enrollment, native plugin and authentication
+gates. It does not claim that filling the node form proves Wings health.
+
+The repository documentation passed focused independent review, local link and
+secret checks and all required jobs in
+[MR 5](https://gitlab.com/wispd/pelican-minigames/-/merge_requests/5), merged as
+`de780ed`. Site lint, unit/image-integrity checks and the production export
+passed. The existing Next.js security upgrade reminder stopped the first build
+after export; its documented retry passed. No dependencies or checks were
+weakened. The dependency-security follow-up above remains open.
+
+Focused browser verification passed at desktop and mobile widths: reciprocal
+repository/guide links, the setup contents anchor, three decoded screenshots,
+alt text, no horizontal overflow, WCAG A/AA and no runtime errors. Setup content
+and all three figures are present without JavaScript. Production publication
+and byte verification are recorded after deployment.

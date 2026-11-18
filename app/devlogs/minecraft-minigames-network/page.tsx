@@ -17,6 +17,7 @@ const contents = [
   ['constraints', 'The rules that shape it'],
   ['architecture', 'How a game wakes up'],
   ['tradeoffs', 'What I reused and what I built'],
+  ['pelican-setup', 'Pelican setup in pictures'],
   ['versions', 'Compatibility is part of the map'],
   ['resets', 'Starting over without losing the past'],
   ['hub', 'A hub you can walk through'],
@@ -30,6 +31,14 @@ function Screenshot({ name, alt, caption, priority = false }: { name: string; al
   return <figure className={styles.screenshot}>
     <Image src={src} alt={alt} width={2560} height={1440} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(100vw - 64px), 865px" priority={priority} />
     <figcaption>{caption} Screenshot by Wisp, 18 November 2026. <a href={src}>Open full size</a>.</figcaption>
+  </figure>;
+}
+
+function PanelScreenshot({ name, alt, caption, height = 1100 }: { name: string; alt: string; caption: string; height?: number }) {
+  const src = `/devlogs/pelican-setup-${name}.png`;
+  return <figure className={styles.screenshot}>
+    <Image src={src} alt={alt} width={1440} height={height} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 850px) calc(100vw - 64px), 865px" />
+    <figcaption>{caption} Captured from a separate disposable Pelican 1.0.0-rc.3 panel on 18 November 2026. <a href={src}>Open full size</a>.</figcaption>
   </figure>;
 }
 
@@ -48,6 +57,8 @@ export default function MinecraftMinigamesDevlog() {
       </dl>
       <p className={styles.meta}>A snapshot of the project on 18 November 2026. “Registered” describes network enrollment; it does not mean every map has passed a complete multiplayer playthrough. This is a personal network, with paid hosting still on hold.</p>
     </header>
+
+    <p className={styles.note}>Source and setup follow-up, 18 November 2026: I’m extracting the reusable host services, Minecraft plugins and egg into <a href="https://gitlab.com/wispd/pelican-minigames">Pelican Minigames on GitLab</a>, an independent AGPL-3.0-only toolkit. The repository excludes this network’s worlds, maps, player history and private configuration. It is development source; the public beta, integrated enrollment, native Pelican management plugin and verified offline authentication remain incomplete.</p>
 
     <nav className={styles.contents} aria-label="Article contents">
       <h2>In this devlog</h2>
@@ -100,6 +111,20 @@ export default function MinecraftMinigamesDevlog() {
       <p>Keeping every game online would simplify startup, at the cost of running many idle JVMs. Managing each game manually through the panel would work too, but would keep an operator in the player’s path. The chosen approach retains the panel and adds a small orchestration layer for this collection’s admission, routing, and persistence rules.</p>
       <p>That custom layer has a maintenance cost: the controller, proxy integration, reset helper, and station plugin must agree on stable identities and recovery behavior. It earns its place by handling the boundaries between existing tools, rather than replacing their server engines or administration interfaces.</p>
       <p>The reusable Pelican minigame template follows the same principle. It builds on maintained runtime images and official downloads, adding exact-version selection, checksum verification, and map metadata. Importing that template alone does not enroll a game in the proxy, controller, menus, or reset registry.</p>
+    </section>
+
+    <section id="pelican-setup" tabIndex={-1} aria-labelledby="pelican-setup-title">
+      <h2 id="pelican-setup-title">Pelican setup in pictures</h2>
+      <p>The reusable toolkit starts with a separately installed Pelican panel and Wings node. These captures show a fresh documentation panel, with example values and a masked password. They do not show the live network or establish complete toolkit acceptance. The <a href="https://gitlab.com/wispd/pelican-minigames/-/blob/main/docs/pelican-setup.md">illustrated setup guide</a> connects the screens to the host installation procedure.</p>
+      <h3>1. Complete the panel installer</h3>
+      <p>Check the PHP requirements, set the panel URL, and create a dedicated administrator. The loopback HTTP URL belongs only to this isolated demonstration; use HTTPS for a remotely accessed panel. Choose and back up the database, then finish the cache, queue and session steps using the vendor’s deployment guidance.</p>
+      <PanelScreenshot name="environment" height={1050} alt="Pelican installer Environment step with App Name, App URL and administrator email and username fields; the password field is masked." caption="The Environment step creates the panel administrator. The shown email and loopback address are disposable examples." />
+      <h3>2. Define the Wings node</h3>
+      <p>Open Nodes and create a node for the game host. Match its API address, TLS mode, ports and data directory to Wings and the toolkit’s installation policy. Keep the node configuration token private. For this toolkit’s initial profile, Wings uses a private IPv4 address with verified TLS; the panel’s default HTTP selection is not sufficient.</p>
+      <PanelScreenshot name="node" alt="Pelican Create Node form with example domain and port, display name, and HTTPS selected for communication with Wings." caption="Node settings must agree with the actual Wings installation. This form is an example, not a connected or healthy node." />
+      <h3>3. Import the minigame egg</h3>
+      <p>Open Eggs and use Import to upload the repository’s minigame egg. Importing a template does not enroll a game. Complete the guarded fresh host installation while the managed game-volume tree is empty; create and upload game servers only afterward. The real enrollment worker and its acceptance checks remain in progress.</p>
+      <PanelScreenshot name="egg-import" alt="Pelican Eggs page with the Import egg dialog open and its upload field visible." caption="Import the reviewed egg export from the same toolkit revision. Importing an egg does not start a game or replace a world." />
     </section>
 
     <section id="versions" tabIndex={-1} aria-labelledby="versions-title">
